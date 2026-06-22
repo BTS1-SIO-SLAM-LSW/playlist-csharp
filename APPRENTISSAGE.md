@@ -1,7 +1,7 @@
 # 🧭 Guide d'apprentissage — Comment réussir ce parcours
 
 > Ce guide explique **comment apprendre** avec ce dépôt : la logique pédagogique, ce qu'il faut savoir avant, comment s'auto-évaluer, et les pièges classiques.
-> Stack à jour : **.NET 10 LTS · C# 14 · EF Core 10 · ASP.NET Core 10** (2025-2026).
+> Stack à jour : **.NET 10 LTS · C# 14 · EF Core 10 · ASP.NET Core 10**.
 
 ---
 
@@ -105,7 +105,7 @@ Les **paliers de modification** suivent cette montée : 🟢 guidé (appliquer) 
 
 ## 7. Ce qui est « à jour » dans ce parcours
 
-Le code utilise les technologies **actuelles** (fin 2025 / 2026), pas des versions dépassées :
+Le code utilise les technologies **actuelles**, pas des versions dépassées :
 
 | Techno | Version | Nouveauté exploitée |
 |---|---|---|
