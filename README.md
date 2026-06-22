@@ -9,8 +9,6 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ggaillard/playlist-csharp?quickstart=1)
 
-**Support de cours C# / .NET 10 · 2025-2026**
-
 </div>
 
 ---
@@ -158,8 +156,3 @@ Ouvrez une [issue avec le template "Question"](../../issues/new?template=questio
 - Le message d'erreur complet
 - La commande que vous avez tapée
 
----
-
-<div align="center">
-<sub>Support de cours · 2025-2026</sub>
-</div>
