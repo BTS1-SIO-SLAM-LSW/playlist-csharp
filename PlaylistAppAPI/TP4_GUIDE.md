@@ -217,6 +217,19 @@ Cherchez aussi une ligne produite par `StatistiquesHandler`.
 
 ## 5. Comprendre l'exemple fourni
 
+> 🔁 **Le câblage des événements** de ce projet (qui publie, qui réagit) :
+
+```mermaid
+flowchart LR
+    Ctrl["ChansonsController"] -->|"publie"| Bus(("EventBus"))
+    Bus --> CA["ChansonAjouteeEvent"]
+    Bus --> PC["PlaylistCreeeEvent"]
+    CA --> AH["AuditHandler"]
+    CA --> SH["StatistiquesHandler"]
+    PC --> AH
+```
+
+
 ```
 PlaylistAppAPI/Events/EventBus.cs   ← tout l'EOA est ici
 ```

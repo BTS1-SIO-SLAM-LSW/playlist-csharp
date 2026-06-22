@@ -1,6 +1,6 @@
 # 🏛️ Concept — L'architecture SOA en couches
 
-> **TP concerné :** TP3 · **Temps de lecture :** 6 min
+> **TP concerné :** TP3 · **Temps de lecture :** 8 min
 
 ---
 
@@ -8,28 +8,49 @@
 
 **SOA** (*Service-Oriented Architecture*) organise le code en **couches** ayant chacune **une seule responsabilité**, qui communiquent par des contrats clairs.
 
-```
-Client HTTP → Controller → Repository → Base de données
-              (le web)     (les données)
+```mermaid
+flowchart TB
+    C["🌐 Client HTTP"] -->|"requête JSON"| Ctrl["Controller<br/>(couche web)"]
+    Ctrl -->|"appelle"| Repo["Repository / Service<br/>(couche d'accès aux données)"]
+    Repo -->|"LINQ"| Ctx["DbContext (EF Core)"]
+    Ctx -->|"SQL"| DB[("🗄️ SQLite")]
+    DB -.->|"données"| Ctx -.-> Repo -.-> Ctrl -.->|"réponse JSON"| C
 ```
 
 - **Controller** : reçoit la requête, renvoie la réponse. Ne sait rien de la base.
 - **Repository** : lit/écrit les données. Ne sait rien du web.
 
-## 2. Pourquoi séparer ?
+## 2. Le trajet d'une requête à travers les couches
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Ctrl as ChansonsController
+    participant Repo as Repository
+    participant DB as SQLite
+    C->>Ctrl: GET /api/chansons
+    Ctrl->>Repo: ObtenirToutesChansons()
+    Repo->>DB: SELECT * FROM Chansons
+    DB-->>Repo: lignes
+    Repo-->>Ctrl: liste de Chanson
+    Ctrl-->>C: 200 OK + JSON
+```
+
+## 3. Pourquoi séparer ?
 
 > 🧠 **Couplage faible :** si on change de base de données, seul le Repository change ; le Controller ne bouge pas. Chaque couche évolue indépendamment, et on peut tester chacune isolément.
 
-## 3. L'injection de dépendances
+## 4. L'injection de dépendances
 
-Le Controller ne **crée pas** le Repository ; ASP.NET Core le lui **fournit**. En C# 14, via le constructeur primaire :
+Le Controller ne **crée pas** ses dépendances ; ASP.NET Core les lui **fournit** automatiquement (le *conteneur d'injection*). En C# 14, via le constructeur primaire :
 ```csharp
 public class ChansonsController(PlaylistContext ctx) : ControllerBase
 ```
+> ⚙️ Le conteneur sait construire `PlaylistContext` (configuré dans `Program.cs`) et l'injecte à chaque requête. Cela rend le code **testable** : en test, on injecte une base InMemory à la place de SQLite.
 
 ---
 
-## 4. Auto-évaluation
+## 5. Auto-évaluation
 
 **Q1.** Quelle est la responsabilité du Controller ? du Repository ?
 <details><summary>▸ Voir la réponse</summary>

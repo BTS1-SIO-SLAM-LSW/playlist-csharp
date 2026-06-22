@@ -174,6 +174,21 @@ dotnet run
 
 ## 5. Comprendre l'exemple fourni
 
+> 🔁 **Vue d'ensemble de l'exécution** — la boucle de menu de `Program.cs` orchestre `Bibliotheque` et `Playlist` :
+
+```mermaid
+flowchart TD
+    Start(["dotnet run"]) --> Menu{"Menu console"}
+    Menu -->|"1 · Ajouter"| Add["Bibliotheque.AjouterChanson()"]
+    Menu -->|"2 · Lister"| List["Afficher les chansons"]
+    Menu -->|"3 · Playlist"| PL["Playlist.AjouterChanson()"]
+    Menu -->|"0 · Quitter"| End(["Fin"])
+    Add --> Menu
+    List --> Menu
+    PL --> Menu
+```
+
+
 > Avant de modifier, on lit. Voici l'architecture et le rôle de chaque fichier.
 
 ```

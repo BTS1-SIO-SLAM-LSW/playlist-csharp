@@ -3,7 +3,7 @@
 > Cochez les cases au fur et à mesure (`[ ]` → `[x]`), puis **committez** ce fichier.
 > Vous pouvez aussi utiliser le **[tableau de bord interactif](https://ggaillard.github.io/playlist-csharp)** et son bouton « Exporter ».
 
-**Progression globale : 0 / 21**
+**Progression globale : 0 / 24**
 
 ---
 
@@ -41,7 +41,7 @@
 - [ ] 🟢 Publier un événement à la suppression
 - [ ] 🟡 Créer un HistoriqueHandler
 - [ ] 🔴 Événement métier complet (NoteModifieeEvent)
-- [ ] ✅ Tests au vert
+- [ ] ✅ Tests EOA au vert (5 tests)
 
 ---
 

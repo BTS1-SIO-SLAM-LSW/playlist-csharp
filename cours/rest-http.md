@@ -1,49 +1,78 @@
 # 🌐 Concept — HTTP, REST et codes de statut
 
-> **TP concerné :** TP3 · **Temps de lecture :** 8 min
+> **TP concerné :** TP3 · **Temps de lecture :** 11 min
 
 ---
 
-## 1. HTTP : le dialogue web
+## 1. HTTP : le protocole du web
 
-Sur le web, tout est **requête** puis **réponse** :
+HTTP (*HyperText Transfer Protocol*) est un protocole **requête / réponse** : le client demande, le serveur répond. Il est **sans état** (*stateless*) — chaque requête est indépendante, le serveur ne « se souvient » pas de la précédente.
+
+```mermaid
+sequenceDiagram
+    participant C as Client (Swagger / navigateur)
+    participant S as API ASP.NET Core
+    C->>S: 1. Requête (méthode + URL + en-têtes + corps)
+    Note over S: 2. Traitement<br/>(routage, logique, base)
+    S-->>C: 3. Réponse (code de statut + en-têtes + corps)
 ```
-CLIENT  ── requête  (méthode + URL + données) ─▶  SERVEUR
-CLIENT  ◀─ réponse  (code de statut + données) ──  SERVEUR
+
+### Anatomie d'une requête et d'une réponse
+
+```http
+POST /api/chansons HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{ "titre": "Imagine", "artiste": "Lennon", "dureeSecondes": 183 }
 ```
+```http
+HTTP/1.1 201 Created
+Location: /api/chansons/12
+Content-Type: application/json
+
+{ "id": 12, "titre": "Imagine", "artiste": "Lennon" }
+```
+
+> 🧩 Une requête = **méthode** (POST) + **chemin** (/api/chansons) + **en-têtes** (`Content-Type`…) + **corps** (les données JSON). Une réponse = **code de statut** (201) + **en-têtes** (`Location`…) + **corps**.
 
 ## 2. REST : des ressources et des verbes
 
 REST organise l'API autour de **ressources** (ici « chanson ») identifiées par une **URL**, manipulées par les **verbes HTTP** :
 
-| Action | Verbe | URL | Succès |
-|---|---|---|---|
-| Lister | `GET` | `/api/chansons` | 200 |
-| Voir n°5 | `GET` | `/api/chansons/5` | 200 |
-| Créer | `POST` | `/api/chansons` | 201 |
-| Modifier | `PUT` | `/api/chansons/5` | 204 |
-| Supprimer | `DELETE` | `/api/chansons/5` | 204 |
+| Action | Verbe | URL | Succès | Idempotent ? |
+|---|---|---|---|---|
+| Lister | `GET` | `/api/chansons` | 200 | ✅ |
+| Voir n°5 | `GET` | `/api/chansons/5` | 200 | ✅ |
+| Créer | `POST` | `/api/chansons` | 201 | ❌ |
+| Remplacer | `PUT` | `/api/chansons/5` | 204 | ✅ |
+| Supprimer | `DELETE` | `/api/chansons/5` | 204 | ✅ |
 
-> 🧠 L'URL dit **quoi**, le verbe dit **quelle action**.
+> 🧠 L'URL dit **quoi** (la ressource), le verbe dit **quelle action**. **Idempotent** = répéter la requête donne le même résultat (un `DELETE` deux fois → toujours supprimé ; un `POST` deux fois → deux créations).
 
 ## 3. Les codes de statut
 
-| Famille | Sens | Exemples |
-|---|---|---|
-| 2xx | Succès | 200, 201, 204 |
-| 4xx | Erreur du client | 400, 404, 409 |
-| 5xx | Erreur du serveur | 500 |
+```mermaid
+flowchart LR
+    R{"Réponse<br/>du serveur"} --> S2["2xx ✅ Succès<br/>200 OK · 201 Created · 204 No Content"]
+    R --> S4["4xx ⚠️ Erreur client<br/>400 Bad Request · 404 Not Found · 409 Conflict"]
+    R --> S5["5xx 🔥 Erreur serveur<br/>500 Internal Server Error"]
+```
 
-> 🧠 2xx « c'est bon », 4xx « tu t'es trompé », 5xx « je me suis trompé ».
+> 🧠 **2xx** « c'est bon », **4xx** « tu t'es trompé » (mauvaise donnée, ressource absente), **5xx** « je me suis trompé » (bug serveur).
+
+## 4. JSON : le format d'échange
+
+Les données circulent en **JSON** (`Content-Type: application/json`). ASP.NET Core **sérialise** automatiquement les objets C# en JSON pour la réponse, et **désérialise** le JSON reçu en objets pour la requête. C'est la *négociation de contenu*.
 
 ---
 
-## 4. Auto-évaluation
+## 5. Auto-évaluation
 
 **Q1.** Quel verbe pour créer une ressource, et quel code en cas de succès ?
 <details><summary>▸ Voir la réponse</summary>
 
-`POST`, et le code **201 Created**.
+`POST`, et le code **201 Created** (souvent accompagné d'un en-tête `Location` vers la nouvelle ressource).
 </details>
 
 **Q2.** Que signifie un code 404 ?
@@ -52,10 +81,16 @@ REST organise l'API autour de **ressources** (ici « chanson ») identifiées pa
 **Not Found** : la ressource demandée n'existe pas. C'est une erreur **4xx** (côté client : il a demandé quelque chose d'inexistant).
 </details>
 
-**Q3.** Dans REST, qu'est-ce qui distingue l'URL du verbe ?
+**Q3.** Que veut dire « HTTP est sans état (stateless) » ?
 <details><summary>▸ Voir la réponse</summary>
 
-L'**URL** identifie la **ressource** (quoi). Le **verbe** indique l'**action** à effectuer dessus (lire, créer, modifier, supprimer).
+Chaque requête est **indépendante** : le serveur ne conserve pas le contexte d'une requête à l'autre. Toute information nécessaire doit être renvoyée à chaque fois (dans l'URL, les en-têtes ou le corps).
+</details>
+
+**Q4.** Pourquoi dit-on que `GET` et `DELETE` sont idempotents mais pas `POST` ?
+<details><summary>▸ Voir la réponse</summary>
+
+Répéter un `GET` ou un `DELETE` aboutit au **même état final**. Répéter un `POST` **crée plusieurs ressources** : il n'est donc pas idempotent.
 </details>
 
 ---

@@ -178,6 +178,17 @@ dotnet run
 
 ## 5. Comprendre l'exemple fourni
 
+> 🔁 **Le chemin d'une donnée jusqu'à SQLite** dans ce projet :
+
+```mermaid
+flowchart LR
+    P["Program.cs"] --> Repo["MusiqueRepository"]
+    Repo --> Ctx["PlaylistContext (DbSet)"]
+    Ctx -->|"SaveChangesAsync()"| DB[("playlist.db · SQLite")]
+    DB -->|"SELECT (LINQ → SQL)"| Ctx --> Repo
+```
+
+
 ```
 PlaylistAppEF/
 ├── Models/

@@ -25,6 +25,17 @@
 
 Ce dépôt est le **support de cours complet** pour apprendre C# et .NET 10 à travers le développement d'une application de gestion de playlists musicales. Il contient 4 TP progressifs, tous exécutables **directement dans votre navigateur** grâce à GitHub Codespaces — **aucune installation locale requise**.
 
+### 🗺️ Votre parcours en un coup d'œil
+
+```mermaid
+flowchart LR
+    TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"] --> TP2["📗 TP2<br/>+ base de données<br/>(ça se souvient)"]
+    TP2 --> TP3["📕 TP3<br/>+ API REST / SOA<br/>(c'est exposé)"]
+    TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
+```
+
+➡️ **Commencez par le [Parcours pédagogique](PARCOURS_TP.md)** : méthode en 4 étapes, les 4 TP, et les **productions à rendre**.
+
 ---
 
 ## 🚦 Démarrage en 3 étapes
@@ -59,9 +70,12 @@ cd PlaylistApp && dotnet run
 cd PlaylistAppEF && dotnet run
 dotnet test ../PlaylistAppEF.Tests/     ← vérifiez votre progression
 
-# TP3 – API REST (SOA + EOA)
+# TP3 – API REST (architecture SOA)
 cd PlaylistAppAPI && dotnet run
 # → Swagger disponible sur http://localhost:5000
+
+# TP4 – Architecture événementielle (EOA)
+dotnet test ../PlaylistAppAPI.Tests/ --filter EventBusTests   # 5 tests EOA
 ```
 
 ---
@@ -90,7 +104,7 @@ playlist-csharp/
 │   ├── TP3_GUIDE.md               ← TP3 : API REST & architecture SOA
 │   ├── TP4_GUIDE.md               ← TP4 : architecture événementielle EOA
 │   ├── Controllers/  Events/  Program.cs
-├── 📕 PlaylistAppAPI.Tests/       8 tests d'intégration
+├── 📕 PlaylistAppAPI.Tests/       13 tests (8 intégration + 5 EOA)
 │
 ├── .devcontainer/            Environnement Codespaces (zéro installation)
 ├── .github/workflows/        CI/CD : build + tests + déploiement Pages
@@ -99,6 +113,21 @@ playlist-csharp/
 
 > **Tout est dans le dépôt** : pas de document à télécharger. Les fiches de TP, la méthode, le suivi de progression et le code vivent ensemble et restent versionnés.
 
+
+## 📦 Productions à rendre
+
+Pour chaque TP, le rendu tient dans votre dépôt : **du code qui compile, des tests verts, des commits réguliers**.
+
+| TP | À rendre | Preuve auto (badge CI) |
+|---|---|---|
+| 📘 TP1 | 3 missions committées · app console qui se lance | TP1 – Build ✅ |
+| 📗 TP2 | migration appliquée · entité Artiste (1-N) | TP2 – Tests ✅ (31 tests) |
+| 📕 TP3 | API + Swagger · endpoints testés | TP3 – API ✅ (8 tests) |
+| 🎏 TP4 | 3 modifications EOA · événements dans les logs | 5 tests EOA ✅ |
+
+Détail complet et critères : **[Parcours → Productions à rendre](PARCOURS_TP.md#-productions-à-rendre-par-tp)**.
+
+---
 
 ## 📊 Suivre ma progression
 

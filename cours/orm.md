@@ -1,6 +1,6 @@
 # 🗄️ Concept — L'ORM et le `DbContext`
 
-> **TP concerné :** TP2 · **Temps de lecture :** 8 min
+> **TP concerné :** TP2 · **Temps de lecture :** 9 min
 
 ---
 
@@ -9,6 +9,21 @@
 Un **ORM** (*Object-Relational Mapping*) fait automatiquement le pont entre vos **classes C#** et les **tables d'une base de données**. Vous écrivez du C#, l'ORM génère le SQL.
 
 > 🌉 **Analogie :** l'ORM est un **traducteur** entre deux langues : celle des objets (C#) et celle des tables (SQL). Vous parlez objets, il parle SQL à la base.
+
+```mermaid
+flowchart LR
+    subgraph CS["Monde C# — objets"]
+        O["new Chanson { Titre = Imagine }"]
+    end
+    ORM{{"EF Core<br/>(le traducteur ORM)"}}
+    subgraph DB["Base SQLite — tables"]
+        T[("Table Chansons")]
+    end
+    O -->|".Add() + SaveChangesAsync()"| ORM
+    ORM -->|"INSERT INTO Chansons…"| T
+    T -->|"SELECT * FROM Chansons"| ORM
+    ORM -->|"objets Chanson reconstruits"| O
+```
 
 ## 2. Sans ORM vs avec ORM
 
@@ -30,9 +45,26 @@ public DbSet<Playlist> Playlists { get; set; } // ↔ table "Playlists"
 ```
 On interroge ensuite ces `DbSet` avec LINQ ; EF Core traduit en SQL.
 
+## 4. Le suivi des changements (*change tracking*)
+
+Le `DbContext` ne sauvegarde rien tant qu'on n'appelle pas `SaveChangesAsync()`. Entre-temps, il **surveille** les objets et calcule le SQL minimal à exécuter :
+
+```mermaid
+sequenceDiagram
+    participant App as Code C#
+    participant Ctx as PlaylistContext
+    participant DB as SQLite
+    App->>Ctx: Chansons.Add(chanson)
+    Note over Ctx: état = Added (en mémoire)
+    App->>Ctx: SaveChangesAsync()
+    Ctx->>DB: INSERT INTO Chansons (...)
+    DB-->>Ctx: OK + Id auto-généré
+    Ctx-->>App: chanson.Id est renseigné
+```
+
 ---
 
-## 4. Auto-évaluation
+## 5. Auto-évaluation
 
 **Q1.** Que signifie ORM et à quoi ça sert ?
 <details><summary>▸ Voir la réponse</summary>
@@ -49,7 +81,7 @@ On interroge ensuite ces `DbSet` avec LINQ ; EF Core traduit en SQL.
 **Q3.** Quelle méthode enregistre réellement les changements en base ?
 <details><summary>▸ Voir la réponse</summary>
 
-`SaveChangesAsync()` (ou `SaveChanges()`). Tant qu'on ne l'appelle pas, les modifications restent en mémoire.
+`SaveChangesAsync()` (ou `SaveChanges()`). Tant qu'on ne l'appelle pas, les modifications restent en mémoire (suivies par le *change tracker*).
 </details>
 
 ---

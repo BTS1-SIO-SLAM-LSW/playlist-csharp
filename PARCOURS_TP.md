@@ -1,16 +1,22 @@
 # 🎓 Parcours pédagogique PlaylistApp — Sommaire des TP
 
-> 
-
 > 🎯 **Suivez votre progression** dans le [tableau de bord interactif](https://ggaillard.github.io/playlist-csharp) ou dans [PROGRESSION.md](PROGRESSION.md).
-
+>
 > Apprendre C# / .NET 10 en partant d'un exemple fonctionnel et en se l'appropriant par des modifications progressives.
 
 ---
 
-## La méthode : 4 étapes, répétées sur chaque TP
+## 🧭 La méthode : 4 étapes, répétées sur chaque TP
 
-Chaque TP applique le **même rituel d'apprentissage**. Vous ne codez jamais à partir d'une page blanche : vous partez d'un exemple qui marche, vous le comprenez, puis vous le faites évoluer.
+Vous ne codez jamais à partir d'une page blanche : vous partez d'un exemple qui marche, vous le comprenez, puis vous le faites évoluer.
+
+```mermaid
+flowchart LR
+    L["1 ▶️ LANCER<br/>voir le résultat attendu"] --> C["2 🔍 COMPRENDRE<br/>lecture guidée du code"]
+    C --> M["3 ✏️ MODIFIER<br/>🟢 guidé → 🟡 semi → 🔴 autonome"]
+    M --> V["4 ✅ VALIDER<br/>tests + checklist"]
+    V -.->|"TP suivant"| L
+```
 
 | Étape | Ce que vous faites | Pourquoi |
 |---|---|---|
@@ -31,7 +37,14 @@ Chaque TP applique le **même rituel d'apprentissage**. Vous ne codez jamais à 
 
 ---
 
-## Les 4 TP
+## 🗺️ Les 4 TP — la trajectoire
+
+```mermaid
+flowchart LR
+    TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"] --> TP2["📗 TP2<br/>+ base de données<br/>(ça se souvient)"]
+    TP2 --> TP3["📕 TP3<br/>+ API REST / SOA<br/>(c'est exposé)"]
+    TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
+```
 
 | TP | Titre | Durée | Compétence | Fiche |
 |---|---|---|---|---|
@@ -40,36 +53,42 @@ Chaque TP applique le **même rituel d'apprentissage**. Vous ne codez jamais à 
 | **TP3** | API REST & architecture SOA | 4h | SLAM4 | [📕 Ouvrir TP3](PlaylistAppAPI/TP3_GUIDE.md) |
 | **TP4** | Architecture événementielle (EOA) | 4h | SLAM4 | [🎏 Ouvrir TP4](PlaylistAppAPI/TP4_GUIDE.md) |
 
-### Progression logique
-
-```
-TP1              TP2                TP3                 TP4
-Console      →   + base données  →  + API REST (SOA)  →  + événements (EOA)
-"ça marche"      "ça se souvient"   "c'est exposé"       "ça évolue sans
-                                                          tout casser"
-```
-
-Chaque TP **réutilise** le précédent : le TP3 (API) s'appuie sur la base de données du TP2. Vous construisez une vraie application, par couches.
+Chaque TP **réutilise** le précédent : le TP3 (API) s'appuie sur la base du TP2, le TP4 (événements) sur l'API du TP3. Vous construisez une vraie application, par couches.
 
 ---
 
+## 📦 Productions à rendre (par TP)
+
+Pour chaque TP, le rendu = **du code qui compile + des tests verts + des commits réguliers**. Tout vit dans votre dépôt : aucun document à envoyer par mail.
+
+| TP | À rendre dans le dépôt | Preuve automatique (CI / autograding) |
+|---|---|---|
+| **📘 TP1** | Les 3 missions (note, tri, recherche par genre) committées · l'app console qui se lance | Badge **TP1 – Build** vert · image Docker construite |
+| **📗 TP2** | Migration appliquée (base créée) · entité **Artiste** (relation 1-N) · les tests qui passent | Badge **TP2 – Tests** vert · **31 tests** au vert |
+| **📕 TP3** | API qui démarre + Swagger accessible · endpoints GET/POST testés | Badge **TP3 – API** vert · **8 tests d'intégration** au vert |
+| **🎏 TP4** | Les 3 modifications EOA (suppression, HistoriqueHandler, NoteModifieeEvent) · événements visibles dans les logs | **5 tests EOA** au vert (autograding) |
+| **🏁 Global** | `PROGRESSION.md` à jour et committé · historique de commits propre (`feat:`, `fix:`…) · lien du dépôt communiqué | Les **4 badges CI** verts en haut du README |
+
+> ✅ **Comment prouver un rendu ?** Poussez votre code : les **GitHub Actions** s'exécutent automatiquement et affichent un badge vert/rouge. Cochez vos missions dans `PROGRESSION.md` (ou exportez depuis le tableau de bord) et committez.
+
+---
 
 ## 🎓 Concepts & auto-évaluations
 
-En complément des missions pratiques, le dossier **[cours/](cours/README.md)** contient une fiche par concept (POO, LINQ, ORM, migrations, REST, SOA, EOA…) avec une **explication didactique** et une **auto-évaluation**. Un **quiz interactif** est aussi intégré au [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet « Quiz ») et compte dans votre progression.
+En complément des missions pratiques, le dossier **[cours/](cours/README.md)** contient une fiche par concept (POO, LINQ, ORM, migrations, REST, SOA, EOA…) avec des **schémas**, une **explication didactique** et une **auto-évaluation**. Un **quiz interactif** est aussi intégré au [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet « Quiz ») et compte dans votre progression.
 
-## Avant de commencer
+## 🚦 Avant de commencer
 
 1. Créez votre dépôt depuis le template (bouton **Use this template**).
 2. Ouvrez-le dans **GitHub Codespaces** (aucune installation locale).
-3. Suivez les fiches **dans l'ordre** : TP1 → TP2 → TP3.
-4. Cochez votre progression dans le `README.md` et committez régulièrement.
+3. Suivez les fiches **dans l'ordre** : TP1 → TP2 → TP3 → TP4.
+4. Cochez votre progression dans `PROGRESSION.md` et committez régulièrement.
 
 Détails complets : [GUIDE_ETUDIANT.md](GUIDE_ETUDIANT.md).
 
 ---
 
-## Ce que vous saurez faire à la fin
+## 🏆 Ce que vous saurez faire à la fin
 
 - Lire et faire évoluer un code C# existant (la réalité du métier)
 - Concevoir et interroger une base de données avec un ORM

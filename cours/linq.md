@@ -1,6 +1,6 @@
 # 🔎 Concept — Les requêtes LINQ
 
-> **TP concerné :** TP1 (et au-delà) · **Temps de lecture :** 7 min
+> **TP concerné :** TP1 (et au-delà) · **Temps de lecture :** 8 min
 
 ---
 
@@ -8,7 +8,26 @@
 
 **LINQ** (*Language Integrated Query*) permet d'interroger une collection avec une syntaxe lisible : filtrer, trier, transformer, regrouper — sans écrire de boucles `for`.
 
-## 2. Les opérations de base
+## 2. Une requête = une chaîne de traitements
+
+Chaque opération prend une séquence en entrée et en produit une nouvelle en sortie. On les **enchaîne** comme un tapis roulant :
+
+```mermaid
+flowchart LR
+    A[("Toutes les<br/>chansons")] --> W["Where(note ≥ 4)<br/>🔻 filtre"]
+    W --> O["OrderByDescending(note)<br/>↕️ trie"]
+    O --> T["Take(3)<br/>✂️ garde 3"]
+    T --> R[("Top 3<br/>chansons")]
+```
+
+```csharp
+chansons
+    .Where(c => c.Note >= 4)        // filtrer
+    .OrderByDescending(c => c.Note) // trier
+    .Take(3);                       // garder les 3 premières
+```
+
+## 3. Les opérations de base
 
 ```csharp
 // Filtrer : garder les chansons de rock
@@ -28,14 +47,7 @@ chansons.Any(c => c.Note == 5);
 
 > 🧠 `c => c.Genre == "Rock"` est une **expression lambda** : « pour chaque chanson `c`, garder celles dont le genre est Rock ». Le `=>` se lit « va vers » ou « tel que ».
 
-## 3. On enchaîne les opérations
-
-```csharp
-chansons
-    .Where(c => c.Note >= 4)        // filtrer
-    .OrderByDescending(c => c.Note) // trier
-    .Take(3);                       // garder les 3 premières
-```
+> ⚙️ **À savoir :** LINQ est **paresseux** (*lazy*). La requête n'est exécutée qu'au moment où on **parcourt** le résultat (un `foreach`, un `.ToList()`, un `.Count()`). Tant qu'on l'enchaîne, rien n'est calculé. Au TP2, ce même LINQ sera **traduit en SQL** par EF Core.
 
 ---
 

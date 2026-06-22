@@ -1,6 +1,6 @@
 # 📚 Concept — Les collections : `List` et `Dictionary`
 
-> **TP concerné :** TP1 · **Temps de lecture :** 6 min
+> **TP concerné :** TP1 · **Temps de lecture :** 7 min
 
 ---
 
@@ -8,7 +8,23 @@
 
 Une **collection** stocke plusieurs valeurs dans une seule variable. Les deux plus courantes en C# sont `List<T>` et `Dictionary<K,V>`.
 
-## 2. `List<T>` — une liste ordonnée
+## 2. Deux façons d'organiser les données
+
+```mermaid
+flowchart TB
+    subgraph L["List de Chanson — accès par POSITION"]
+        direction LR
+        i0["index 0<br/>Imagine"] --> i1["index 1<br/>Yesterday"] --> i2["index 2<br/>Bohemian Rh."]
+    end
+    subgraph D["Dictionary int vers Chanson — accès par CLÉ"]
+        direction LR
+        k1(["clé 1"]) --> v1["Imagine"]
+        k2(["clé 7"]) --> v2["Yesterday"]
+        k3(["clé 42"]) --> v3["Bohemian Rh."]
+    end
+```
+
+## 3. `List<T>` — une liste ordonnée
 
 ```csharp
 List<Chanson> chansons = new();
@@ -16,9 +32,9 @@ chansons.Add(uneChanson);     // ajoute à la fin
 chansons.Count;               // nombre d'éléments
 chansons[0];                  // accès par position (index)
 ```
-> 🧠 Une `List` **conserve l'ordre** d'insertion et **accepte les doublons**. Idéale pour une playlist (l'ordre compte).
+> 🧠 Une `List` **conserve l'ordre** d'insertion et **accepte les doublons**. Idéale pour une playlist (l'ordre compte). Pour retrouver un élément précis, il faut **parcourir** la liste.
 
-## 3. `Dictionary<K,V>` — un annuaire clé → valeur
+## 4. `Dictionary<K,V>` — un annuaire clé → valeur
 
 ```csharp
 Dictionary<int, Chanson> parId = new();
@@ -26,18 +42,18 @@ parId[1] = chanson;           // la clé 1 pointe vers cette chanson
 var c = parId[1];             // accès direct par la clé (très rapide)
 parId.ContainsKey(5);         // la clé existe-t-elle ?
 ```
-> 🧠 Un `Dictionary` associe une **clé unique** à une valeur. Idéal pour retrouver une chanson par son `Id` instantanément, sans parcourir toute la liste.
+> 🧠 Un `Dictionary` associe une **clé unique** à une valeur. Retrouver une chanson par son `Id` est **instantané** (pas de parcours). En interne, la clé est transformée par une *fonction de hachage* qui pointe presque directement vers la bonne case.
 
-## 4. Lequel choisir ?
+## 5. Lequel choisir ?
 
-| Besoin | Collection |
-|---|---|
-| Garder un ordre, autoriser doublons | `List<T>` |
-| Retrouver vite par un identifiant unique | `Dictionary<K,V>` |
+| Besoin | Collection | Coût d'une recherche |
+|---|---|---|
+| Garder un ordre, autoriser doublons | `List<T>` | parcours (lent si gros) |
+| Retrouver vite par un identifiant unique | `Dictionary<K,V>` | quasi-instantané |
 
 ---
 
-## 5. Auto-évaluation
+## 6. Auto-évaluation
 
 **Q1.** Quelle collection garde l'ordre d'insertion ?
 <details><summary>▸ Voir la réponse</summary>

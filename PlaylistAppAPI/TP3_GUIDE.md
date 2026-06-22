@@ -216,6 +216,19 @@ Dépliez `POST /api/chansons` → **Try it out** → remplissez → **Execute**.
 
 ## 5. Comprendre l'exemple fourni
 
+> 🔁 **Les endpoints exposés par `ChansonsController`** et leur trajet vers la base :
+
+```mermaid
+flowchart LR
+    Cli["Client / Swagger"] --> API["ChansonsController"]
+    API --> E1["GET /api/chansons"]
+    API --> E2["GET /api/chansons/{id}"]
+    API --> E3["POST /api/chansons"]
+    API --> E4["DELETE /api/chansons/{id}"]
+    E1 & E2 & E3 & E4 --> Ctx["PlaylistContext"] --> DB[("SQLite")]
+```
+
+
 ```
 PlaylistAppAPI/
 ├── Controllers/

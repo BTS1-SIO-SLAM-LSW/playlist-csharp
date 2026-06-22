@@ -1,6 +1,6 @@
 # 🔗 Concept — Les relations entre entités (1-N, N-N)
 
-> **TP concerné :** TP2 · **Temps de lecture :** 7 min
+> **TP concerné :** TP2 · **Temps de lecture :** 8 min
 
 ---
 
@@ -8,27 +8,48 @@
 
 Les données du monde réel sont **liées** : un artiste a plusieurs chansons, une playlist contient plusieurs chansons. On modélise ces liens par des **relations**.
 
-## 2. Relation un-à-plusieurs (1-N)
+## 2. Le modèle de données du projet
 
-Un artiste → plusieurs chansons, mais une chanson → un seul artiste.
+```mermaid
+erDiagram
+    ARTISTE ||--o{ CHANSON : "interprète (1-N)"
+    PLAYLIST ||--o{ PLAYLIST_CHANSON : "contient"
+    CHANSON ||--o{ PLAYLIST_CHANSON : "figure dans"
+    ARTISTE {
+        int Id PK
+        string Nom
+    }
+    CHANSON {
+        int Id PK
+        string Titre
+        int ArtisteId FK
+    }
+    PLAYLIST {
+        int Id PK
+        string Nom
+    }
+    PLAYLIST_CHANSON {
+        int PlaylistId FK
+        int ChansonId FK
+        int Position
+    }
 ```
-Artiste (1) ───< (N) Chanson
-```
-En base : la table `Chansons` porte une **clé étrangère** `ArtisteId`.
 
-## 3. Relation plusieurs-à-plusieurs (N-N)
+Les symboles `||` (un) et `o{` (plusieurs) se lisent : un `ARTISTE` est lié à **plusieurs** `CHANSON`.
 
-Une playlist contient plusieurs chansons **et** une chanson peut être dans plusieurs playlists.
-```
-Playlist (N) ───< PlaylistChanson >─── (N) Chanson
-```
-On ne peut pas relier directement : on crée une **table de liaison** `PlaylistChanson` qui contient les deux clés étrangères (`PlaylistId`, `ChansonId`) et souvent un ordre (`Position`).
+## 3. Relation un-à-plusieurs (1-N)
 
-> 🧠 La table de liaison est **la** solution standard pour modéliser un N-N. C'est un grand classique du référentiel BTS (MLD).
+Un artiste → plusieurs chansons, mais une chanson → un seul artiste. En base, la table `Chansons` porte une **clé étrangère** `ArtisteId` qui pointe vers `Artiste.Id`.
+
+## 4. Relation plusieurs-à-plusieurs (N-N)
+
+Une playlist contient plusieurs chansons **et** une chanson peut être dans plusieurs playlists. On ne peut pas relier directement : on crée une **table de liaison** `PlaylistChanson` qui contient les deux clés étrangères (`PlaylistId`, `ChansonId`) et souvent un ordre (`Position`).
+
+> 🧠 La table de liaison **décompose** un N-N en deux relations 1-N. C'est **la** solution standard du référentiel BTS (MLD).
 
 ---
 
-## 4. Auto-évaluation
+## 5. Auto-évaluation
 
 **Q1.** Donnez un exemple de relation 1-N dans le projet.
 <details><summary>▸ Voir la réponse</summary>
@@ -39,7 +60,7 @@ Un **artiste** possède plusieurs **chansons**, mais chaque chanson n'a qu'un ar
 **Q2.** Comment modélise-t-on une relation N-N ?
 <details><summary>▸ Voir la réponse</summary>
 
-Avec une **table de liaison** (ici `PlaylistChanson`) qui porte les deux clés étrangères (`PlaylistId` et `ChansonId`). Elle relie les deux tables.
+Avec une **table de liaison** (ici `PlaylistChanson`) qui porte les deux clés étrangères (`PlaylistId` et `ChansonId`). Elle relie les deux tables en décomposant le N-N en deux 1-N.
 </details>
 
 **Q3.** Que contient en général la table de liaison en plus des deux clés ?

@@ -1,6 +1,6 @@
 # 🎏 Concept — Événements et publish/subscribe (EOA)
 
-> **TP concerné :** TP4 · **Temps de lecture :** 8 min
+> **TP concerné :** TP4 · **Temps de lecture :** 10 min
 
 ---
 
@@ -16,21 +16,47 @@ L'**EOA** (*Event-Oriented Architecture*) renverse la logique : au lieu d'ordonn
 
 ## 3. Les 3 rôles (publish/subscribe)
 
+```mermaid
+sequenceDiagram
+    participant Ctrl as ChansonsController (émetteur)
+    participant Bus as EventBus
+    participant A as AuditHandler (abonné)
+    participant S as StatistiquesHandler (abonné)
+    Ctrl->>Bus: PublishAsync(ChansonAjouteeEvent)
+    par Le bus distribue à tous les abonnés
+        Bus->>A: HandleChansonAjoutee(e)
+        Bus->>S: HandleChansonAjoutee(e)
+    end
+    Note over Ctrl,S: l'émetteur ne connaît PAS ses abonnés → découplage total
+```
+
 | Rôle | Qui | Fait |
 |---|---|---|
 | Émetteur | Controller | publie l'événement |
 | Bus | `EventBus` | distribue aux abonnés |
 | Abonnés | `AuditHandler`, `StatistiquesHandler` | réagissent |
 
-L'émetteur **ne connaît pas** ses abonnés : **découplage total**. Pour ajouter un comportement, on crée un handler et on l'abonne — **sans toucher** au Controller.
+Pour ajouter un comportement (ex. un e-mail), on crée un handler et on l'abonne — **sans toucher** au Controller.
 
 ## 4. SOA et EOA se complètent
+
+```mermaid
+flowchart LR
+    C["POST /api/chansons"] --> Ctrl["Controller"]
+    Ctrl -->|"1. SOA : enregistre (synchrone)"| DB[("SQLite")]
+    Ctrl -->|"2. EOA : publie l'événement"| Bus(("EventBus"))
+    Bus -.->|"asynchrone, découplé"| H1["Audit"]
+    Bus -.-> H2["Stats"]
+    Bus -.-> H3["…futur handler"]
+```
 
 | | SOA | EOA |
 |---|---|---|
 | Logique | « fais et réponds » | « ceci est arrivé, réagissez » |
 | Couplage | direct | découplé |
 | Moment | synchrone | asynchrone |
+
+> ⚙️ **Passage à l'échelle :** ici le bus est *en mémoire*. En production, on remplace `InMemoryEventBus` par un vrai courtier de messages (**Kafka**, **RabbitMQ**) sans changer la logique des émetteurs ni des abonnés — c'est le même contrat publish/subscribe.
 
 ---
 

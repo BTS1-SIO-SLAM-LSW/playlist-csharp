@@ -1,6 +1,6 @@
 # 🧱 Concept — La Programmation Orientée Objet (POO)
 
-> **TP concerné :** TP1 · **Temps de lecture :** 8 min
+> **TP concerné :** TP1 · **Temps de lecture :** 10 min
 
 ---
 
@@ -14,7 +14,39 @@ Sans POO, on a des variables éparpillées et des fonctions qui se baladent. Ave
 
 > 🎁 **Analogie :** une classe est un **moule** ; un objet est un **gâteau** fait avec ce moule. Le moule `Chanson` permet de fabriquer autant de chansons que l'on veut, toutes avec la même structure.
 
-## 3. Les 3 notions à retenir
+## 3. Le modèle objet du TP1 (vue d'ensemble)
+
+```mermaid
+classDiagram
+    class Chanson {
+        +int Id
+        +string Titre
+        +string Artiste
+        +string Genre
+        +int DureeSecondes
+        +int Note
+        +DureeFormatee() string
+    }
+    class Playlist {
+        -List~Chanson~ _chansons
+        +string Nom
+        +IReadOnlyList~Chanson~ Chansons
+        +AjouterChanson(Chanson c)
+        +RetirerChanson(Chanson c)
+        +DureeTotale() int
+    }
+    class Bibliotheque {
+        -Dictionary _chansonsParId
+        +AjouterChanson(Chanson c)
+        +Rechercher(string terme) List~Chanson~
+    }
+    Playlist "1" o-- "0..*" Chanson : contient
+    Bibliotheque "1" o-- "0..*" Chanson : référence
+```
+
+**Comment lire ce diagramme :** chaque rectangle est une **classe**. Le `+` marque ce qui est **public** (accessible de l'extérieur), le `-` ce qui est **privé** (caché). Le losange `o--` signifie « **contient / est composé de** » : une `Playlist` regroupe plusieurs `Chanson`.
+
+## 4. Les 3 notions à retenir
 
 ### Classe et objet
 ```csharp
@@ -32,7 +64,15 @@ On **protège** les données internes. Dans `Playlist`, la liste est **privée**
 private List<Chanson> _chansons = new();
 public IReadOnlyList<Chanson> Chansons => _chansons.AsReadOnly();
 ```
-> 🧠 Ainsi, personne ne peut ajouter une chanson « par la bande » : on **doit** passer par la méthode `AjouterChanson(...)`, qui peut vérifier les règles.
+
+```mermaid
+flowchart LR
+    Ext["Code externe"] -->|"AjouterChanson() ✅ autorisé"| API["Méthodes publiques<br/>(la porte d'entrée)"]
+    Ext -.->|"_chansons ❌ interdit"| Champ[("Champ privé<br/>_chansons")]
+    API -->|"contrôle les règles<br/>(pas de doublon…)"| Champ
+```
+
+> 🧠 Personne ne peut ajouter une chanson « par la bande » : on **doit** passer par `AjouterChanson(...)`, qui peut vérifier les règles. C'est l'encapsulation : la donnée est protégée derrière une porte unique.
 
 ### Propriété vs méthode
 - **Propriété** = une donnée (`Titre`, `Artiste`).
@@ -40,7 +80,7 @@ public IReadOnlyList<Chanson> Chansons => _chansons.AsReadOnly();
 
 ---
 
-## 4. Auto-évaluation
+## 5. Auto-évaluation
 
 > Essayez de répondre **avant** de déplier.
 
