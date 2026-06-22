@@ -11,15 +11,15 @@
 
 **Support de cours C# / .NET 10 · 2025-2026**
 
-[📖 Documentation](https://ggaillard.github.io/playlist-csharp) · [🚀 Ouvrir dans Codespaces](https://codespaces.new/ggaillard/playlist-csharp) · [❓ Poser une question](../../issues/new?template=question.yml)
-
 </div>
 
 ---
 
-> 🧭 **Comment apprendre avec ce dépôt ?** Lisez d'abord le **[Guide d'apprentissage](APPRENTISSAGE.md)** (méthode, prérequis, auto-évaluation, stack à jour .NET 10 / C# 14).
->
-> 📚 **Nouveau ici ?** Commencez par le **[Parcours pédagogique des TP](PARCOURS_TP.md)** — il explique la méthode et renvoie vers les 3 fiches détaillées (TP1, TP2, TP3).
+## 🚀 Par où commencer ?
+
+### 👉 Un seul point de départ : **[Ouvrir le Parcours pédagogique →](PARCOURS_TP.md)**
+
+Tout est là, dans l'ordre : la **méthode**, la **mise en route**, les **4 TP** et les **productions à rendre**. Suivez-le de haut en bas, sans vous disperser.
 
 ## 🎯 À quoi sert ce dépôt ?
 
@@ -34,11 +34,9 @@ flowchart LR
     TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
 ```
 
-➡️ **Commencez par le [Parcours pédagogique](PARCOURS_TP.md)** : méthode en 4 étapes, les 4 TP, et les **productions à rendre**.
-
 ---
 
-## 🚦 Démarrage en 3 étapes
+## 🚦 Les 3 étapes de mise en route (détaillées dans le [Parcours](PARCOURS_TP.md))
 
 ### 1️⃣ Créer votre propre dépôt
 

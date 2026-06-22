@@ -84,6 +84,8 @@ En complément des missions pratiques, le dossier **[cours/](cours/README.md)** 
 3. Suivez les fiches **dans l'ordre** : TP1 → TP2 → TP3 → TP4.
 4. Cochez votre progression dans `PROGRESSION.md` et committez régulièrement.
 
+> 📚 **Pour aller plus loin :** méthode, prérequis et stack à jour dans le [Guide d'apprentissage](APPRENTISSAGE.md).
+
 Détails complets : [GUIDE_ETUDIANT.md](GUIDE_ETUDIANT.md).
 
 ---
