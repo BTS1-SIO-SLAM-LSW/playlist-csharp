@@ -63,7 +63,6 @@ void ShowWelcome()
     Console.WriteLine("╔══════════════════════════════════════════════╗");
     Console.WriteLine("║        🎵  PlaylistApp  🎵                  ║");
     Console.WriteLine("║   Gestion de playlists musicales en C#       ║");
-    Console.WriteLine("║   Support de cours C# / .NET 10           ║");
     Console.WriteLine("╚══════════════════════════════════════════════╝");
     Console.ResetColor();
 }

@@ -1,6 +1,5 @@
 # ══════════════════════════════════════════════════════════════════════════════
 #  Dockerfile – PlaylistApp EF  (TP2 : Entity Framework Core + SQLite)
-#  Support de cours C# / .NET 10
 #
 #  Build multi-étapes :
 #   Stage 1 "build"     → SDK complet : compilation + génération migrations
@@ -35,7 +34,6 @@ RUN dotnet publish -c Release -o /app/publish
 # ── Stage 2 : Runtime ─────────────────────────────────────────────────────────
 FROM mcr.microsoft.com/dotnet/runtime:10.0 AS runtime
 
-LABEL maintainer="Support de cours C# / .NET 10"
 LABEL description="TP2 – Playlist EF Core + SQLite dans Docker"
 LABEL version="2.0"
 

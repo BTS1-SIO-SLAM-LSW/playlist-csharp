@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
         Title       = "🎵 PlaylistApp API",
         Version     = "v1",
         Description = "API REST de gestion de playlists musicales\n\n" +
-                      "Architecture SOA + EOA | Support de cours C# / .NET 10\n\n" +
+                      "Architecture SOA + EOA\n\n" +
                       "Référence : github.com/jasonsturges/sqlite-dotnet-core",
         Contact     = new() { Name = "SLAM", Email = "contact@example.org" }
     });

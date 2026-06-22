@@ -30,7 +30,6 @@ RUN dotnet publish -c Release -o /app/publish --no-restore
 FROM mcr.microsoft.com/dotnet/runtime:10.0 AS runtime
 
 # Métadonnées de l'image
-LABEL maintainer="Support de cours C# / .NET 10"
 LABEL description="Application console de gestion de playlists musicales"
 LABEL version="1.0"
 

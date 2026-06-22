@@ -75,7 +75,6 @@ void AfficherBienvenue()
     Console.WriteLine("╔════════════════════════════════════════════════════╗");
     Console.WriteLine("║   🎵  PlaylistApp EF  –  TP2  🎵                 ║");
     Console.WriteLine("║   Entity Framework Core + SQLite dans Docker       ║");
-    Console.WriteLine("║   Support de cours C# / .NET 10                  ║");
     Console.WriteLine("╚════════════════════════════════════════════════════╝");
     Console.ResetColor();
 }
