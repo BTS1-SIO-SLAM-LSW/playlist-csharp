@@ -245,11 +245,11 @@ C'est la boucle du menu qui appelle les méthodes ci-dessus.
 
 ---
 
-## 6. S'approprier le code par la modification
+## 6. ✍️ S'approprier le code par la modification
 
 > **C'est le cœur du TP.** Vous allez faire évoluer l'exemple en 3 paliers. Chaque modification suit le même rituel : **Objectif → Démarche → Vérification → Indice**. La solution complète n'est pas donnée : à vous de chercher (c'est ça, s'approprier).
 
-### 🟢 Modification 1 (guidée) — Ajouter une note aux chansons
+### ✍️ 🟢 Modification 1 (guidée) — Ajouter une note aux chansons
 
 **🎯 Objectif :** chaque chanson pourra avoir une note de 1 à 5 étoiles.
 
@@ -264,7 +264,7 @@ C'est la boucle du menu qui appelle les méthodes ci-dessus.
 
 ---
 
-### 🟡 Modification 2 (semi-guidée) — Trier une playlist par durée
+### ✍️ 🟡 Modification 2 (semi-guidée) — Trier une playlist par durée
 
 **🎯 Objectif :** ajouter une option « trier la playlist par durée » dans le menu.
 
@@ -278,7 +278,7 @@ C'est la boucle du menu qui appelle les méthodes ci-dessus.
 
 ---
 
-### 🔴 Modification 3 (autonome) — Recherche par genre musical
+### ✍️ 🔴 Modification 3 (autonome) — Recherche par genre musical
 
 **🎯 Objectif :** permettre de chercher toutes les chansons d'un genre donné (Rock, Pop…).
 
@@ -290,7 +290,7 @@ C'est la boucle du menu qui appelle les méthodes ci-dessus.
 
 ---
 
-## 7. Conteneuriser avec Docker
+## 7. 🐳 Conteneuriser avec Docker
 
 **🎯 Objectif :** faire tourner votre application dans un conteneur, comme en entreprise.
 
@@ -305,7 +305,7 @@ docker run -it playlist-app
 
 ---
 
-## 8. Validation finale — checklist
+## 8. ✅ Validation finale — checklist
 
 Cochez dans votre README au fur et à mesure :
 - [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé

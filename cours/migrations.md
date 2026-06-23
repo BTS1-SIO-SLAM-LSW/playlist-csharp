@@ -51,7 +51,7 @@ Mettre `DateTime.UtcNow` comme valeur par défaut dans le *seed* crée des **mig
 
 **Le choix :** migrations dès qu'un schéma **vit, évolue ou est partagé** ; `EnsureCreated` réservé au jetable (proto, tests).
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Qu'est-ce qu'une migration ?
 <details><summary>▸ Voir la réponse</summary>

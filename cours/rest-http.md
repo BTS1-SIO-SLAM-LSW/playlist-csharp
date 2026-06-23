@@ -80,7 +80,7 @@ Les données circulent en **JSON** (`Content-Type: application/json`). ASP.NET C
 
 **Le choix :** REST pour des **API de ressources (CRUD)** ; sinon **gRPC** (perf interne), **GraphQL** (requêtes flexibles) ou **WebSocket** (temps réel) selon le besoin.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Quel verbe pour créer une ressource, et quel code en cas de succès ?
 <details><summary>▸ Voir la réponse</summary>

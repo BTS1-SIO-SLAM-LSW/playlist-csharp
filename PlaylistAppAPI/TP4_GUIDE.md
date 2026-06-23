@@ -268,11 +268,11 @@ Ce fichier contient, dans l'ordre :
 
 ---
 
-## 6. S'approprier le code par la modification
+## 6. ✍️ S'approprier le code par la modification
 
 > Rituel : **🎯 Objectif → 📝 Démarche → 🔍 Vérification → 💡 Indice**.
 
-### 🟢 Modification 1 (guidée) — Publier un événement à la suppression
+### ✍️ 🟢 Modification 1 (guidée) — Publier un événement à la suppression
 **🎯 Objectif :** quand on supprime une chanson, publier `ChansonSupprimeeEvent` et le journaliser.
 **📝 Démarche :**
 1. Dans `ChansonsController.cs`, méthode `Delete`, après la suppression réussie, appelez `await _eventBus.PublishAsync(new ChansonSupprimeeEvent(...));`.
@@ -281,7 +281,7 @@ Ce fichier contient, dans l'ordre :
 **🔍 Vérification :** un `DELETE` fait apparaître une ligne `[AUDIT] Chanson supprimée` dans les logs.
 **💡 Indice :** `ChansonSupprimeeEvent` existe déjà dans `EventBus.cs`. Inspirez-vous de l'ajout déjà câblé.
 
-### 🟡 Modification 2 (semi-guidée) — Un handler « historique »
+### ✍️ 🟡 Modification 2 (semi-guidée) — Un handler « historique »
 **🎯 Objectif :** créer un nouveau handler `HistoriqueHandler` qui garde en mémoire la liste des derniers événements.
 **📝 Démarche :**
 1. Créez la classe `HistoriqueHandler` avec une `List<string>` interne.
@@ -290,7 +290,7 @@ Ce fichier contient, dans l'ordre :
 **🔍 Vérification :** après plusieurs actions, l'historique contient bien une entrée par événement.
 **💡 Indice :** calquez la structure de `StatistiquesHandler` (constructeur primaire + méthode `Handle...`).
 
-### 🔴 Modification 3 (autonome) — Un événement métier complet
+### ✍️ 🔴 Modification 3 (autonome) — Un événement métier complet
 **🎯 Objectif :** créer de A à Z un événement `NoteModifieeEvent` (déclenché quand on change la note d'une chanson), avec publication et au moins un handler abonné.
 **📝 Démarche (à structurer) :** définir le record, publier depuis l'endpoint concerné, créer/abonner un handler.
 **🔍 Vérification :** modifier une note produit la réaction attendue dans les logs.
@@ -307,7 +307,7 @@ dotnet test ../PlaylistAppAPI.Tests/
 
 ---
 
-## 8. Validation finale — checklist
+## 8. ✅ Validation finale — checklist
 - [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé
 - [ ] Je vois les lignes `[AUDIT]` et statistiques après un POST
 - [ ] **Modification 1** : événement de suppression journalisé

@@ -96,7 +96,7 @@ flowchart TD
 
 **Le choix :** EOA quand les effets sont **multiples, évolutifs ou découplés** ; un appel direct (SOA) reste préférable pour un effet **unique et immédiat**.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Quel problème l'EOA résout-elle ?
 <details><summary>▸ Voir la réponse</summary>

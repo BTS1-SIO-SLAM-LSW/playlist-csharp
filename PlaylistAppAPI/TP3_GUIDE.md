@@ -260,23 +260,23 @@ Pour chaque méthode, repérez : (1) l'**attribut de route** (`[HttpGet]`, `[Htt
 
 ---
 
-## 6. S'approprier le code par la modification
+## 6. ✍️ S'approprier le code par la modification
 
 > Rituel : **🎯 Objectif → 📝 Démarche → 🔍 Vérification → 💡 Indice**.
 
-### 🟢 Modification 1 (guidée) — Endpoint « top chansons »
+### ✍️ 🟢 Modification 1 (guidée) — Endpoint « top chansons »
 **🎯 Objectif :** exposer `GET /api/chansons/top/{n}` renvoyant les `n` chansons les mieux notées.
 **📝 Démarche :** ajoutez une méthode `[HttpGet("top/{n:int}")]`, triez par note décroissante, prenez les `n` premières, renvoyez `Ok(...)`.
 **🔍 Vérification :** `top/3` renvoie 3 chansons, la mieux notée en tête, code 200.
 **💡 Indice :** `await _ctx.Chansons.OrderByDescending(c => c.Note).Take(n).ToListAsync();`
 
-### 🟡 Modification 2 (semi-guidée) — Validation à la création
+### ✍️ 🟡 Modification 2 (semi-guidée) — Validation à la création
 **🎯 Objectif :** refuser un POST si la note n'est pas entre 1 et 5 (code 400).
 **📝 Démarche :** dans `Create`, vérifiez `Note` ; si invalide, renvoyez `BadRequest(...)`.
 **🔍 Vérification :** un POST avec `note: 9` → **400** ; avec `note: 4` → **201**.
 **💡 Indice :** `if (chanson.Note < 1 || chanson.Note > 5) return BadRequest("Note entre 1 et 5");`
 
-### 🔴 Modification 3 (autonome) — Un `PlaylistsController` complet
+### ✍️ 🔴 Modification 3 (autonome) — Un `PlaylistsController` complet
 **🎯 Objectif :** créer un contrôleur exposant les playlists (lister, voir, créer).
 **📝 Démarche (à structurer) :** calquez-vous sur `ChansonsController`. Implémentez `GET /api/playlists`, `GET /api/playlists/{id}`, `POST /api/playlists`.
 **🔍 Vérification :** Swagger affiche un groupe « Playlists » fonctionnel.
@@ -295,7 +295,7 @@ dotnet test ../PlaylistAppAPI.Tests/
 
 ---
 
-## 8. Validation finale — checklist
+## 8. ✅ Validation finale — checklist
 - [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé
 - [ ] L'API démarre, Swagger accessible
 - [ ] `GET` et `POST` fonctionnent (200 / 201)

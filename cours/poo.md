@@ -93,7 +93,7 @@ flowchart LR
 
 **Le choix :** la POO s'impose dès qu'il y a des **règles métier** et une durée de vie. Pour un mini-script jetable, le procédural suffit — ne pas « tout objet-ifier » par réflexe.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 > Essayez de répondre **avant** de déplier.
 

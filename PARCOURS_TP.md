@@ -35,6 +35,17 @@ flowchart LR
 
 > Les solutions complètes ne sont **pas** dans ces fiches : chercher fait partie de l'apprentissage. En cas de blocage, ouvrez une *issue* (modèle « Question » fourni).
 
+### 🔑 Légende des icônes (les mêmes dans tout le dépôt)
+
+| Icône | Signification |
+|---|---|
+| ✍️ | **À faire** : une action concrète attendue de vous |
+| 🎓 | Lire la fiche concept **+ auto-évaluation** (à faire en premier) |
+| 🟢 🟡 🔴 | Niveau d'une mission : guidé · semi-guidé · autonome |
+| ✅ | **Valider** : faire passer les tests / cocher la checklist |
+| 🐳 | Conteneuriser avec Docker |
+| 💾 | Commit & push (versionner votre travail) |
+
 ---
 
 ## 🗺️ Les 4 TP — la trajectoire

@@ -103,7 +103,7 @@ On laisse la **base** trier via son **index** et ne renvoyer que 10 lignes. Char
 
 **Le choix :** LINQ par défaut pour la clarté ; sur de gros volumes en base, **surveiller le SQL généré** et la matérialisation (`ToList`).
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Que fait `chansons.Where(c => c.Annee >= 2000)` ?
 <details><summary>▸ Voir la réponse</summary>

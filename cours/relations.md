@@ -62,7 +62,7 @@ Une playlist contient plusieurs chansons **et** une chanson peut être dans plus
 
 **Le choix :** **normaliser** (relations) par défaut ; **dénormaliser** ponctuellement (copier une donnée) seulement pour accélérer des lectures critiques.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Donnez un exemple de relation 1-N dans le projet.
 <details><summary>▸ Voir la réponse</summary>

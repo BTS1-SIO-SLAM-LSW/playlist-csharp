@@ -65,7 +65,7 @@ parId.ContainsKey(5);         // la clé existe-t-elle ?
 
 **Le choix :** ordre/doublons → `List` ; recherche fréquente par identifiant → `Dictionary`. Très souvent : une `List` pour parcourir, un `Dictionary` pour retrouver vite.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Quelle collection garde l'ordre d'insertion ?
 <details><summary>▸ Voir la réponse</summary>

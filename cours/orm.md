@@ -77,7 +77,7 @@ sequenceDiagram
 
 **Le choix :** l'ORM pour le **CRUD courant** ; pour les requêtes critiques en perf, descendre au **SQL** (vues, requêtes brutes, micro-ORM).
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Que signifie ORM et à quoi ça sert ?
 <details><summary>▸ Voir la réponse</summary>

@@ -65,7 +65,7 @@ public class ChansonsController(PlaylistContext ctx) : ControllerBase
 
 **Le choix :** le découpage en couches pour des applis **qui durent** ; éviter l'over-engineering sur un prototype.
 
-## Auto-évaluation
+## ✍️ Auto-évaluation
 
 **Q1.** Quelle est la responsabilité du Controller ? du Repository ?
 <details><summary>▸ Voir la réponse</summary>

@@ -263,11 +263,11 @@ dotnet ef database update
 
 ---
 
-## 7. S'approprier le code par la modification
+## 7. ✍️ S'approprier le code par la modification
 
 > **Cœur du TP.** Vous allez faire évoluer le modèle de données, ce qui est l'activité la plus fréquente d'un développeur SLAM. Rituel : **Objectif → Démarche → Vérification → Indice**.
 
-### 🟢 Modification 1 (guidée) — Ajouter un champ « Label » (maison de disque)
+### ✍️ 🟢 Modification 1 (guidée) — Ajouter un champ « Label » (maison de disque)
 
 **🎯 Objectif :** chaque chanson stockera le nom de son label.
 
@@ -283,7 +283,7 @@ dotnet ef database update
 
 ---
 
-### 🟡 Modification 2 (semi-guidée) — Une méthode « chansons par genre »
+### ✍️ 🟡 Modification 2 (semi-guidée) — Une méthode « chansons par genre »
 
 **🎯 Objectif :** ajouter au Repository une méthode qui renvoie les chansons d'un genre, triées par note décroissante.
 
@@ -298,7 +298,7 @@ dotnet ef database update
 
 ---
 
-### 🔴 Modification 3 (autonome) — Ajouter une entité `Artiste` (relation 1-N)
+### ✍️ 🔴 Modification 3 (autonome) — Ajouter une entité `Artiste` (relation 1-N)
 
 **🎯 Objectif :** créer une vraie table `Artistes` reliée aux chansons (un artiste → plusieurs chansons).
 
@@ -329,7 +329,7 @@ Si vous avez ajouté `ParGenreAsync` (Modification 2), **écrivez votre propre t
 
 ---
 
-## 9. Conteneuriser avec persistance
+## 9. 🐳 Conteneuriser avec persistance
 
 ```bash
 docker compose up --build
@@ -340,7 +340,7 @@ docker compose up --build
 
 ---
 
-## 10. Validation finale — checklist
+## 10. ✅ Validation finale — checklist
 
 - [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé
 - [ ] La base se crée (`dotnet ef database update`)
