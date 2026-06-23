@@ -1,14 +1,15 @@
 # 🔎 Concept — Les requêtes LINQ
 
 > **TP concerné :** TP1 (et au-delà) · **Temps de lecture :** 8 min
+> ▶️ **[Faire le TP1](../PlaylistApp/TP1_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 **LINQ** (*Language Integrated Query*) permet d'interroger une collection avec une syntaxe lisible : filtrer, trier, transformer, regrouper — sans écrire de boucles `for`.
 
-## 2. Une requête = une chaîne de traitements
+## Une requête = une chaîne de traitements
 
 Chaque opération prend une séquence en entrée et en produit une nouvelle en sortie. On les **enchaîne** comme un tapis roulant :
 
@@ -27,7 +28,7 @@ chansons
     .Take(3);                       // garder les 3 premières
 ```
 
-## 3. Les opérations de base
+## Les opérations de base
 
 ```csharp
 // Filtrer : garder les chansons de rock
@@ -51,6 +52,45 @@ chansons.Any(c => c.Note == 5);
 
 ---
 
+## 🆚 SQL vs LINQ : comparatif, performance et choix
+
+Même besoin — « les 3 chansons rock les mieux notées » — deux écritures :
+
+| | SQL (langage de la base) | LINQ (intégré à C#) |
+|---|---|---|
+| Écriture | `SELECT Titre FROM Chansons WHERE Genre='Rock' ORDER BY Note DESC LIMIT 3;` | `chansons.Where(c => c.Genre=="Rock").OrderByDescending(c => c.Note).Take(3)` |
+| S'exécute | dans le moteur de base | dans votre programme C# |
+| Vérifié | à l'exécution (texte) | à la **compilation** (typé) |
+
+### ⏱️ Mesurer le temps d'affichage
+
+```csharp
+var sw = System.Diagnostics.Stopwatch.StartNew();
+var top = chansons.Where(c => c.Genre == "Rock")
+                  .OrderByDescending(c => c.Note).Take(3).ToList();
+sw.Stop();
+Console.WriteLine($"⏱️ LINQ : {sw.Elapsed.TotalMilliseconds:F3} ms");
+```
+
+> 📏 **Ordre de grandeur** (à confirmer chez vous) : sur **petit volume déjà en mémoire**, LINQ est quasi instantané ; sur **gros volume stocké**, laisser la **base** filtrer/trier (SQL ou LINQ-to-EF) ne rapatrie que l'utile — bien plus rapide que tout charger en RAM.
+
+### 🧭 Choisir selon l'usage
+
+```mermaid
+flowchart TD
+    Q{"Où sont les données ?"}
+    Q -->|"déjà en mémoire (List)"| L["✅ LINQ"]
+    Q -->|"en base"| B{"Gros volume ?"}
+    B -->|"non"| L2["LINQ-to-EF (confort)"]
+    B -->|"oui"| Sg["✅ Laisser la BASE filtrer (SQL)"]
+```
+
+**Mini-test —** Table de 5 M de lignes, vous voulez le top 10 : pourquoi ne pas tout charger pour trier en LINQ ?
+<details><summary>▸ Voir la réponse</summary>
+
+On laisse la **base** trier via son **index** et ne renvoyer que 10 lignes. Charger 5 M de lignes en mémoire serait lent et coûteux ; LINQ-to-EF génère ce SQL pour vous.
+</details>
+
 ## 🏛️ Le point de vue de l'architecte
 
 **Enjeu :** gagner en **lisibilité** des requêtes sans perdre le **contrôle du coût** (mémoire, SQL généré).
@@ -63,7 +103,7 @@ chansons.Any(c => c.Note == 5);
 
 **Le choix :** LINQ par défaut pour la clarté ; sur de gros volumes en base, **surveiller le SQL généré** et la matérialisation (`ToList`).
 
-## 4. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Que fait `chansons.Where(c => c.Annee >= 2000)` ?
 <details><summary>▸ Voir la réponse</summary>

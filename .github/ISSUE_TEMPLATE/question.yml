@@ -13,7 +13,8 @@ body:
       options:
         - "TP1 – Collections & Console"
         - "TP2 – Entity Framework Core"
-        - "TP3 – API REST (SOA + EOA)"
+        - "TP3 – API REST (SOA)"
+        - "TP4 – Architecture événementielle (EOA)"
         - "Configuration (Codespaces, Docker…)"
     validations:
       required: true

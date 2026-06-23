@@ -3,6 +3,8 @@
 > **Module :** PlaylistApp (2/3) · **Durée : 6h**
 
 > 🎓 **Concepts associés** (explication + auto-évaluation) : [ORM](../cours/orm.md) · [Migrations](../cours/migrations.md) · [Relations](../cours/relations.md)
+>
+> 👉 Le **comparatif et le choix** de chaque notion vivent dans ces fiches : lisez-les et faites l'auto-évaluation pour valider.
 
 > **Démarche :** partir d'un exemple fonctionnel → comprendre l'ORM → se l'approprier en faisant évoluer le modèle de données.
 
@@ -330,6 +332,7 @@ docker compose up --build
 
 ## 10. Validation finale — checklist
 
+- [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé
 - [ ] La base se crée (`dotnet ef database update`)
 - [ ] Les données persistent après redémarrage
 - [ ] **Modification 1** : colonne `Label` ajoutée (visible dans SQLite Viewer)
@@ -338,62 +341,6 @@ docker compose up --build
 - [ ] `dotnet test` → 31 tests verts (32+ si vous avez ajouté le vôtre)
 - [ ] `docker compose up` démarre l'app
 - [ ] Commits réguliers avec messages clairs
-
----
-
-## 🆚 Migrations vs `EnsureCreated` : le choix à faire
-
-EF Core offre **deux façons** de créer la base — pour des finalités différentes.
-
-| | `EnsureCreated()` | **Migrations** (`migrations add` + `database update`) |
-|---|---|---|
-| Crée la base | oui, d'un coup | oui, étape par étape |
-| Fait évoluer un schéma existant | ❌ non (il faut tout supprimer) | ✅ oui (ajout de colonne, table…) |
-| Historique versionné | ❌ aucun | ✅ un fichier par changement (dans Git) |
-| Travail en équipe | risqué (schémas divergents) | ✅ tout le monde applique les mêmes migrations |
-| Idéal pour | un prototype jetable, un test | un vrai projet qui évolue |
-
-### ⏱️ Le coût caché
-
-`EnsureCreated` paraît plus rapide *au début* (une ligne), mais dès qu'on modifie une entité il faut **supprimer puis recréer** la base → **perte des données**. Une migration coûte une commande de plus, mais fait évoluer la base **sans rien perdre**.
-
-### 🧭 Choisir selon l'usage
-
-```mermaid
-flowchart TD
-    Q{"La base va-t-elle évoluer<br/>ou être partagée ?"}
-    Q -->|"non (démo, test jetable)"| E["EnsureCreated()<br/>rapide et simple"]
-    Q -->|"oui (projet réel, équipe)"| M["✅ Migrations<br/>traçable, évolutif, sans perte"]
-```
-
-| Situation | Préférez |
-|---|---|
-| Test unitaire (souvent base InMemory) | `EnsureCreated` |
-| Démo jetable, schéma figé | `EnsureCreated` |
-| Projet de TP / vrai projet, schéma qui évolue | **Migrations** |
-| Plusieurs développeurs sur la même base | **Migrations** |
-
-> 🧠 Dans ce cours on utilise les **migrations** : c'est la pratique professionnelle, et ça évite le piège « j'ai changé une classe, ma base ne correspond plus ».
-
-### ✅ Mini auto-évaluation
-
-**Q1.** Vous ajoutez une propriété `Label` à `Chanson` sur un projet déjà en base. `EnsureCreated` ou migration ?
-<details><summary>▸ Voir la réponse</summary>
-
-Une **migration** (`dotnet ef migrations add AjoutLabel` puis `database update`). `EnsureCreated` ne modifie pas une base existante : il faudrait la supprimer et perdre les données.
-</details>
-
-**Q2.** Pourquoi les migrations sont-elles meilleures en équipe ?
-<details><summary>▸ Voir la réponse</summary>
-
-Chaque migration est un fichier **versionné dans Git** : tous les développeurs appliquent la même suite et obtiennent **exactement le même schéma**, de façon reproductible.
-</details>
-
-**Q3.** Quand `EnsureCreated` est-il acceptable ?
-<details><summary>▸ Voir la réponse</summary>
-
-Pour une **base jetable** : prototype rapide, démo, ou tests (souvent en InMemory) où l'historique et l'évolution du schéma n'ont pas d'importance.
-</details>
 
 ---
 
@@ -411,3 +358,5 @@ Pour une **base jetable** : prototype rapide, démo, ou tests (souvent en InMemo
 
 ⬅️ **TP précédent :** [TP1 — Console & POO](../PlaylistApp/TP1_GUIDE.md)
 ➡️ **TP suivant :** [TP3 — API REST & SOA](../PlaylistAppAPI/TP3_GUIDE.md)
+
+🧭 **[Retour au parcours](../PARCOURS_TP.md)**

@@ -1,20 +1,21 @@
 # 🎏 Concept — Événements et publish/subscribe (EOA)
 
 > **TP concerné :** TP4 · **Temps de lecture :** 10 min
+> ▶️ **[Faire le TP4](../PlaylistAppAPI/TP4_GUIDE.md)**
 
 ---
 
-## 1. Le problème
+## Le problème
 
 Quand on crée une chanson, on veut peut-être journaliser, mettre à jour des stats, notifier… Tout mettre dans le Controller le rend énorme et fragile : c'est le **couplage fort**.
 
-## 2. L'idée : annoncer au lieu d'ordonner
+## L'idée : annoncer au lieu d'ordonner
 
 L'**EOA** (*Event-Oriented Architecture*) renverse la logique : au lieu d'ordonner chaque action, on **publie un événement** (« chanson ajoutée »), et **ceux que ça intéresse réagissent**.
 
 > 📣 **Analogie de la gare :** le haut-parleur annonce un train. Il ne sait pas qui écoute. Les voyageurs concernés réagissent ; les autres ignorent.
 
-## 3. Les 3 rôles (publish/subscribe)
+## Les 3 rôles (publish/subscribe)
 
 ```mermaid
 sequenceDiagram
@@ -38,7 +39,7 @@ sequenceDiagram
 
 Pour ajouter un comportement (ex. un e-mail), on crée un handler et on l'abonne — **sans toucher** au Controller.
 
-## 4. SOA et EOA se complètent
+## SOA et EOA se complètent
 
 ```mermaid
 flowchart LR
@@ -60,6 +61,29 @@ flowchart LR
 
 ---
 
+## 🆚 SOA vs EOA : choisir selon l'usage
+
+```mermaid
+flowchart TD
+    Q{"L'appelant a-t-il besoin<br/>du résultat tout de suite ?"}
+    Q -->|"oui (lire / créer et renvoyer)"| Soa["✅ SOA — appel direct, synchrone"]
+    Q -->|"non (audit, mail, stats…)"| Eoa["✅ EOA — publier un événement"]
+```
+
+| Besoin | Architecture |
+|---|---|
+| Lire/écrire une donnée et renvoyer la réponse | **SOA** |
+| Déclencher des effets de bord (audit, notif, cache) | **EOA** |
+| Ajouter un comportement sans toucher l'émetteur | **EOA** |
+
+> ⚠️ Ne pas sur-utiliser l'EOA : pour un effet **unique et immédiat**, l'appel direct (SOA) est plus simple à lire et à déboguer.
+
+**Mini-test —** À la création d'une chanson, journaliser ET mettre à jour des stats sans alourdir le Controller : SOA ou EOA ?
+<details><summary>▸ Voir la réponse</summary>
+
+**EOA** : on publie un événement « chanson ajoutée » ; audit et stats sont des **abonnés** qui réagissent, sans que le Controller les connaisse.
+</details>
+
 ## 🏛️ Le point de vue de l'architecte
 
 **Enjeu :** **découpler** l'émetteur des réactions pour **étendre sans modifier**, et garder des temps de réponse stables.
@@ -72,7 +96,7 @@ flowchart LR
 
 **Le choix :** EOA quand les effets sont **multiples, évolutifs ou découplés** ; un appel direct (SOA) reste préférable pour un effet **unique et immédiat**.
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Quel problème l'EOA résout-elle ?
 <details><summary>▸ Voir la réponse</summary>

@@ -34,45 +34,9 @@ flowchart LR
 
 ---
 
-## 🚦 Les 3 étapes de mise en route (détaillées dans le [Parcours](PARCOURS_TP.md))
+## 🚦 Mise en route
 
-### 1️⃣ Créer votre propre dépôt
-
-> **Ne pas fork !** Utilisez le bouton "Use this template" pour avoir votre propre copie propre.
-
-```
-Cliquer sur : [ Use this template ] → [ Create a new repository ]
-Nom suggéré  : playlist-csharp-VOTRE_NOM
-Visibilité   : Public (obligatoire pour GitHub Pages gratuit)
-```
-
-### 2️⃣ Ouvrir dans GitHub Codespaces
-
-```
-Votre dépôt → [ Code ] → [ Codespaces ] → [ Create codespace on main ]
-```
-
-Attendez ~2 minutes → VS Code s'ouvre dans votre navigateur avec tout pré-installé :
-- .NET 10 SDK · dotnet-ef · Docker · Git
-- Extensions VS Code : C# Dev Kit, Docker, SQLite Viewer, REST Client
-
-### 3️⃣ Suivre les TP dans l'ordre
-
-```bash
-# TP1 – Application console (collections C#)
-cd PlaylistApp && dotnet run
-
-# TP2 – Entity Framework Core + SQLite
-cd PlaylistAppEF && dotnet run
-dotnet test ../PlaylistAppEF.Tests/     ← vérifiez votre progression
-
-# TP3 – API REST (architecture SOA)
-cd PlaylistAppAPI && dotnet run
-# → Swagger disponible sur http://localhost:5000
-
-# TP4 – Architecture événementielle (EOA)
-dotnet test ../PlaylistAppAPI.Tests/ --filter EventBusTests   # 5 tests EOA
-```
+La procédure de référence — créer votre dépôt, ouvrir GitHub Codespaces, lancer chaque TP — est détaillée dans le **[Guide étudiant](GUIDE_ETUDIANT.md)** (également accessible via le [Parcours](PARCOURS_TP.md)).
 
 ---
 
@@ -152,7 +116,7 @@ Le tableau de bord sauvegarde votre avancement dans le navigateur. Quand vous vo
 ## ❓ Besoin d'aide ?
 
 Ouvrez une [issue avec le template "Question"](../../issues/new?template=question.yml) en précisant :
-- Le TP concerné (TP1 / TP2 / TP3)
+- Le TP concerné (TP1 / TP2 / TP3 / TP4)
 - Le message d'erreur complet
 - La commande que vous avez tapée
 

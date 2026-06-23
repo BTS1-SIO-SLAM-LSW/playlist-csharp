@@ -1,10 +1,11 @@
 # 🗄️ Concept — L'ORM et le `DbContext`
 
 > **TP concerné :** TP2 · **Temps de lecture :** 9 min
+> ▶️ **[Faire le TP2](../PlaylistAppEF/TP2_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 Un **ORM** (*Object-Relational Mapping*) fait automatiquement le pont entre vos **classes C#** et les **tables d'une base de données**. Vous écrivez du C#, l'ORM génère le SQL.
 
@@ -25,7 +26,7 @@ flowchart LR
     ORM -->|"objets Chanson reconstruits"| O
 ```
 
-## 2. Sans ORM vs avec ORM
+## Sans ORM vs avec ORM
 
 ```csharp
 // Sans ORM : on écrit le SQL à la main (fastidieux, source d'erreurs)
@@ -36,7 +37,7 @@ _ctx.Chansons.Add(new Chanson { Titre = "Imagine", Artiste = "Lennon" });
 await _ctx.SaveChangesAsync();
 ```
 
-## 3. Le `DbContext` : la porte d'entrée
+## Le `DbContext` : la porte d'entrée
 
 Le `PlaylistContext` est la classe centrale d'EF Core. Chaque `DbSet` représente **une table** :
 ```csharp
@@ -45,7 +46,7 @@ public DbSet<Playlist> Playlists { get; set; } // ↔ table "Playlists"
 ```
 On interroge ensuite ces `DbSet` avec LINQ ; EF Core traduit en SQL.
 
-## 4. Le suivi des changements (*change tracking*)
+## Le suivi des changements (*change tracking*)
 
 Le `DbContext` ne sauvegarde rien tant qu'on n'appelle pas `SaveChangesAsync()`. Entre-temps, il **surveille** les objets et calcule le SQL minimal à exécuter :
 
@@ -76,7 +77,7 @@ sequenceDiagram
 
 **Le choix :** l'ORM pour le **CRUD courant** ; pour les requêtes critiques en perf, descendre au **SQL** (vues, requêtes brutes, micro-ORM).
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Que signifie ORM et à quoi ça sert ?
 <details><summary>▸ Voir la réponse</summary>

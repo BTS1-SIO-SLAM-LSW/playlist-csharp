@@ -1,10 +1,11 @@
 # 🌐 Concept — HTTP, REST et codes de statut
 
 > **TP concerné :** TP3 · **Temps de lecture :** 11 min
+> ▶️ **[Faire le TP3](../PlaylistAppAPI/TP3_GUIDE.md)**
 
 ---
 
-## 1. HTTP : le protocole du web
+## HTTP : le protocole du web
 
 HTTP (*HyperText Transfer Protocol*) est un protocole **requête / réponse** : le client demande, le serveur répond. Il est **sans état** (*stateless*) — chaque requête est indépendante, le serveur ne « se souvient » pas de la précédente.
 
@@ -36,7 +37,7 @@ Content-Type: application/json
 
 > 🧩 Une requête = **méthode** (POST) + **chemin** (/api/chansons) + **en-têtes** (`Content-Type`…) + **corps** (les données JSON). Une réponse = **code de statut** (201) + **en-têtes** (`Location`…) + **corps**.
 
-## 2. REST : des ressources et des verbes
+## REST : des ressources et des verbes
 
 REST organise l'API autour de **ressources** (ici « chanson ») identifiées par une **URL**, manipulées par les **verbes HTTP** :
 
@@ -50,7 +51,7 @@ REST organise l'API autour de **ressources** (ici « chanson ») identifiées pa
 
 > 🧠 L'URL dit **quoi** (la ressource), le verbe dit **quelle action**. **Idempotent** = répéter la requête donne le même résultat (un `DELETE` deux fois → toujours supprimé ; un `POST` deux fois → deux créations).
 
-## 3. Les codes de statut
+## Les codes de statut
 
 ```mermaid
 flowchart LR
@@ -61,7 +62,7 @@ flowchart LR
 
 > 🧠 **2xx** « c'est bon », **4xx** « tu t'es trompé » (mauvaise donnée, ressource absente), **5xx** « je me suis trompé » (bug serveur).
 
-## 4. JSON : le format d'échange
+## JSON : le format d'échange
 
 Les données circulent en **JSON** (`Content-Type: application/json`). ASP.NET Core **sérialise** automatiquement les objets C# en JSON pour la réponse, et **désérialise** le JSON reçu en objets pour la requête. C'est la *négociation de contenu*.
 
@@ -79,7 +80,7 @@ Les données circulent en **JSON** (`Content-Type: application/json`). ASP.NET C
 
 **Le choix :** REST pour des **API de ressources (CRUD)** ; sinon **gRPC** (perf interne), **GraphQL** (requêtes flexibles) ou **WebSocket** (temps réel) selon le besoin.
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Quel verbe pour créer une ressource, et quel code en cas de succès ?
 <details><summary>▸ Voir la réponse</summary>

@@ -1,14 +1,15 @@
 # 🔄 Concept — Les migrations
 
 > **TP concerné :** TP2 · **Temps de lecture :** 7 min
+> ▶️ **[Faire le TP2](../PlaylistAppEF/TP2_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 Une **migration** est un script **versionné** qui décrit comment faire évoluer la structure de la base (ajouter une table, une colonne…). C'est « Git pour le schéma de la base ».
 
-## 2. Le cycle en 3 temps
+## Le cycle en 3 temps
 
 ```mermaid
 flowchart LR
@@ -28,11 +29,11 @@ dotnet ef database update
 
 > 🧠 **Règle d'or :** on ne modifie **jamais** la base à la main. On modifie le **modèle C#**, on **génère** une migration, on l'**applique**. Traçabilité totale, et toute l'équipe a le même schéma.
 
-## 3. Pourquoi versionner le schéma ?
+## Pourquoi versionner le schéma ?
 
 Chaque migration est un fichier daté, rejouable, partagé via Git. Un collègue qui récupère le projet lance `database update` et obtient **exactement** la même structure — comme on récupère le code.
 
-## 4. Le piège classique
+## Le piège classique
 
 Mettre `DateTime.UtcNow` comme valeur par défaut dans le *seed* crée des **migrations fantômes** : à chaque génération, la date change, donc EF croit qu'il faut tout réécrire. On utilise une **date fixe**.
 
@@ -50,7 +51,7 @@ Mettre `DateTime.UtcNow` comme valeur par défaut dans le *seed* crée des **mig
 
 **Le choix :** migrations dès qu'un schéma **vit, évolue ou est partagé** ; `EnsureCreated` réservé au jetable (proto, tests).
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Qu'est-ce qu'une migration ?
 <details><summary>▸ Voir la réponse</summary>

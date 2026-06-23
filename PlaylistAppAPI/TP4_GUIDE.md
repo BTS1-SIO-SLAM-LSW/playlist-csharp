@@ -3,6 +3,8 @@
 > **Module :** PlaylistApp (4/4) · **Durée : 4h** · Stack : .NET 10 · C# 14
 
 > 🎓 **Concepts associés** (explication + auto-évaluation) : [Événements & EOA](../cours/eoa.md)
+>
+> 👉 Le **comparatif et le choix** de chaque notion vivent dans ces fiches : lisez-les et faites l'auto-évaluation pour valider.
 
 > **Démarche :** partir de l'API du TP3 → comprendre pourquoi et comment découpler avec des événements → l'étendre.
 
@@ -296,6 +298,7 @@ dotnet test ../PlaylistAppAPI.Tests/
 ---
 
 ## 8. Validation finale — checklist
+- [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md` et committé
 - [ ] Je vois les lignes `[AUDIT]` et statistiques après un POST
 - [ ] **Modification 1** : événement de suppression journalisé
 - [ ] **Modification 2** : `HistoriqueHandler` fonctionnel
@@ -313,54 +316,6 @@ dotnet test ../PlaylistAppAPI.Tests/
 
 ---
 
-## 🆚 SOA vs EOA : maintenant que vous connaissez les deux
-
-Vous avez codé les deux. La vraie question n'est pas « laquelle est la meilleure », mais **« quand chacune apporte-t-elle quelque chose ? »**
-
-| Critère | SOA suffit | L'EOA apporte un vrai plus |
-|---|---|---|
-| Nombre de réactions à un fait | 0–1 | plusieurs (audit + stats + mail…) |
-| Qui réagit change souvent | non | oui (on ajoute des abonnés) |
-| L'appelant doit-il connaître les effets ? | oui | non, on veut le découpler |
-| Réponse immédiate exigée | oui | l'effet peut se faire après |
-
-### ⏱️ Le gain en temps de réponse
-
-Sans EOA, plus on ajoute d'effets de bord à un endpoint, plus il **ralentit** (il fait tout, en série, avant de répondre). Avec l'EOA, l'endpoint **publie et répond** ; les abonnés travaillent ensuite. Le temps de réponse perçu reste **stable** même si on ajoute des réactions.
-
-### 🧭 Le bon réflexe
-
-```mermaid
-flowchart TD
-    F["Un fait métier survient<br/>(chanson ajoutée…)"] --> Q{"Plusieurs réactions,<br/>ou besoin de découpler ?"}
-    Q -->|"non : 1 effet, connu, immédiat"| Soa["Appel direct (SOA) suffit"]
-    Q -->|"oui : effets multiples / évolutifs"| Eoa["✅ Publier un événement (EOA)"]
-```
-
-> ⚠️ **Ne pas sur-utiliser l'EOA :** pour une action unique et immédiate, un appel direct (SOA) est plus simple à lire et à déboguer. L'EOA brille quand les **réactions se multiplient** ou doivent rester **découplées**.
-
-### ✅ Mini auto-évaluation
-
-**Q1.** Un endpoint n'a qu'un seul effet, immédiat et connu. L'EOA est-elle utile ?
-<details><summary>▸ Voir la réponse</summary>
-
-Pas vraiment : un **appel direct (SOA)** est plus simple et lisible. L'EOA ajoute une indirection qui ne se justifie que s'il y a plusieurs réactions ou un besoin de découplage.
-</details>
-
-**Q2.** Pourquoi le temps de réponse d'un endpoint EOA reste-t-il stable quand on ajoute des handlers ?
-<details><summary>▸ Voir la réponse</summary>
-
-Parce que l'endpoint **publie l'événement et répond** sans attendre les handlers. Ajouter un abonné n'allonge pas la réponse au client : la réaction se fait après-coup.
-</details>
-
-**Q3.** Citez un risque d'un usage excessif de l'EOA.
-<details><summary>▸ Voir la réponse</summary>
-
-La logique devient **difficile à suivre** : on ne voit plus d'un coup d'œil « qui réagit à quoi ». Pour des cas simples et directs, SOA reste préférable.
-</details>
-
----
-
 ## 10. Dépannage
 | Problème | Solution |
 |---|---|
@@ -375,3 +330,5 @@ La logique devient **difficile à suivre** : on ne voit plus d'un coup d'œil «
 Vous êtes parti d'une console (TP1), vous lui avez donné une mémoire durable (TP2), vous l'avez ouverte au monde via une API REST en couches (TP3), et vous l'avez rendue **extensible sans la modifier** grâce aux événements (TP4). C'est toute la trajectoire d'une application moderne : **fonctionner, persister, exposer, évoluer**.
 
 ⬅️ **TP précédent :** [TP3 — API REST & SOA](TP3_GUIDE.md)
+
+🧭 **[Retour au parcours](../PARCOURS_TP.md)**

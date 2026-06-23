@@ -1,14 +1,15 @@
 # 📚 Concept — Les collections : `List` et `Dictionary`
 
 > **TP concerné :** TP1 · **Temps de lecture :** 7 min
+> ▶️ **[Faire le TP1](../PlaylistApp/TP1_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 Une **collection** stocke plusieurs valeurs dans une seule variable. Les deux plus courantes en C# sont `List<T>` et `Dictionary<K,V>`.
 
-## 2. Deux façons d'organiser les données
+## Deux façons d'organiser les données
 
 ```mermaid
 flowchart TB
@@ -24,7 +25,7 @@ flowchart TB
     end
 ```
 
-## 3. `List<T>` — une liste ordonnée
+## `List<T>` — une liste ordonnée
 
 ```csharp
 List<Chanson> chansons = new();
@@ -34,7 +35,7 @@ chansons[0];                  // accès par position (index)
 ```
 > 🧠 Une `List` **conserve l'ordre** d'insertion et **accepte les doublons**. Idéale pour une playlist (l'ordre compte). Pour retrouver un élément précis, il faut **parcourir** la liste.
 
-## 4. `Dictionary<K,V>` — un annuaire clé → valeur
+## `Dictionary<K,V>` — un annuaire clé → valeur
 
 ```csharp
 Dictionary<int, Chanson> parId = new();
@@ -44,7 +45,7 @@ parId.ContainsKey(5);         // la clé existe-t-elle ?
 ```
 > 🧠 Un `Dictionary` associe une **clé unique** à une valeur. Retrouver une chanson par son `Id` est **instantané** (pas de parcours). En interne, la clé est transformée par une *fonction de hachage* qui pointe presque directement vers la bonne case.
 
-## 5. Lequel choisir ?
+## Lequel choisir ?
 
 | Besoin | Collection | Coût d'une recherche |
 |---|---|---|
@@ -64,7 +65,7 @@ parId.ContainsKey(5);         // la clé existe-t-elle ?
 
 **Le choix :** ordre/doublons → `List` ; recherche fréquente par identifiant → `Dictionary`. Très souvent : une `List` pour parcourir, un `Dictionary` pour retrouver vite.
 
-## 6. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Quelle collection garde l'ordre d'insertion ?
 <details><summary>▸ Voir la réponse</summary>

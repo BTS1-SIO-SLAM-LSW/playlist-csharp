@@ -79,14 +79,11 @@ En complément des missions pratiques, le dossier **[cours/](cours/README.md)** 
 
 ## 🚦 Avant de commencer
 
-1. Créez votre dépôt depuis le template (bouton **Use this template**).
-2. Ouvrez-le dans **GitHub Codespaces** (aucune installation locale).
-3. Suivez les fiches **dans l'ordre** : TP1 → TP2 → TP3 → TP4.
-4. Cochez votre progression dans `PROGRESSION.md` et committez régulièrement.
+1. **Mise en route** (créer le dépôt, ouvrir Codespaces) : suivez le **[Guide étudiant](GUIDE_ETUDIANT.md)** — c'est la procédure de référence.
+2. Suivez ensuite les fiches **dans l'ordre** : TP1 → TP2 → TP3 → TP4.
+3. Cochez votre progression dans `PROGRESSION.md` et committez régulièrement.
 
 > 📚 **Pour aller plus loin :** méthode, prérequis et stack à jour dans le [Guide d'apprentissage](APPRENTISSAGE.md).
-
-Détails complets : [GUIDE_ETUDIANT.md](GUIDE_ETUDIANT.md).
 
 ---
 

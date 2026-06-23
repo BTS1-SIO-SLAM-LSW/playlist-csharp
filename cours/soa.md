@@ -1,10 +1,11 @@
 # 🏛️ Concept — L'architecture SOA en couches
 
 > **TP concerné :** TP3 · **Temps de lecture :** 8 min
+> ▶️ **[Faire le TP3](../PlaylistAppAPI/TP3_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 **SOA** (*Service-Oriented Architecture*) organise le code en **couches** ayant chacune **une seule responsabilité**, qui communiquent par des contrats clairs.
 
@@ -20,7 +21,7 @@ flowchart TB
 - **Controller** : reçoit la requête, renvoie la réponse. Ne sait rien de la base.
 - **Repository** : lit/écrit les données. Ne sait rien du web.
 
-## 2. Le trajet d'une requête à travers les couches
+## Le trajet d'une requête à travers les couches
 
 ```mermaid
 sequenceDiagram
@@ -36,11 +37,11 @@ sequenceDiagram
     Ctrl-->>C: 200 OK + JSON
 ```
 
-## 3. Pourquoi séparer ?
+## Pourquoi séparer ?
 
 > 🧠 **Couplage faible :** si on change de base de données, seul le Repository change ; le Controller ne bouge pas. Chaque couche évolue indépendamment, et on peut tester chacune isolément.
 
-## 4. L'injection de dépendances
+## L'injection de dépendances
 
 Le Controller ne **crée pas** ses dépendances ; ASP.NET Core les lui **fournit** automatiquement (le *conteneur d'injection*). En C# 14, via le constructeur primaire :
 ```csharp
@@ -49,6 +50,8 @@ public class ChansonsController(PlaylistContext ctx) : ControllerBase
 > ⚙️ Le conteneur sait construire `PlaylistContext` (configuré dans `Program.cs`) et l'injecte à chaque requête. Cela rend le code **testable** : en test, on injecte une base InMemory à la place de SQLite.
 
 ---
+
+> 🆚 **SOA ou EOA ?** Le comparatif et le guide de choix entre architecture synchrone (SOA) et événementielle (EOA) sont détaillés dans la fiche [EOA](eoa.md).
 
 ## 🏛️ Le point de vue de l'architecte
 
@@ -62,7 +65,7 @@ public class ChansonsController(PlaylistContext ctx) : ControllerBase
 
 **Le choix :** le découpage en couches pour des applis **qui durent** ; éviter l'over-engineering sur un prototype.
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Quelle est la responsabilité du Controller ? du Repository ?
 <details><summary>▸ Voir la réponse</summary>

@@ -1,20 +1,21 @@
 # 🧱 Concept — La Programmation Orientée Objet (POO)
 
 > **TP concerné :** TP1 · **Temps de lecture :** 10 min
+> ▶️ **[Faire le TP1](../PlaylistApp/TP1_GUIDE.md)**
 
 ---
 
-## 1. L'idée en une phrase
+## L'idée en une phrase
 
 La POO consiste à **organiser le code en objets** : des « boîtes » qui regroupent des **données** (propriétés) et des **comportements** (méthodes) qui vont ensemble.
 
-## 2. Pourquoi ?
+## Pourquoi ?
 
 Sans POO, on a des variables éparpillées et des fonctions qui se baladent. Avec la POO, on **regroupe** ce qui concerne une même chose. Une chanson a un titre, un artiste, une durée, et sait s'afficher : tout cela vit dans **une seule classe** `Chanson`.
 
 > 🎁 **Analogie :** une classe est un **moule** ; un objet est un **gâteau** fait avec ce moule. Le moule `Chanson` permet de fabriquer autant de chansons que l'on veut, toutes avec la même structure.
 
-## 3. Le modèle objet du TP1 (vue d'ensemble)
+## Le modèle objet du TP1 (vue d'ensemble)
 
 ```mermaid
 classDiagram
@@ -46,7 +47,7 @@ classDiagram
 
 **Comment lire ce diagramme :** chaque rectangle est une **classe**. Le `+` marque ce qui est **public** (accessible de l'extérieur), le `-` ce qui est **privé** (caché). Le losange `o--` signifie « **contient / est composé de** » : une `Playlist` regroupe plusieurs `Chanson`.
 
-## 4. Les 3 notions à retenir
+## Les 3 notions à retenir
 
 ### Classe et objet
 ```csharp
@@ -92,7 +93,7 @@ flowchart LR
 
 **Le choix :** la POO s'impose dès qu'il y a des **règles métier** et une durée de vie. Pour un mini-script jetable, le procédural suffit — ne pas « tout objet-ifier » par réflexe.
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 > Essayez de répondre **avant** de déplier.
 

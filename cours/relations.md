@@ -1,14 +1,15 @@
 # 🔗 Concept — Les relations entre entités (1-N, N-N)
 
 > **TP concerné :** TP2 · **Temps de lecture :** 8 min
+> ▶️ **[Faire le TP2](../PlaylistAppEF/TP2_GUIDE.md)**
 
 ---
 
-## 1. L'idée
+## L'idée
 
 Les données du monde réel sont **liées** : un artiste a plusieurs chansons, une playlist contient plusieurs chansons. On modélise ces liens par des **relations**.
 
-## 2. Le modèle de données du projet
+## Le modèle de données du projet
 
 ```mermaid
 erDiagram
@@ -37,11 +38,11 @@ erDiagram
 
 Les symboles `||` (un) et `o{` (plusieurs) se lisent : un `ARTISTE` est lié à **plusieurs** `CHANSON`.
 
-## 3. Relation un-à-plusieurs (1-N)
+## Relation un-à-plusieurs (1-N)
 
 Un artiste → plusieurs chansons, mais une chanson → un seul artiste. En base, la table `Chansons` porte une **clé étrangère** `ArtisteId` qui pointe vers `Artiste.Id`.
 
-## 4. Relation plusieurs-à-plusieurs (N-N)
+## Relation plusieurs-à-plusieurs (N-N)
 
 Une playlist contient plusieurs chansons **et** une chanson peut être dans plusieurs playlists. On ne peut pas relier directement : on crée une **table de liaison** `PlaylistChanson` qui contient les deux clés étrangères (`PlaylistId`, `ChansonId`) et souvent un ordre (`Position`).
 
@@ -61,7 +62,7 @@ Une playlist contient plusieurs chansons **et** une chanson peut être dans plus
 
 **Le choix :** **normaliser** (relations) par défaut ; **dénormaliser** ponctuellement (copier une donnée) seulement pour accélérer des lectures critiques.
 
-## 5. Auto-évaluation
+## Auto-évaluation
 
 **Q1.** Donnez un exemple de relation 1-N dans le projet.
 <details><summary>▸ Voir la réponse</summary>
