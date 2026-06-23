@@ -78,7 +78,7 @@ Pour chaque TP, le rendu = **du code qui compile + des tests verts + des commits
 | **📗 TP2** | Migration appliquée (base créée) · entité **Artiste** (relation 1-N) · les tests qui passent | Badge **TP2 – Tests** vert · **31 tests** au vert |
 | **📕 TP3** | API qui démarre + Swagger accessible · endpoints GET/POST testés | Badge **TP3 – API** vert · **8 tests d'intégration** au vert |
 | **🎏 TP4** | Les 3 modifications EOA (suppression, HistoriqueHandler, NoteModifieeEvent) · événements visibles dans les logs | **5 tests EOA** au vert (autograding) |
-| **🏁 Global** | `PROGRESSION.md` à jour et committé · historique de commits propre (`feat:`, `fix:`…) · lien du dépôt communiqué | Les **4 badges CI** verts en haut du README |
+| **🏁 Global** | `PROGRESSION.md` à jour et committé · historique de commits propre (`feat:`, `fix:`…) · lien du dépôt communiqué | Le **statut vert** des workflows (onglet **Actions** de GitHub) |
 
 > ✅ **Comment prouver un rendu ?** Poussez votre code : les **GitHub Actions** s'exécutent automatiquement et affichent un badge vert/rouge. Cochez vos missions dans `PROGRESSION.md` (ou exportez depuis le tableau de bord) et committez.
 

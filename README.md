@@ -2,12 +2,9 @@
 
 <div align="center">
 
-[![TP1 – Build](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp1-build.yml/badge.svg)](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp1-build.yml)
-[![TP2 – Tests EF Core](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp2-tests.yml/badge.svg)](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp2-tests.yml)
-[![TP3 – API REST](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp3-api.yml/badge.svg)](https://github.com/ggaillard/playlist-csharp/actions/workflows/tp3-api.yml)
-[![Pages](https://github.com/ggaillard/playlist-csharp/actions/workflows/pages.yml/badge.svg)](https://ggaillard.github.io/playlist-csharp)
+[![Ouvrir dans GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ggaillard/playlist-csharp?quickstart=1)
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ggaillard/playlist-csharp?quickstart=1)
+**[📊 Tableau de bord](https://ggaillard.github.io/playlist-csharp)** · **[📘 Parcours](PARCOURS_TP.md)** · **[❓ Poser une question](../../issues/new?template=question.yml)**
 
 </div>
 
