@@ -24,7 +24,8 @@ Ce dépôt est le **support de cours complet** pour apprendre C# et .NET 10 à t
 
 ```mermaid
 flowchart LR
-    TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"] --> TP2["📗 TP2<br/>+ base de données<br/>(ça se souvient)"]
+    TP0["🚀 TP0<br/>Mise en place<br/>(ça démarre)"] --> TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"]
+    TP1 --> TP2["📗 TP2<br/>+ base de données<br/>(ça se souvient)"]
     TP2 --> TP3["📕 TP3<br/>+ API REST / SOA<br/>(c'est exposé)"]
     TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
 ```
