@@ -30,6 +30,19 @@ flowchart LR
     TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
 ```
 
+### ⏱️ Estimation du temps
+
+| TP | Sujet | Durée estimée |
+|---|---|---|
+| 🚀 **TP0** | Mise en place de l'environnement | ~30 min |
+| 📘 **TP1** | Console & POO | ~4 h |
+| 📗 **TP2** | Entity Framework Core | ~6 h |
+| 📕 **TP3** | API REST & SOA | ~4 h |
+| 🎏 **TP4** | Architecture événementielle (EOA) | ~4 h |
+| | **Total** | **~18 h 30** |
+
+> ⏳ Estimations indicatives, à votre rythme : la lecture des fiches concepts + auto-évaluations est incluse. Le TP2 est le plus long (modélisation des données + migrations).
+
 ---
 
 ## 🚦 Mise en route

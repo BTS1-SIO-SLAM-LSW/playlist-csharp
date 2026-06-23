@@ -258,6 +258,8 @@ C'est la boucle du menu qui appelle les méthodes ci-dessus.
 
 ## 7. 🐳 Conteneuriser avec Docker
 
+> ℹ️ **À distinguer du TP0** : le `.devcontainer` (TP0) conteneurise votre **environnement de dev** ; **ici, on conteneurise l'application** (le livrable) pour l'exécuter / la déployer. C'est la compétence « mettre à disposition un service » (B1.5 / SPR5).
+
 **🎯 Objectif :** faire tourner votre application dans un conteneur, comme en entreprise.
 
 ```bash

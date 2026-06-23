@@ -34,6 +34,8 @@ Un **Dev Container** est un environnement de développement **décrit par du cod
 
 > 🧠 Détails et auto-évaluation dans la fiche concept : **[Environnement de développement](cours/environnement.md)**.
 
+> ℹ️ **Deux usages de Docker à ne pas confondre :** **ici (TP0)**, Docker sert à recréer **votre environnement de développement** (le Dev Container où vous écrivez et exécutez le code). **Aux TP1 → TP3**, vous conteneuriserez **l'application elle-même** (un `Dockerfile` qui empaquette le programme pour l'exécuter / le livrer) — autre usage, côté **déploiement**.
+
 ## 3. Modélisation
 
 ### Diagramme d'activité — le cycle de construction

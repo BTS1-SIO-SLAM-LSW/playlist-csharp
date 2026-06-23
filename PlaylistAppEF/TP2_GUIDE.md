@@ -331,6 +331,8 @@ Si vous avez ajouté `ParGenreAsync` (Modification 2), **écrivez votre propre t
 
 ## 9. 🐳 Conteneuriser avec persistance
 
+> ℹ️ **À distinguer du TP0** : le `.devcontainer` (TP0) conteneurise votre **environnement de dev** ; **ici, on conteneurise l'application** (le livrable) pour l'exécuter / la déployer. C'est la compétence « mettre à disposition un service » (B1.5 / SPR5).
+
 ```bash
 docker compose up --build
 ```

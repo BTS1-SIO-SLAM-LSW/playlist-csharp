@@ -1,6 +1,6 @@
 # 🔗 Concept — Les relations entre entités (1-N, N-N)
 
-> **TP concerné :** TP2 · **Temps de lecture :** 8 min
+> **TP concerné :** TP2 · **Temps de lecture :** 12 min
 > ▶️ **[Faire le TP2](../PlaylistAppEF/TP2_GUIDE.md)**
 
 ---
@@ -40,13 +40,124 @@ Les symboles `||` (un) et `o{` (plusieurs) se lisent : un `ARTISTE` est lié à 
 
 ## Relation un-à-plusieurs (1-N)
 
-Un artiste → plusieurs chansons, mais une chanson → un seul artiste. En base, la table `Chansons` porte une **clé étrangère** `ArtisteId` qui pointe vers `Artiste.Id`.
+**Définition :** une ligne du côté « **1** » est liée à **plusieurs** lignes du côté « **N** », mais chaque ligne du côté « N » n'est liée qu'à **une seule** ligne du côté « 1 ».
+
+> Exemple : **un artiste** interprète **plusieurs chansons** ; mais **une chanson** n'a qu'**un seul** artiste.
+
+```mermaid
+erDiagram
+    ARTISTE ||--o{ CHANSON : "interprète"
+    ARTISTE {
+        int Id PK
+        string Nom
+    }
+    CHANSON {
+        int Id PK
+        string Titre
+        int ArtisteId FK
+    }
+```
+
+**Lire la cardinalité :** `||` = « exactement un », `o{` = « zéro ou plusieurs ». Donc **un** ARTISTE ↔ **plusieurs** CHANSON.
+
+**En base de données :** la **clé étrangère se place toujours du côté « plusieurs »**. La table `Chansons` porte une colonne `ArtisteId` qui pointe vers `Artistes.Id` :
+
+*Table Artistes*
+
+| Id | Nom |
+|---|---|
+| 1 | Queen |
+| 2 | Lennon |
+
+*Table Chansons*
+
+| Id | Titre | ArtisteId |
+|---|---|---|
+| 10 | Bohemian Rhapsody | **1** |
+| 11 | We Will Rock You | **1** |
+| 12 | Imagine | **2** |
+
+> Les chansons 10 et 11 pointent toutes deux vers l'artiste 1 → « **plusieurs chansons pour un artiste** ».
+
+**En C# (EF Core)** — on déclare des **propriétés de navigation** :
+
+```csharp
+public class Artiste
+{
+    public int Id { get; set; }
+    public string Nom { get; set; } = "";
+    // côté « N » : une COLLECTION de chansons
+    public ICollection<Chanson> Chansons { get; set; } = new List<Chanson>();
+}
+
+public class Chanson
+{
+    public int Id { get; set; }
+    public string Titre { get; set; } = "";
+    public int ArtisteId { get; set; }     // la clé étrangère
+    public Artiste? Artiste { get; set; }  // côté « 1 » : une référence simple
+}
+```
+
+> 🧠 Côté « 1 » → une **collection** (`ICollection<Chanson>`). Côté « N » → une **référence** (`Artiste`) **+ la clé étrangère** (`ArtisteId`).
 
 ## Relation plusieurs-à-plusieurs (N-N)
 
-Une playlist contient plusieurs chansons **et** une chanson peut être dans plusieurs playlists. On ne peut pas relier directement : on crée une **table de liaison** `PlaylistChanson` qui contient les deux clés étrangères (`PlaylistId`, `ChansonId`) et souvent un ordre (`Position`).
+**Définition :** chaque ligne d'un côté peut être liée à **plusieurs** lignes de l'autre, **dans les deux sens**.
 
-> 🧠 La table de liaison **décompose** un N-N en deux relations 1-N. C'est **la** solution standard du référentiel BTS (MLD).
+> Exemple : **une playlist** contient **plusieurs chansons**, **et** **une chanson** peut figurer dans **plusieurs playlists**.
+
+**Pourquoi on ne peut pas la stocker directement :** une ligne possède des colonnes **fixes** ; elle ne peut pas contenir une **liste de longueur variable** de clés étrangères. On introduit donc une **table de liaison** (ou *table de jonction*) qui enregistre **chaque association** sur une ligne.
+
+```mermaid
+erDiagram
+    PLAYLIST ||--o{ PLAYLIST_CHANSON : "contient"
+    CHANSON  ||--o{ PLAYLIST_CHANSON : "figure dans"
+    PLAYLIST {
+        int Id PK
+        string Nom
+    }
+    PLAYLIST_CHANSON {
+        int PlaylistId FK
+        int ChansonId FK
+        int Position
+    }
+    CHANSON {
+        int Id PK
+        string Titre
+    }
+```
+
+> 🧠 La table de liaison **décompose le N-N en deux relations 1-N** (PLAYLIST 1-N PLAYLIST_CHANSON, et CHANSON 1-N PLAYLIST_CHANSON). C'est **la** solution standard du référentiel BTS (MLD).
+
+**En base de données :** chaque couple (playlist, chanson) = **une ligne** de `PlaylistChanson` :
+
+| PlaylistId | ChansonId | Position |
+|---|---|---|
+| 1 | 10 | 1 |
+| 1 | 12 | 2 |
+| 2 | 10 | 1 |
+
+> La chanson 10 figure dans les playlists 1 **et** 2 → c'est bien du N-N. La table porte aussi `Position` : une **donnée propre à l'association**.
+
+**En C# (EF Core)** — table de liaison **explicite** (parce qu'elle porte `Position`) :
+
+```csharp
+public class PlaylistChanson
+{
+    public int PlaylistId { get; set; }    // FK → Playlists.Id
+    public int ChansonId  { get; set; }    // FK → Chansons.Id
+    public int Position   { get; set; }    // donnée propre à l'association
+    public Playlist? Playlist { get; set; }
+    public Chanson?  Chanson  { get; set; }
+}
+
+// Dans Playlist ET dans Chanson, la navigation passe par la liaison :
+public ICollection<PlaylistChanson> PlaylistChansons { get; set; } = new List<PlaylistChanson>();
+```
+
+> ⚙️ EF Core sait aussi gérer un N-N **implicite** (sans classe de liaison). Ici on garde une **classe explicite** car on veut stocker une **donnée sur l'association** (la `Position` de la chanson dans la playlist).
+> Pour lister les chansons d'une playlist, on passe **par** la liaison : `playlist.PlaylistChansons.Select(pc => pc.Chanson)`.
 
 ---
 
