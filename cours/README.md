@@ -42,6 +42,12 @@ flowchart LR
 
 ---
 
+## 🚀 Concept du TP0 — Mise en place
+
+| Concept | Fiche |
+|---|---|
+| Environnement de développement (Dev Container, conteneurs) | [environnement.md](environnement.md) |
+
 ## 📘 Concepts du TP1 — Console & POO
 
 | Concept | Fiche |

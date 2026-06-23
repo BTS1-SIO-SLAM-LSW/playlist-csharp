@@ -1,77 +1,100 @@
 # 🚀 TP0 — Mettre en place l'environnement
 
 > **Module :** PlaylistApp (0/4) · **Durée : ~30 min** · Stack : .NET 10 · C# 14
->
-> 🎯 **Objectif :** faire tourner l'application **avant tout codage**, et comprendre comment l'environnement est préparé. Deux voies au choix : **Codespaces** (rien à installer) ou **VS Code en local**.
 
-> 🔑 **Icônes :** ✍️ à faire · ✅ valider · 🐳 Docker.
+> 🎓 **Concepts associés — à lire EN PREMIER** (explication + auto-évaluation) : [Environnement de développement (Dev Container)](cours/environnement.md)
+>
+> 👉 **Étape 1 du TP — avant de coder :** lisez cette fiche et réussissez son auto-évaluation. (Le comparatif et le choix y sont aussi détaillés.)
+
+> **Démarche :** partir d'un environnement **décrit** (`.devcontainer`) → comprendre comment il est reconstruit → le faire tourner en **Codespaces** ou en **local**, puis lancer l'application.
+
+> 🔑 **Icônes :** ✍️ à faire · 🎓 concept + auto-évaluation · ✅ valider · 🐳 Docker.
 
 ---
 
 > 🏛️ **Enjeu d'architecture** — Un environnement **reproductible** (identique pour tout le monde, fini le « ça marche chez moi ») est la fondation d'un projet sérieux. Le dossier `.devcontainer` **décrit** l'environnement ; Codespaces (cloud) ou VS Code (local) le **recréent à l'identique**.
 
-## 1. Objectifs
+## 1. Objectifs pédagogiques
 
-- Lancer l'application console (TP1) dans un environnement prêt à l'emploi.
-- Comprendre le rôle du dossier `.devcontainer`.
-- Choisir sa voie : 🟢 Codespaces (zéro installation) ou 🟡 VS Code local.
+| # | Objectif | Vous saurez… |
+|---|---|---|
+| O1 | Comprendre l'intérêt d'un environnement reproductible | expliquer pourquoi on décrit l'environnement dans le code |
+| O2 | Distinguer **image** et **conteneur** (Docker) | dire ce que produit le `.devcontainer` |
+| O3 | Lancer l'application | obtenir le menu via `dotnet run` |
+| O4 | Choisir sa voie | Codespaces (cloud) **ou** VS Code local |
 
-## 2. Comprendre le dossier `.devcontainer`
+## 2. La théorie, pas à pas
 
-Un **Dev Container** est un environnement de développement **décrit par du code**, dans le dossier `.devcontainer/`. Le même descriptif sert dans le cloud comme en local :
-
-```mermaid
-flowchart LR
-    DC[".devcontainer/<br/>devcontainer.json + post-create.sh"] --> ENV{{"Environnement reconstruit<br/>(conteneur Docker)"}}
-    ENV --> CS["☁️ GitHub Codespaces"]
-    ENV --> LOCAL["💻 VS Code local<br/>(extension Dev Containers)"]
-    CS --> APP[".NET 10 · dotnet-ef · Docker · extensions VS Code prêts"]
-    LOCAL --> APP
-```
-
-> 🗺️ **Lire l'organigramme** : un **rectangle** = une étape, un **losange** = l'environnement produit. Le même `.devcontainer` donne le **même environnement**, en cloud ou en local.
-
-Deux fichiers clés :
+Un **Dev Container** est un environnement de développement **décrit par du code**, dans le dossier `.devcontainer/`. Deux fichiers clés :
 
 | Fichier | Rôle |
 |---|---|
-| `.devcontainer/devcontainer.json` | **Décrit** l'environnement : image .NET 10, fonctionnalités (Docker, Git), **extensions VS Code** (C# Dev Kit, Docker, SQLite Viewer, REST Client), ports transférés (5000/5001) |
-| `.devcontainer/post-create.sh` | **Script lancé une seule fois** après création : installe `dotnet-ef`, restaure les paquets NuGet, prépare le dossier de données SQLite |
+| `.devcontainer/devcontainer.json` | **décrit** l'environnement : image .NET 10, fonctionnalités (Docker, Git), **extensions VS Code** (C# Dev Kit, Docker, SQLite Viewer, REST Client), ports (5000/5001) |
+| `.devcontainer/post-create.sh` | **script lancé une fois** après création : installe `dotnet-ef`, restaure NuGet, prépare le dossier de données SQLite |
 
-> 🧠 Résultat : vous ouvrez le projet et **tout est déjà installé** — fini « installez d'abord .NET, puis EF Core, puis Docker… ».
+> 🧠 Détails et auto-évaluation dans la fiche concept : **[Environnement de développement](cours/environnement.md)**.
 
-## 3. ✍️ Voie A — GitHub Codespaces (recommandé · zéro installation)
+## 3. Modélisation
 
-1. Sur la page de votre dépôt : **Code → Codespaces → Create codespace on main**.
+### Diagramme d'activité — le cycle de construction
+
+```mermaid
+flowchart TD
+    A["Ouvrir le projet<br/>(Codespaces ou « Reopen in Container »)"] --> B["Lecture de devcontainer.json"]
+    B --> C["Construction du conteneur<br/>(image .NET 10 + fonctionnalités)"]
+    C --> D["Exécution de post-create.sh<br/>(dotnet-ef · restore NuGet · dossier data)"]
+    D --> E(["✅ Environnement prêt"])
+```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; chaque **rectangle** est une étape, le **stade final** marque l'environnement prêt.
+
+### Diagramme — un seul descriptif, deux voies
+
+```mermaid
+flowchart LR
+    DC[".devcontainer/<br/>(environnement décrit)"] --> CS["☁️ GitHub Codespaces"]
+    DC --> LOCAL["💻 VS Code local<br/>(Dev Containers)"]
+    CS --> APP["✅ .NET 10 · dotnet-ef · Docker · extensions prêts"]
+    LOCAL --> APP
+```
+
+> 🗺️ **Légende** : le **même** `.devcontainer` produit le **même environnement**, en cloud (Codespaces) comme en local.
+
+## 4. ✍️ Mise en place — pas à pas
+
+### Voie A — GitHub Codespaces (recommandé · zéro installation)
+
+1. Sur votre dépôt : **Code → Codespaces → Create codespace on main**.
 2. Patientez ~2 min : VS Code s'ouvre **dans le navigateur**, l'environnement se construit depuis le `.devcontainer`.
-3. Le terminal est prêt ; .NET 10 et Docker sont disponibles.
 
-> 💡 Rien à installer sur votre machine — idéal pour démarrer tout de suite.
+✅ **Résultat attendu :** VS Code en ligne, terminal prêt, .NET 10 disponible.
 
-## 4. ✍️ Voie B — En local avec VS Code
+### Voie B — En local avec VS Code
 
-**Prérequis :** [VS Code](https://code.visualstudio.com/), [Docker Desktop](https://www.docker.com/products/docker-desktop/) et l'extension **Dev Containers** (`ms-vscode-remote.remote-containers`).
+**Prérequis :** [VS Code](https://code.visualstudio.com/), [Docker Desktop](https://www.docker.com/products/docker-desktop/), extension **Dev Containers** (`ms-vscode-remote.remote-containers`).
 
-1. Clonez votre dépôt, puis ouvrez le dossier dans VS Code.
-2. VS Code propose **« Reopen in Container »** (ou `F1` → *Dev Containers: Reopen in Container*).
-3. Le conteneur se construit depuis le `.devcontainer` : **même environnement** qu'en Codespaces.
+1. Clonez votre dépôt, ouvrez le dossier dans VS Code.
+2. `F1` → *Dev Containers: Reopen in Container*.
 
-> 🐳 Docker Desktop doit être lancé. (Sans Docker, vous pouvez installer le **SDK .NET 10** directement, mais le Dev Container reste recommandé : identique pour tous.)
+✅ **Résultat attendu :** le même environnement qu'en Codespaces, sur votre machine.
 
-## 5. ✍️ Lancer l'application
+> 🐳 Docker Desktop doit être lancé avant d'ouvrir le conteneur.
+
+## 5. ✍️ Lancer et vérifier l'application
 
 ```bash
 cd PlaylistApp
 dotnet run
 ```
 
-Le **menu de l'application console** s'affiche → l'environnement fonctionne. 🎉
+✅ **Résultat attendu :** le menu de l'application s'affiche. Testez-le : `1` liste les chansons, `2` recherche, `0` quitte. **L'environnement fonctionne — vous pouvez passer au TP1.**
 
 ## 6. ✅ Validation finale — checklist
 
+- [ ] 🎓 J'ai lu la fiche [Environnement de développement](cours/environnement.md) et réussi son auto-évaluation
 - [ ] Mon environnement est prêt (Codespaces **ou** Dev Container local)
 - [ ] `dotnet run` affiche le menu de l'application
-- [ ] Je sais à quoi sert le dossier `.devcontainer` (décrire un environnement reproductible)
+- [ ] Je sais distinguer une **image** d'un **conteneur**, et à quoi sert `.devcontainer`
 - [ ] 🎓 J'ai coché mes missions dans `PROGRESSION.md`
 
 ## 7. Dépannage
@@ -81,6 +104,7 @@ Le **menu de l'application console** s'affiche → l'environnement fonctionne. �
 | `dotnet : command not found` | Reconstruisez l'environnement : `F1` → *Rebuild Container* (ou recréez le Codespace) |
 | Docker ne démarre pas (local) | Lancez **Docker Desktop** avant d'ouvrir le conteneur |
 | 1re construction longue | Normal : l'image se télécharge une fois, puis elle est mise en cache |
+| Le menu ne s'affiche pas | Êtes-vous bien dans le dossier `PlaylistApp` (`cd PlaylistApp`) ? |
 
 ---
 

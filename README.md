@@ -46,6 +46,7 @@ playlist-csharp/
 ├── 📋 PROGRESSION.md          Checklist versionnée (à committer)
 ├── 🗺️  PARCOURS_TP.md          La méthode pédagogique + index des missions
 ├── 🎓 cours/                  Concepts de cours + auto-évaluations
+├── 🚀 TP0_GUIDE.md            Mise en place de l'environnement (à faire en premier)
 ├── 📖 GUIDE_ETUDIANT.md       Mise en route détaillée + dépannage
 │
 ├── 📘 PlaylistApp/            TP1 — Console & POO
@@ -63,7 +64,7 @@ playlist-csharp/
 │   ├── Controllers/  Events/  Program.cs
 ├── 📕 PlaylistAppAPI.Tests/       13 tests (8 intégration + 5 EOA)
 │
-├── .devcontainer/            Environnement Codespaces (zéro installation)
+├── .devcontainer/            Environnement (Codespaces / VS Code local) — expliqué au TP0
 ├── .github/workflows/        CI/CD : build + tests + déploiement Pages
 └── .gitpod.yml               Alternative Gitpod
 ```

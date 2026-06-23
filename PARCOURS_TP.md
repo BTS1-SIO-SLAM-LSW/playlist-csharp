@@ -90,6 +90,9 @@ Pour chaque TP, le rendu = **du code qui compile + des tests verts + des commits
 
 Chaque TP s'appuie sur des **fiches concept** ([dossier `cours/`](cours/README.md)) : schéma + explication + auto-évaluation. La bonne méthode pour chaque notion : **lire la fiche → faire l'auto-évaluation → pratiquer dans le TP**.
 
+### 🚀 TP0 — Mise en place · [▶️ ouvrir le TP](TP0_GUIDE.md)
+[Environnement de développement (Dev Container)](cours/environnement.md)
+
 ### 📘 TP1 — Console & POO · [▶️ ouvrir le TP](PlaylistApp/TP1_GUIDE.md)
 [POO (classes, encapsulation)](cours/poo.md) · [Collections (`List` / `Dictionary`)](cours/collections.md) · [Requêtes LINQ](cours/linq.md)
 

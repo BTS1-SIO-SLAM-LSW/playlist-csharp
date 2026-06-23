@@ -333,6 +333,18 @@ function exportMd(){
 
 // ── QUIZ d'auto-évaluation (intégré à la progression) ─────────────────────
 const QUIZ = [
+  { tp:'🚀 TP0 — Environnement', concept:'cours/environnement.md', questions:[
+    {q:"Que résout un environnement décrit (Dev Container) ?",
+     o:["Le « ça marche chez moi » : un environnement identique pour tous","La lenteur du réseau","Le manque de mémoire"], c:0},
+    {q:"Différence entre une image et un conteneur ?",
+     o:["Ce sont des synonymes","L'image est le modèle figé, le conteneur une instance en exécution","Le conteneur est le modèle, l'image l'instance"], c:1},
+    {q:"À quoi sert le fichier devcontainer.json ?",
+     o:["À décrire l'environnement (image, outils, extensions)","À stocker les chansons","À lancer les tests"], c:0},
+    {q:"🌳 Choix : coder tout de suite sans rien installer ?",
+     o:["Installation locale","GitHub Codespaces","Impossible"], c:1},
+    {q:"Pourquoi un environnement reproductible aide-t-il en équipe ?",
+     o:["Tout le monde a la même configuration","Ça accélère internet","Ça supprime les tests"], c:0},
+  ]},
   { tp:'📘 TP1 — POO & Collections', concept:'cours/poo.md', questions:[
     {q:"Quelle est la différence entre une classe et un objet ?",
      o:["La classe est le moule, l'objet une instance concrète","L'objet est le moule, la classe une instance","Ce sont des synonymes"], c:0},

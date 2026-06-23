@@ -88,7 +88,7 @@ classDiagram
         +Melanger() void
     }
     class Bibliotheque {
-        -Dictionary~int,Chanson~ _chansons
+        -Dictionary _chansonsParId
         +ChargerDonnees() void
         +RechercherParArtiste(string) IEnumerable~Chanson~
         +ObtenirChanson(int) Chanson
@@ -135,52 +135,18 @@ flowchart TD
 
 ---
 
-## 4. Mise en place de l'environnement — pas à pas
+## 4. Lancer l'application
 
-> Suivez chaque étape dans l'ordre. À chaque étape, un **✅ Résultat attendu** vous permet de vérifier que tout va bien avant de continuer.
+> 🚀 **L'environnement est déjà en place** depuis le **[TP0 — Mise en place](../TP0_GUIDE.md)** (Codespaces ou VS Code local). Si ce n'est pas fait, faites-le d'abord.
 
-### Étape 1 — Créer votre dépôt depuis le template
-1. Ouvrez le dépôt du cours dans votre navigateur.
-2. Cliquez sur le bouton vert **`Use this template`** → **`Create a new repository`**.
-3. Nommez-le `playlist-csharp-VOTRENOM`, laissez-le en **Public**, puis **`Create repository`**.
+Dans le terminal :
 
-✅ **Résultat attendu :** vous êtes sur la page de *votre* dépôt, à l'adresse `https://github.com/VOTREUSER/playlist-csharp-VOTRENOM`.
-
-### Étape 2 — Ouvrir l'environnement de développement
-1. Sur votre dépôt : bouton **`Code`** → onglet **`Codespaces`** → **`Create codespace on main`**.
-2. Patientez ~2 minutes (construction de l'environnement).
-
-✅ **Résultat attendu :** VS Code s'ouvre dans votre navigateur, avec l'arborescence du projet à gauche.
-
-### Étape 3 — Vérifier les outils
-Dans le terminal intégré (menu `Terminal` → `New Terminal`), tapez :
-```bash
-dotnet --version
-```
-✅ **Résultat attendu :** une version commençant par `10.0` s'affiche.
-
-### Étape 4 — Lancer l'application fournie
 ```bash
 cd PlaylistApp
 dotnet run
 ```
-✅ **Résultat attendu :** un menu s'affiche dans le terminal :
-```
-╔══════════════════════════════════════════════╗
-║        🎵  PlaylistApp  🎵                  ║
-╚══════════════════════════════════════════════╝
-══ MENU PRINCIPAL ══════════════════════════════
-   1. Lister toutes les chansons
-   ...
-▶  Votre choix :
-```
 
-### Étape 5 — Tester quelques fonctions
-- Tapez `1` puis `Entrée` → la liste des chansons s'affiche.
-- Tapez `2` → recherchez « Queen ».
-- Tapez `0` → quittez.
-
-✅ **Résultat attendu :** vous avez vu des données de démonstration s'afficher. **L'exemple fonctionne : vous pouvez maintenant l'étudier.**
+✅ **Résultat attendu :** le menu de l'application s'affiche. Testez-le : `1` liste les chansons, `2` recherche, `0` quitte. **L'exemple fonctionne — vous pouvez maintenant l'étudier.**
 
 ---
 

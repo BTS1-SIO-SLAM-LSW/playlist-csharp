@@ -67,7 +67,7 @@ classDiagram
         +DescendreChanson(int) void
     }
     class Bibliotheque {
-        -Dictionary~int,Chanson~ _chansons
+        -Dictionary _chansonsParId
         -List~Playlist~ _playlists
         +ChargerDonnees() void
         +ObtenirToutesChansons() IEnumerable~Chanson~
