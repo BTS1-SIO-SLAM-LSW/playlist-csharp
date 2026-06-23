@@ -136,17 +136,17 @@ La démarche professionnelle : modifier le modèle, migrer, valider.
 
 ```mermaid
 flowchart TD
-    D([Debut]) --> M[Modifier une classe modele]
-    M --> G[dotnet ef migrations add]
-    G --> V{Migration correcte ?}
-    V -->|Non| M
-    V -->|Oui| A[dotnet ef database update]
-    A --> T{Tests passent ?}
-    T -->|Non| M
-    T -->|Oui| F([Fin - base a jour])
+    ini(("●")) --> M["Modifier une classe modèle"]
+    M --> G["dotnet ef migrations add"]
+    G --> V{"Migration correcte ?"}
+    V -->|"Non"| M
+    V -->|"Oui"| A["dotnet ef database update"]
+    A --> T{"Tests passent ?"}
+    T -->|"Non"| M
+    T -->|"Oui"| fin(("◉"))
 ```
 
-> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
+> 🗺️ **Lire le diagramme d'activité (UML)** : **●** = nœud initial (début) · **◉** = nœud final (fin) ; un **rectangle** = une action, un **losange** = une décision (chaque branche = une réponse), un **cylindre** = une base de données.
 
 ---
 

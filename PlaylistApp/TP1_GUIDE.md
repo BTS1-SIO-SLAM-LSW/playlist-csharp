@@ -124,14 +124,14 @@ Le flux de contrôle de l'application.
 
 ```mermaid
 flowchart TD
-    D([Debut]) --> A[Afficher le menu]
-    A --> C{Choix utilisateur}
-    C -->|1-5| T[Executer l action]
+    ini(("●")) --> A["Afficher le menu"]
+    A --> C{"Choix utilisateur"}
+    C -->|"1-5"| T["Exécuter l'action"]
     T --> A
-    C -->|0| F([Quitter])
+    C -->|"0"| fin(("◉"))
 ```
 
-> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
+> 🗺️ **Lire le diagramme d'activité (UML)** : **●** = nœud initial (début) · **◉** = nœud final (fin) ; un **rectangle** = une action, un **losange** = une décision (chaque branche = une réponse), un **cylindre** = une base de données.
 
 ---
 

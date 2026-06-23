@@ -458,4 +458,12 @@ function answerQuiz(bi,qi,oi){
 function switchTab(name){
   document.getElementById('tab-missions').classList.toggle('active', name==='missions');
   document.getElementById('tab-quiz').classList.toggle('active', name==='quiz');
-  document.getEleme
+  document.getElementById('panel-missions').classList.toggle('active', name==='missions');
+  document.getElementById('panel-quiz').classList.toggle('active', name==='quiz');
+}
+
+render();
+renderQuiz();
+</script>
+</body>
+</html>

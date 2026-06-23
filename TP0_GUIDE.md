@@ -40,13 +40,15 @@ Un **Dev Container** est un environnement de développement **décrit par du cod
 
 ```mermaid
 flowchart TD
-    A["Ouvrir le projet<br/>(Codespaces ou « Reopen in Container »)"] --> B["Lecture de devcontainer.json"]
+    ini(("●")) --> A["Ouvrir le projet<br/>(Codespaces ou « Reopen in Container »)"]
+    A --> B["Lecture de devcontainer.json"]
     B --> C["Construction du conteneur<br/>(image .NET 10 + fonctionnalités)"]
     C --> D["Exécution de post-create.sh<br/>(dotnet-ef · restore NuGet · dossier data)"]
-    D --> E(["✅ Environnement prêt"])
+    D --> E["Environnement prêt ✅"]
+    E --> fin(("◉"))
 ```
 
-> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; chaque **rectangle** est une étape, le **stade final** marque l'environnement prêt.
+> 🗺️ **Lire le diagramme d'activité (UML)** : **●** = nœud initial (début) · **◉** = nœud final (fin) ; un **rectangle** = une action, un **losange** = une décision (chaque branche = une réponse), un **cylindre** = une base de données.
 
 ### Diagramme — un seul descriptif, deux voies
 

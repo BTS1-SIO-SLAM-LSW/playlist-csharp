@@ -189,18 +189,18 @@ sequenceDiagram
 ### Diagramme d'activité — le flux d'un événement
 ```mermaid
 flowchart TD
-    D([Action metier reussie]) --> P[Creer l objet evenement]
-    P --> PUB[Publier sur le bus]
-    PUB --> Q{Des handlers abonnes ?}
-    Q -->|Non| F([Fin - rien ne se passe])
-    Q -->|Oui| H[Chaque handler reagit en parallele]
-    H --> A[AuditHandler journalise]
-    H --> S[StatistiquesHandler met a jour]
-    A --> F2([Fin])
-    S --> F2
+    ini(("●")) --> P["Action métier réussie : créer l'objet événement"]
+    P --> PUB["Publier sur le bus"]
+    PUB --> Q{"Des handlers abonnés ?"}
+    Q -->|"Non"| fin(("◉"))
+    Q -->|"Oui"| H["Chaque handler réagit en parallèle"]
+    H --> A["AuditHandler journalise"]
+    H --> S["StatistiquesHandler met à jour"]
+    A --> fin
+    S --> fin
 ```
 
-> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
+> 🗺️ **Lire le diagramme d'activité (UML)** : **●** = nœud initial (début) · **◉** = nœud final (fin) ; un **rectangle** = une action, un **losange** = une décision (chaque branche = une réponse), un **cylindre** = une base de données.
 
 ---
 

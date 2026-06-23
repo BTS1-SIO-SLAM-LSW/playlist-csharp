@@ -184,19 +184,20 @@ sequenceDiagram
 ### Diagramme d'activité — cycle de vie d'une requête
 ```mermaid
 flowchart TD
-    D([Requete HTTP recue]) --> R{Route trouvee ?}
-    R -->|Non| E404[404 Not Found]
-    R -->|Oui| V{Donnees valides ?}
-    V -->|Non| E400[400 Bad Request]
-    V -->|Oui| S[Controller appelle Repository]
-    S --> DB[(Acces base de donnees)]
-    DB --> OK[Retour 200 / 201]
-    E404 --> F([Reponse envoyee])
-    E400 --> F
-    OK --> F
+    ini(("●")) --> RQ["Requête HTTP reçue"]
+    RQ --> R{"Route trouvée ?"}
+    R -->|"Non"| E404["404 Not Found"]
+    R -->|"Oui"| V{"Données valides ?"}
+    V -->|"Non"| E400["400 Bad Request"]
+    V -->|"Oui"| S["Controller appelle Repository"]
+    S --> DB[("Accès base de données")]
+    DB --> OK["Retour 200 / 201"]
+    E404 --> fin(("◉"))
+    E400 --> fin
+    OK --> fin
 ```
 
-> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
+> 🗺️ **Lire le diagramme d'activité (UML)** : **●** = nœud initial (début) · **◉** = nœud final (fin) ; un **rectangle** = une action, un **losange** = une décision (chaque branche = une réponse), un **cylindre** = une base de données.
 
 ---
 
