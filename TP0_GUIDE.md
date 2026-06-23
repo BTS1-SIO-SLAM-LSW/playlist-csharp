@@ -75,14 +75,51 @@ flowchart LR
 
 ### Voie B — En local avec VS Code
 
-**Prérequis :** [VS Code](https://code.visualstudio.com/), [Docker Desktop](https://www.docker.com/products/docker-desktop/), extension **Dev Containers** (`ms-vscode-remote.remote-containers`).
+Deux options selon que vous utilisez ou non le conteneur.
 
-1. Clonez votre dépôt, ouvrez le dossier dans VS Code.
+#### B1 — Avec le Dev Container (recommandé en local)
+
+Vous n'installez **que** ces trois éléments :
+
+| Outil | Où l'obtenir |
+|---|---|
+| **VS Code** | <https://code.visualstudio.com/> |
+| **Docker Desktop** | <https://www.docker.com/products/docker-desktop/> |
+| Extension **Dev Containers** | dans VS Code, installez `ms-vscode-remote.remote-containers` |
+
+➡️ **.NET 10, `dotnet-ef` et Docker sont fournis par le conteneur** (décrits dans `.devcontainer`) : **rien d'autre à installer**.
+
+1. Clonez votre dépôt, puis ouvrez le dossier dans VS Code (Docker Desktop doit tourner).
 2. `F1` → *Dev Containers: Reopen in Container*.
 
 ✅ **Résultat attendu :** le même environnement qu'en Codespaces, sur votre machine.
 
-> 🐳 Docker Desktop doit être lancé avant d'ouvrir le conteneur.
+#### B2 — Installation native (sans conteneur)
+
+Si vous préférez tout installer directement (pas de Docker pour développer) :
+
+**1️⃣ .NET 10 SDK** — le compilateur et l'outillage C#
+- 📥 Page officielle : <https://dotnet.microsoft.com/download/dotnet/10.0>
+- **Windows** : `winget install Microsoft.DotNet.SDK.10`
+- **macOS** : `brew install --cask dotnet-sdk` (ou le `.pkg` de la page officielle)
+- **Linux (Ubuntu/Debian)** : `sudo apt-get update && sudo apt-get install -y dotnet-sdk-10.0` *(dépôt `packages.microsoft.com`)* — ou le script `https://dot.net/v1/dotnet-install.sh --channel 10.0`
+- ✅ **Vérifier** : `dotnet --version` → doit afficher `10.x`
+
+**2️⃣ dotnet-ef** — l'outil Entity Framework Core (migrations, utilisé au TP2)
+```bash
+dotnet tool install --global dotnet-ef
+# Si "dotnet ef : command not found" ensuite, ajoutez les outils au PATH :
+export PATH="$PATH:$HOME/.dotnet/tools"        # bash / zsh (à mettre dans ~/.bashrc)
+```
+- ✅ **Vérifier** : `dotnet ef --version`
+
+**3️⃣ Docker Desktop** — pour conteneuriser l'**application** (TP1 build, TP2/TP3 `docker compose`)
+- 📥 <https://www.docker.com/products/docker-desktop/> (Windows/macOS) · sous Linux : **Docker Engine**
+- ✅ **Vérifier** : `docker --version`
+
+> 💡 Le **Dev Container (B1)** reste recommandé : il garantit **la même version** pour tout le monde. En installation native, les versions peuvent diverger d'une machine à l'autre (« ça marche chez moi »).
+
+> 🐳 **Rappel :** Docker ici sert (B1) à votre environnement de dev **et** (TP1→TP3) à conteneuriser l'application — voir la note du §2.
 
 ## 5. ✍️ Lancer et vérifier l'application
 
