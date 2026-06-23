@@ -97,6 +97,24 @@ sequenceDiagram
 `SaveChangesAsync()` (ou `SaveChanges()`). Tant qu'on ne l'appelle pas, les modifications restent en mémoire (suivies par le *change tracker*).
 </details>
 
+
+**Q4.** Que se passe-t-il si on fait `.Add(chanson)` **sans** `SaveChangesAsync()` ?
+<details><summary>▸ Voir la réponse</summary>
+
+La chanson est marquée « Added » **en mémoire** (suivie par le *change tracker*), mais **rien n'est écrit en base** tant qu'on ne sauvegarde pas.
+</details>
+
+**Q5.** Citez un inconvénient d'un ORM.
+<details><summary>▸ Voir la réponse</summary>
+
+Il **masque le SQL généré** : on peut produire des requêtes inefficaces (ex. N+1) sans s'en rendre compte. Pour des requêtes critiques, on peut préférer du SQL explicite.
+</details>
+
+**Q6.** À quoi sert le paquet `Microsoft.EntityFrameworkCore.Sqlite` ?
+<details><summary>▸ Voir la réponse</summary>
+
+C'est le **fournisseur (provider)** qui permet à EF Core de dialoguer avec une base **SQLite** (traduire les requêtes dans son dialecte).
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

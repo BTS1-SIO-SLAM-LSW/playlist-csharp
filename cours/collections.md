@@ -85,6 +85,24 @@ Pour retrouver une chanson par son `Id` **directement** (`_chansons[id]`), sans 
 Non. Les clés sont **uniques**. Tenter d'ajouter une clé existante lève une exception (ou écrase la valeur selon la méthode utilisée).
 </details>
 
+
+**Q4.** Comment accède-t-on au premier élément d'une `List` ?
+<details><summary>▸ Voir la réponse</summary>
+
+Par son **index** : `liste[0]` (les positions commencent à 0).
+</details>
+
+**Q5.** Que renvoie `dico.ContainsKey(5)` ?
+<details><summary>▸ Voir la réponse</summary>
+
+`true` ou `false` selon que la **clé** 5 existe déjà dans le `Dictionary`.
+</details>
+
+**Q6.** 🌳 Choix : pour compter le nombre de chansons par genre, quelle structure ?
+<details><summary>▸ Voir la réponse</summary>
+
+Un `Dictionary<string,int>` (genre → compteur) : on retrouve et incrémente chaque genre directement par sa clé.
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

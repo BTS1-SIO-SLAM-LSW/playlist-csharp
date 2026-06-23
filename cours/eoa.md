@@ -122,6 +122,18 @@ Non. On crée un **nouveau handler** et on l'**abonne** à l'événement. Le Con
 Non, **complémentaires**. On enregistre la chanson en SOA (synchrone), puis on publie un événement en EOA pour les effets de bord (asynchrone, découplé).
 </details>
 
+
+**Q5.** En production, par quoi remplace-t-on le bus d'événements **en mémoire** ?
+<details><summary>▸ Voir la réponse</summary>
+
+Par un **courtier de messages** comme **Kafka** ou **RabbitMQ**, en gardant le même contrat *publish/subscribe* (émetteurs et abonnés ne changent pas).
+</details>
+
+**Q6.** 🌳 Choix : un endpoint avec **un seul** effet, immédiat et connu — faut-il l'EOA ?
+<details><summary>▸ Voir la réponse</summary>
+
+Non : un **appel direct (SOA)** est plus simple à lire et déboguer. L'EOA se justifie quand les réactions sont **multiples, évolutives ou à découpler**.
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

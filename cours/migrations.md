@@ -71,6 +71,24 @@ Un script versionné décrivant un **changement de structure** de la base (table
 Parce que la valeur change à chaque génération de migration → EF Core génère des **migrations « fantômes »** qui veulent réécrire les dates. On met une **date fixe**.
 </details>
 
+
+**Q4.** Quelle commande applique les migrations et met la base à jour ?
+<details><summary>▸ Voir la réponse</summary>
+
+`dotnet ef database update`.
+</details>
+
+**Q5.** Pourquoi committer les fichiers de migration dans Git ?
+<details><summary>▸ Voir la réponse</summary>
+
+Pour que **toute l'équipe applique la même suite** de migrations et obtienne un schéma **identique et reproductible**.
+</details>
+
+**Q6.** 🌳 Choix : faire évoluer une base existante sans perdre les données — quelle approche ?
+<details><summary>▸ Voir la réponse</summary>
+
+Une **migration** (`migrations add` puis `database update`) : elle applique le changement **sans supprimer** la base ni les données.
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

@@ -106,6 +106,18 @@ Chaque requête est **indépendante** : le serveur ne conserve pas le contexte d
 Répéter un `GET` ou un `DELETE` aboutit au **même état final**. Répéter un `POST` **crée plusieurs ressources** : il n'est donc pas idempotent.
 </details>
 
+
+**Q5.** Quel en-tête / format utilise-t-on pour échanger des données structurées ?
+<details><summary>▸ Voir la réponse</summary>
+
+Le **JSON** (`Content-Type: application/json`). ASP.NET Core sérialise les objets C# en JSON et désérialise le JSON reçu.
+</details>
+
+**Q6.** 🌳 Choix : besoin de notifications **temps réel** poussées par le serveur — REST suffit-il ?
+<details><summary>▸ Voir la réponse</summary>
+
+Non : REST est en **requête/réponse** (le client demande). Pour du temps réel poussé, on utilise **WebSocket** (ou SSE).
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

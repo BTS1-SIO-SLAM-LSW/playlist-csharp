@@ -126,6 +126,24 @@ chansons.OrderByDescending(c => c.Note).Take(3);
 On trie par note décroissante, puis on prend les 3 premières.
 </details>
 
+
+**Q4.** Que signifie « LINQ est paresseux (*lazy*) » ?
+<details><summary>▸ Voir la réponse</summary>
+
+La requête n'est **exécutée qu'au moment du parcours** (`foreach`, `.ToList()`, `.Count()`). Tant qu'on l'enchaîne, rien n'est calculé.
+</details>
+
+**Q5.** Que fait `.Select(c => c.Titre)` ?
+<details><summary>▸ Voir la réponse</summary>
+
+Il **projette/transforme** chaque chanson en son titre : on obtient une séquence de titres (pas de filtrage).
+</details>
+
+**Q6.** 🌳 Choix : au TP2, comment la même requête LINQ s'exécute-t-elle sur la base ?
+<details><summary>▸ Voir la réponse</summary>
+
+EF Core **traduit le LINQ en SQL** (LINQ-to-EF) : c'est la base qui filtre/trie, on ne rapatrie que le résultat utile.
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

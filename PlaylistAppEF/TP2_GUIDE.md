@@ -1,10 +1,10 @@
 # 📗 TP2 — Persistance des données avec Entity Framework Core
 
-> **Module :** PlaylistApp (2/3) · **Durée : 6h**
+> **Module :** PlaylistApp (2/4) · **Durée : 6h**
 
-> 🎓 **Concepts associés** (explication + auto-évaluation) : [ORM](../cours/orm.md) · [Migrations](../cours/migrations.md) · [Relations](../cours/relations.md)
+> 🎓 **Concepts associés — à lire EN PREMIER** (explication + auto-évaluation) : [ORM](../cours/orm.md) · [Migrations](../cours/migrations.md) · [Relations](../cours/relations.md)
 >
-> 👉 Le **comparatif et le choix** de chaque notion vivent dans ces fiches : lisez-les et faites l'auto-évaluation pour valider.
+> 👉 **Étape 1 du TP — avant de coder :** lisez ces fiches et réussissez leur **auto-évaluation**. (Le comparatif et le choix de chaque notion y sont aussi détaillés.)
 
 > **Démarche :** partir d'un exemple fonctionnel → comprendre l'ORM → se l'approprier en faisant évoluer le modèle de données.
 
@@ -59,6 +59,8 @@ flowchart LR
     U --- UC5
 ```
 
+> 🗺️ **Lire le diagramme de cas d'usage** : le **rond** est l'acteur (l'utilisateur, ou l'émetteur d'un événement) ; chaque **bulle** est une action / un cas d'usage ; les **traits** relient l'acteur aux actions qu'il peut déclencher.
+
 ### Diagramme de classes
 Notez la table de liaison `PlaylistChanson` (relation N-N) et le `PlaylistContext` qui expose les `DbSet`.
 
@@ -100,6 +102,8 @@ classDiagram
     MusiqueRepository ..> PlaylistContext : utilise
 ```
 
+> 🗺️ **Lire le diagramme de classes** : chaque boîte est une **classe** (ses attributs en haut, ses méthodes en bas). Le préfixe `+` = **public** (visible de l'extérieur), `-` = **privé** (interne). Les liens montrent les **relations** : `o--` composition (« contient/possède »), `-->` association/dépendance, `<|--` héritage.
+
 ### Diagramme de séquence — « ajouter une chanson à une playlist » via EF Core
 Observez le passage par le Repository, le DbContext, puis SQLite.
 
@@ -125,6 +129,8 @@ sequenceDiagram
     P-->>U: Chanson ajoutee
 ```
 
+> 🗺️ **Lire le diagramme de séquence** : chaque **colonne** est un participant (objet ou service) ; le **temps s'écoule de haut en bas**. Une flèche pleine `->>` = un **appel**, une flèche pointillée `-->>` = une **réponse/retour**. Un bloc `par` regroupe des actions exécutées **en parallèle**.
+
 ### Diagramme d'activité — le cycle d'une migration
 La démarche professionnelle : modifier le modèle, migrer, valider.
 
@@ -139,6 +145,8 @@ flowchart TD
     T -->|Non| M
     T -->|Oui| F([Fin - base a jour])
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 ---
 
@@ -191,6 +199,8 @@ flowchart LR
     Ctx -->|"SaveChangesAsync()"| DB[("playlist.db · SQLite")]
     DB -->|"SELECT (LINQ → SQL)"| Ctx --> Repo
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 
 ```

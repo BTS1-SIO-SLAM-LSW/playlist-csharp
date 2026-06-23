@@ -85,6 +85,24 @@ Les couches dépendent le moins possible les unes des autres. Avantage : on peut
 Le système d'**injection de dépendances** d'ASP.NET Core : il crée et passe automatiquement le `PlaylistContext` au constructeur du Controller.
 </details>
 
+
+**Q4.** Pourquoi le découpage en couches **facilite-t-il les tests** ?
+<details><summary>▸ Voir la réponse</summary>
+
+On peut tester chaque couche **isolément** : en test, on injecte par exemple une base **InMemory** à la place de SQLite, sans toucher au Controller.
+</details>
+
+**Q5.** Si on remplace SQLite par PostgreSQL, quelle couche est impactée ?
+<details><summary>▸ Voir la réponse</summary>
+
+Surtout la **couche données** (Repository / configuration du `DbContext`). Grâce au couplage faible, le **Controller ne change pas**.
+</details>
+
+**Q6.** 🌳 Choix : déclencher un audit à la création — appel direct (SOA) ou événement (EOA) ?
+<details><summary>▸ Voir la réponse</summary>
+
+Si l'effet est **unique et immédiat**, un appel direct (SOA) suffit. S'il y a **plusieurs réactions ou un besoin de découplage**, on publie un **événement** (EOA — voir [eoa.md](eoa.md)).
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).

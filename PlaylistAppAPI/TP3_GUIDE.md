@@ -2,9 +2,9 @@
 
 > **Module :** PlaylistApp (3/4) · **Durée : 4h** · Stack : .NET 10 · C# 14 · ASP.NET Core 10
 
-> 🎓 **Concepts associés** (explication + auto-évaluation) : [REST & HTTP](../cours/rest-http.md) · [Architecture SOA](../cours/soa.md)
+> 🎓 **Concepts associés — à lire EN PREMIER** (explication + auto-évaluation) : [REST & HTTP](../cours/rest-http.md) · [Architecture SOA](../cours/soa.md)
 >
-> 👉 Le **comparatif et le choix** de chaque notion vivent dans ces fiches : lisez-les et faites l'auto-évaluation pour valider.
+> 👉 **Étape 1 du TP — avant de coder :** lisez ces fiches et réussissez leur **auto-évaluation**. (Le comparatif et le choix de chaque notion y sont aussi détaillés.)
 
 > **Démarche :** partir d'une API fonctionnelle → comprendre REST et l'architecture en couches → l'étendre.
 
@@ -138,6 +138,8 @@ flowchart LR
     M --- UC5
 ```
 
+> 🗺️ **Lire le diagramme de cas d'usage** : le **rond** est l'acteur (l'utilisateur, ou l'émetteur d'un événement) ; chaque **bulle** est une action / un cas d'usage ; les **traits** relient l'acteur aux actions qu'il peut déclencher.
+
 ### Diagramme de classes — les couches SOA
 ```mermaid
 classDiagram
@@ -160,6 +162,8 @@ classDiagram
     MusiqueRepository ..> PlaylistContext : accede aux donnees
 ```
 
+> 🗺️ **Lire le diagramme de classes** : chaque boîte est une **classe** (ses attributs en haut, ses méthodes en bas). Le préfixe `+` = **public** (visible de l'extérieur), `-` = **privé** (interne). Les liens montrent les **relations** : `o--` composition (« contient/possède »), `-->` association/dépendance, `<|--` héritage.
+
 ### Diagramme de séquence — « GET /api/chansons »
 ```mermaid
 sequenceDiagram
@@ -175,6 +179,8 @@ sequenceDiagram
     Ct-->>C: 200 OK + JSON
 ```
 
+> 🗺️ **Lire le diagramme de séquence** : chaque **colonne** est un participant (objet ou service) ; le **temps s'écoule de haut en bas**. Une flèche pleine `->>` = un **appel**, une flèche pointillée `-->>` = une **réponse/retour**. Un bloc `par` regroupe des actions exécutées **en parallèle**.
+
 ### Diagramme d'activité — cycle de vie d'une requête
 ```mermaid
 flowchart TD
@@ -189,6 +195,8 @@ flowchart TD
     E400 --> F
     OK --> F
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 ---
 
@@ -231,6 +239,8 @@ flowchart LR
     API --> E4["DELETE /api/chansons/{id}"]
     E1 & E2 & E3 & E4 --> Ctx["PlaylistContext"] --> DB[("SQLite")]
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 
 ```

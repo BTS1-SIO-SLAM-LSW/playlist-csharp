@@ -125,6 +125,18 @@ C'est une **méthode** : elle **fait un calcul** (convertir des secondes en `mm:
 Cela expose la liste en **lecture seule** : on peut la parcourir et la lire de l'extérieur, mais pas y ajouter ni retirer d'éléments directement. C'est une protection (encapsulation).
 </details>
 
+
+**Q5.** À quoi sert un **constructeur** comme `new Chanson(...)` ?
+<details><summary>▸ Voir la réponse</summary>
+
+À **initialiser** un nouvel objet au moment de sa création (renseigner ses propriétés de départ). C'est le point d'entrée pour fabriquer une instance à partir de la classe.
+</details>
+
+**Q6.** Donnez un avantage concret de regrouper données et méthodes dans une même classe.
+<details><summary>▸ Voir la réponse</summary>
+
+Le code est plus **lisible et maintenable** : tout ce qui concerne une chanson (ses données *et* ses comportements) vit au même endroit, réutilisable, sans variables éparpillées.
+</details>
 ---
 
 ✅ **Concept acquis ?** Cochez-le dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet Quiz).

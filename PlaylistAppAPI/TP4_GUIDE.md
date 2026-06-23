@@ -2,9 +2,9 @@
 
 > **Module :** PlaylistApp (4/4) · **Durée : 4h** · Stack : .NET 10 · C# 14
 
-> 🎓 **Concepts associés** (explication + auto-évaluation) : [Événements & EOA](../cours/eoa.md)
+> 🎓 **Concepts associés — à lire EN PREMIER** (explication + auto-évaluation) : [Événements & EOA](../cours/eoa.md)
 >
-> 👉 Le **comparatif et le choix** de chaque notion vivent dans ces fiches : lisez-les et faites l'auto-évaluation pour valider.
+> 👉 **Étape 1 du TP — avant de coder :** lisez ces fiches et réussissez leur **auto-évaluation**. (Le comparatif et le choix de chaque notion y sont aussi détaillés.)
 
 > **Démarche :** partir de l'API du TP3 → comprendre pourquoi et comment découpler avec des événements → l'étendre.
 
@@ -128,6 +128,8 @@ flowchart LR
     SYS -. publie .-> UC3
 ```
 
+> 🗺️ **Lire le diagramme de cas d'usage** : le **rond** est l'acteur (l'utilisateur, ou l'émetteur d'un événement) ; chaque **bulle** est une action / un cas d'usage ; les **traits** relient l'acteur aux actions qu'il peut déclencher.
+
 ### Diagramme de classes — bus, événements, handlers
 ```mermaid
 classDiagram
@@ -161,6 +163,8 @@ classDiagram
     StatistiquesHandler ..> ChansonAjouteeEvent : s abonne
 ```
 
+> 🗺️ **Lire le diagramme de classes** : chaque boîte est une **classe** (ses attributs en haut, ses méthodes en bas). Le préfixe `+` = **public** (visible de l'extérieur), `-` = **privé** (interne). Les liens montrent les **relations** : `o--` composition (« contient/possède »), `-->` association/dépendance, `<|--` héritage.
+
 ### Diagramme de séquence — publication et réactions parallèles
 ```mermaid
 sequenceDiagram
@@ -180,6 +184,8 @@ sequenceDiagram
     B-->>Ct: termine (sans bloquer la reponse HTTP)
 ```
 
+> 🗺️ **Lire le diagramme de séquence** : chaque **colonne** est un participant (objet ou service) ; le **temps s'écoule de haut en bas**. Une flèche pleine `->>` = un **appel**, une flèche pointillée `-->>` = une **réponse/retour**. Un bloc `par` regroupe des actions exécutées **en parallèle**.
+
 ### Diagramme d'activité — le flux d'un événement
 ```mermaid
 flowchart TD
@@ -193,6 +199,8 @@ flowchart TD
     A --> F2([Fin])
     S --> F2
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 ---
 
@@ -232,6 +240,8 @@ flowchart LR
     CA --> SH["StatistiquesHandler"]
     PC --> AH
 ```
+
+> 🗺️ **Lire l'organigramme** : on suit le **sens des flèches** ; l'**étiquette** sur une flèche précise la condition ou l'action. Un **rectangle** = une étape/action, un **losange** = une décision (chaque branche = une réponse possible), un **cylindre** = une base de données (lorsqu'ils sont présents).
 
 
 ```

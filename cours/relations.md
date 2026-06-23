@@ -82,6 +82,24 @@ Avec une **table de liaison** (ici `PlaylistChanson`) qui porte les deux clés �
 Souvent des données propres à l'association, comme la **position** de la chanson dans la playlist, ou une date d'ajout.
 </details>
 
+
+**Q4.** Qu'est-ce qu'une **clé étrangère** ?
+<details><summary>▸ Voir la réponse</summary>
+
+Une colonne qui **référence la clé primaire d'une autre table** : elle matérialise le lien entre les deux tables.
+</details>
+
+**Q5.** Dans le projet, quelle table porte la clé étrangère `ArtisteId` ?
+<details><summary>▸ Voir la réponse</summary>
+
+La table **Chansons** (le côté « plusieurs » de la relation 1-N : plusieurs chansons pour un artiste).
+</details>
+
+**Q6.** Pourquoi ne peut-on pas relier directement deux tables en N-N ?
+<details><summary>▸ Voir la réponse</summary>
+
+Une ligne ne peut pas pointer vers plusieurs lignes à la fois. On passe par une **table de liaison** qui décompose le N-N en **deux relations 1-N**.
+</details>
 ---
 
 ✅ Cochez ce concept dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp).
