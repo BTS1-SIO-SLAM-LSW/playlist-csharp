@@ -153,7 +153,7 @@
 const PARCOURS = [
   {
     id:'tp1', icon:'📘', titre:'TP1 — Console & POO', sous:'Collections, LINQ, encapsulation',
-    color:'var(--blue)', guide:'../PlaylistApp/TP1_GUIDE.md',
+    color:'var(--blue)', guide:'PlaylistApp/TP1_GUIDE.md',
     missions:[
       {id:'tp1-c0', t:"📖 Lire les fiches POO · Collections · LINQ + auto-évaluation", tag:'concept'},
       {id:'tp1-s1', t:"Créer mon dépôt depuis le template", tag:'setup'},
@@ -166,7 +166,7 @@ const PARCOURS = [
   },
   {
     id:'tp2', icon:'📗', titre:'TP2 — Entity Framework Core', sous:'ORM, migrations, relation N-N, tests',
-    color:'var(--green)', guide:'../PlaylistAppEF/TP2_GUIDE.md',
+    color:'var(--green)', guide:'PlaylistAppEF/TP2_GUIDE.md',
     missions:[
       {id:'tp2-c0', t:"📖 Lire les fiches ORM · Migrations · Relations + auto-évaluation", tag:'concept'},
       {id:'tp2-s1', t:"Appliquer la migration (créer la base)", tag:'setup'},
@@ -180,7 +180,7 @@ const PARCOURS = [
   },
   {
     id:'tp3', icon:'📕', titre:'TP3 — API REST & SOA', sous:'ASP.NET Core, Swagger, architecture en couches',
-    color:'var(--violet)', guide:'../PlaylistAppAPI/TP3_GUIDE.md',
+    color:'var(--violet)', guide:'PlaylistAppAPI/TP3_GUIDE.md',
     missions:[
       {id:'tp3-c0', t:"📖 Lire les fiches REST/HTTP · SOA + auto-évaluation", tag:'concept'},
       {id:'tp3-s1', t:"Lancer l'API et ouvrir Swagger", tag:'setup'},
@@ -193,7 +193,7 @@ const PARCOURS = [
   },
   {
     id:'tp4', icon:'🎏', titre:'TP4 — Architecture événementielle (EOA)', sous:'Bus d\'événements, publish/subscribe, découplage',
-    color:'var(--amber)', guide:'../PlaylistAppAPI/TP4_GUIDE.md',
+    color:'var(--amber)', guide:'PlaylistAppAPI/TP4_GUIDE.md',
     missions:[
       {id:'tp4-c0', t:"📖 Lire la fiche EOA + auto-évaluation", tag:'concept'},
       {id:'tp4-s1', t:"Observer un événement dans les logs (POST → [AUDIT])", tag:'setup'},
@@ -221,6 +221,12 @@ function save(s){ try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){memSt
 let state=load();
 
 const allMissions = PARCOURS.flatMap(tp=>tp.missions.map(m=>m.id));
+
+// Liens vers les fichiers du dépôt (rendus par GitHub). Portable : déduit user/repo depuis l'URL Pages.
+const REPO_BASE = location.hostname.endsWith('github.io')
+  ? `https://github.com/${location.hostname.split('.')[0]}/${location.pathname.split('/').filter(Boolean)[0]||'playlist-csharp'}/blob/main/`
+  : 'https://github.com/ggaillard/playlist-csharp/blob/main/';
+const fileURL = p => REPO_BASE + p;
 
 function render(){
   const c=document.getElementById('tpContainer'); c.innerHTML='';
@@ -250,7 +256,7 @@ function render(){
             <input type="checkbox" id="${m.id}" ${ck} onchange="toggle('${m.id}')">
             <div class="mission-body">
               <label class="mission-label" for="${m.id}">${m.t}</label>
-              <div class="mission-meta"><span class="tag ${tag.c}">${tag.l}</span><a class="mission-link" href="${tp.guide}" target="_blank">📖 voir la fiche</a></div>
+              <div class="mission-meta"><span class="tag ${tag.c}">${tag.l}</span><a class="mission-link" href="${fileURL(tp.guide)}" target="_blank">📖 voir la fiche</a></div>
             </div>
           </div>`;
         }).join('')}
@@ -401,7 +407,7 @@ function renderQuiz(){
     const done=bloc.questions.filter((_,qi)=>state['q-'+bi+'-'+qi]==='ok').length;
     let html='<div class="quiz-tp-head"><h3>'+bloc.tp+'</h3>'
       +'<span style="font-size:.8rem;color:var(--muted)">'+done+'/'+bloc.questions.length+' \u2713</span>'
-      +'<a class="quiz-link" href="'+bloc.concept+'" target="_blank">\ud83d\udcd6 fiche concept</a></div>';
+      +'<a class="quiz-link" href="'+fileURL(bloc.concept)+'" target="_blank">\ud83d\udcd6 fiche concept</a></div>';
     bloc.questions.forEach((qu,qi)=>{
       const key='q-'+bi+'-'+qi; const answered=state[key];
       html+='<div class="quiz-q"><div class="quiz-q-text">'+(qi+1)+'. '+qu.q+'</div>';
