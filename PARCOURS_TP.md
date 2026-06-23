@@ -73,9 +73,23 @@ Pour chaque TP, le rendu = **du code qui compile + des tests verts + des commits
 
 ---
 
-## 🎓 Concepts & auto-évaluations
+## 🎓 Les concepts de cours, par TP
 
-En complément des missions pratiques, le dossier **[cours/](cours/README.md)** contient une fiche par concept (POO, LINQ, ORM, migrations, REST, SOA, EOA…) avec des **schémas**, une **explication didactique** et une **auto-évaluation**. Un **quiz interactif** est aussi intégré au [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet « Quiz ») et compte dans votre progression.
+Chaque TP s'appuie sur des **fiches concept** ([dossier `cours/`](cours/README.md)) : schéma + explication + auto-évaluation. La bonne méthode pour chaque notion : **lire la fiche → faire l'auto-évaluation → pratiquer dans le TP**.
+
+### 📘 TP1 — Console & POO · [▶️ ouvrir le TP](PlaylistApp/TP1_GUIDE.md)
+[POO (classes, encapsulation)](cours/poo.md) · [Collections (`List` / `Dictionary`)](cours/collections.md) · [Requêtes LINQ](cours/linq.md)
+
+### 📗 TP2 — Entity Framework Core · [▶️ ouvrir le TP](PlaylistAppEF/TP2_GUIDE.md)
+[ORM & `DbContext`](cours/orm.md) · [Migrations](cours/migrations.md) · [Relations 1-N / N-N](cours/relations.md)
+
+### 📕 TP3 — API REST & SOA · [▶️ ouvrir le TP](PlaylistAppAPI/TP3_GUIDE.md)
+[HTTP, REST & codes de statut](cours/rest-http.md) · [Architecture SOA en couches](cours/soa.md)
+
+### 🎏 TP4 — Architecture événementielle · [▶️ ouvrir le TP](PlaylistAppAPI/TP4_GUIDE.md)
+[Événements & publish/subscribe (EOA)](cours/eoa.md)
+
+> 🧮 Un **quiz interactif** couvrant tous ces concepts est aussi dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet « Quiz ») et compte dans votre progression.
 
 ## 🚦 Avant de commencer
 
