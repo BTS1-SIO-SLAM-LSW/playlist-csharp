@@ -64,6 +64,7 @@
   .tag-y{background:rgba(210,153,34,.18);color:var(--amber)}
   .tag-r{background:rgba(248,81,73,.15);color:var(--red)}
   .tag-test{background:rgba(188,140,255,.15);color:var(--violet)}
+  .tag-concept{background:rgba(86,182,194,.18);color:#56b6c2}
   .mission-link{font-size:.72rem;color:var(--blue);text-decoration:none}
   .mission-link:hover{text-decoration:underline}
   .done-banner{background:rgba(63,185,80,.12);border:1px solid var(--green);color:var(--green);border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:.9rem;text-align:center;font-weight:500;display:none}
@@ -126,7 +127,7 @@
       </div>
       <div class="global-info">
         <h2>Progression globale</h2>
-        <p id="globalMsg">Cochez vos missions au fur et à mesure. Votre progression est sauvegardée automatiquement dans ce navigateur.</p>
+        <p id="globalMsg">Cochez vos missions et répondez au quiz. Votre progression est sauvegardée automatiquement.</p>
         <div class="actions">
           <button class="btn btn-primary" onclick="exportMd()">📋 Exporter pour PROGRESSION.md</button>
           <button class="btn" onclick="resetAll()">↺ Réinitialiser</button>
@@ -154,6 +155,7 @@ const PARCOURS = [
     id:'tp1', icon:'📘', titre:'TP1 — Console & POO', sous:'Collections, LINQ, encapsulation',
     color:'var(--blue)', guide:'../PlaylistApp/TP1_GUIDE.md',
     missions:[
+      {id:'tp1-c0', t:"📖 Lire les fiches POO · Collections · LINQ + auto-évaluation", tag:'concept'},
       {id:'tp1-s1', t:"Créer mon dépôt depuis le template", tag:'setup'},
       {id:'tp1-s2', t:"Ouvrir le Codespace et lancer l'application", tag:'setup'},
       {id:'tp1-m1', t:"Ajouter une note (1-5) aux chansons", tag:'g'},
@@ -166,6 +168,7 @@ const PARCOURS = [
     id:'tp2', icon:'📗', titre:'TP2 — Entity Framework Core', sous:'ORM, migrations, relation N-N, tests',
     color:'var(--green)', guide:'../PlaylistAppEF/TP2_GUIDE.md',
     missions:[
+      {id:'tp2-c0', t:"📖 Lire les fiches ORM · Migrations · Relations + auto-évaluation", tag:'concept'},
       {id:'tp2-s1', t:"Appliquer la migration (créer la base)", tag:'setup'},
       {id:'tp2-s2', t:"Vérifier la persistance après redémarrage", tag:'setup'},
       {id:'tp2-m1', t:"Ajouter un champ « Label » (+ migration)", tag:'g'},
@@ -179,6 +182,7 @@ const PARCOURS = [
     id:'tp3', icon:'📕', titre:'TP3 — API REST & SOA', sous:'ASP.NET Core, Swagger, architecture en couches',
     color:'var(--violet)', guide:'../PlaylistAppAPI/TP3_GUIDE.md',
     missions:[
+      {id:'tp3-c0', t:"📖 Lire les fiches REST/HTTP · SOA + auto-évaluation", tag:'concept'},
       {id:'tp3-s1', t:"Lancer l'API et ouvrir Swagger", tag:'setup'},
       {id:'tp3-s2', t:"Tester GET et POST dans Swagger", tag:'setup'},
       {id:'tp3-m1', t:"Endpoint GET /api/chansons/top/{n}", tag:'g'},
@@ -191,6 +195,7 @@ const PARCOURS = [
     id:'tp4', icon:'🎏', titre:'TP4 — Architecture événementielle (EOA)', sous:'Bus d\'événements, publish/subscribe, découplage',
     color:'var(--amber)', guide:'../PlaylistAppAPI/TP4_GUIDE.md',
     missions:[
+      {id:'tp4-c0', t:"📖 Lire la fiche EOA + auto-évaluation", tag:'concept'},
       {id:'tp4-s1', t:"Observer un événement dans les logs (POST → [AUDIT])", tag:'setup'},
       {id:'tp4-m1', t:"Publier un événement à la suppression", tag:'g'},
       {id:'tp4-m2', t:"Créer un HistoriqueHandler", tag:'y'},
@@ -206,6 +211,7 @@ const TAGS = {
   y:{l:'🟡 semi-guidé', c:'tag-y'},
   r:{l:'🔴 autonome', c:'tag-r'},
   test:{l:'✅ tests', c:'tag-test'},
+  concept:{l:'🎓 concept + quiz', c:'tag-concept'},
 };
 
 const KEY='playlistapp-progression';
@@ -319,12 +325,22 @@ const QUIZ = [
      o:["Pour gagner de la mémoire","Pour l'encapsulation : forcer le passage par AjouterChanson","Pour accélérer le tri"], c:1},
     {q:"Quelle collection garde l'ordre d'insertion ?",
      o:["Dictionary","List","Aucune des deux"], c:1},
+    {q:"🌳 Choix : retrouver très souvent une chanson par son identifiant unique. Quelle structure ?",
+     o:["List (on parcourt)","Dictionary (accès direct par clé)","Un tableau trié"], c:1},
+    {q:"🌳 Choix : garder l'ordre ET autoriser les doublons. Quelle structure ?",
+     o:["Dictionary","List","Un ensemble (Set)"], c:1},
   ]},
   { tp:'📘 TP1 — LINQ', concept:'cours/linq.md', questions:[
     {q:"Que fait .Where(c => c.Note >= 4) ?",
      o:["Trie par note","Filtre les chansons notées 4 ou plus","Compte les chansons"], c:1},
     {q:"Comment obtenir les 3 mieux notées ?",
      o:[".OrderByDescending(c=>c.Note).Take(3)",".Where(c=>c.Note==3)",".Select(c=>c.Note).Top(3)"], c:0},
+    {q:"Différence entre Where et Select ?",
+     o:["Where transforme, Select filtre","Where filtre, Select transforme (projette)","Les deux trient"], c:1},
+    {q:"🌳 Choix : les données sont déjà dans une List en mémoire. SQL ou LINQ ?",
+     o:["SQL","LINQ","Ni l'un ni l'autre"], c:1},
+    {q:"🌳 Choix : une table de 5 millions de lignes, on veut le top 10. Que faire ?",
+     o:["Tout charger en mémoire puis trier en LINQ","Laisser la base trier via son index (SQL / LINQ-to-EF)","C'est impossible"], c:1},
   ]},
   { tp:'📗 TP2 — ORM & Migrations', concept:'cours/orm.md', questions:[
     {q:"Que signifie ORM ?",
@@ -333,10 +349,22 @@ const QUIZ = [
      o:["Une requête HTTP","Une table en base de données","Un fichier de config"], c:1},
     {q:"Dans quel ordre ajoute-t-on une colonne ?",
      o:["Modifier la base puis le code","Modifier le modèle C#, migrations add, database update","database update puis migrations add"], c:1},
+    {q:"Quelle méthode enregistre réellement les changements en base ?",
+     o:["SaveChangesAsync()","ToList()","Add()"], c:0},
+    {q:"🌳 Choix : faire évoluer le schéma sans perdre les données, en équipe. Quel outil ?",
+     o:["Modifier la base à la main","Les migrations (versionnées dans Git)","Supprimer puis recréer la base"], c:1},
   ]},
   { tp:'📗 TP2 — Relations', concept:'cours/relations.md', questions:[
     {q:"Comment modélise-t-on une relation N-N ?",
      o:["Avec une clé étrangère simple","Avec une table de liaison","C'est impossible"], c:1},
+    {q:"Exemple de relation 1-N dans le projet ?",
+     o:["Un artiste possède plusieurs chansons","Une chanson a plusieurs artistes uniques","Deux playlists identiques"], c:0},
+    {q:"Qu'est-ce qu'une clé étrangère ?",
+     o:["Une colonne qui référence la clé d'une autre table","Un mot de passe de la base","Un index de tri"], c:0},
+    {q:"Que porte souvent la table de liaison en plus des deux clés ?",
+     o:["Rien d'autre","La position / l'ordre dans la playlist","Le mot de passe"], c:1},
+    {q:"🌳 Choix : une chanson peut être dans plusieurs playlists et une playlist contient plusieurs chansons. Quelle relation ?",
+     o:["1-N","N-N (via table de liaison)","1-1"], c:1},
   ]},
   { tp:'📕 TP3 — REST & SOA', concept:'cours/rest-http.md', questions:[
     {q:"Quel verbe et quel code pour créer une ressource ?",
@@ -345,6 +373,10 @@ const QUIZ = [
      o:["Succès","Ressource introuvable","Erreur serveur"], c:1},
     {q:"Rôle du Repository dans SOA ?",
      o:["Gérer le web","Accéder aux données","Afficher l'IHM"], c:1},
+    {q:"HTTP est un protocole…",
+     o:["avec état (il retient chaque requête)","sans état (chaque requête est indépendante)","orienté connexion permanente"], c:1},
+    {q:"🌳 Choix : besoin de notifications temps réel bidirectionnelles. Quelle techno ?",
+     o:["REST classique","WebSocket","SOAP"], c:1},
   ]},
   { tp:'🎏 TP4 — EOA', concept:'cours/eoa.md', questions:[
     {q:"Quel problème l'EOA résout-elle ?",
@@ -353,6 +385,10 @@ const QUIZ = [
      o:["Oui, toujours","Non : on crée et abonne un nouveau handler","Oui, mais juste une ligne"], c:1},
     {q:"SOA et EOA sont…",
      o:["concurrentes","complémentaires","identiques"], c:1},
+    {q:"🌳 Choix : à la création, journaliser + stats + e-mail sans alourdir le Controller. Quelle approche ?",
+     o:["Tout mettre dans le Controller (SOA direct)","Publier un événement, les handlers réagissent (EOA)","Ne rien faire"], c:1},
+    {q:"🌳 Choix : un endpoint avec UN seul effet, immédiat et connu. Quelle approche ?",
+     o:["Un appel direct (SOA), plus simple","Forcément l'EOA","Plusieurs bus d'événements"], c:0},
   ]},
 ];
 
