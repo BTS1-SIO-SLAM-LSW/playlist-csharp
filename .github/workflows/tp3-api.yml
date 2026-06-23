@@ -7,6 +7,11 @@ on:
     paths: ["PlaylistAppAPI/**", "PlaylistAppAPI.Tests/**"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 jobs:
   api-tests:
     name: "🌐 Tests API REST (WebApplicationFactory)"
@@ -39,7 +44,7 @@ jobs:
             --logger "trx;LogFileName=tp3-results.trx"
 
       - name: "📊 Rapport tests API"
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: always()
         with:
           name: "Tests TP3 – API REST"
