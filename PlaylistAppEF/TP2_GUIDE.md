@@ -339,6 +339,62 @@ docker compose up --build
 
 ---
 
+## 🆚 Migrations vs `EnsureCreated` : le choix à faire
+
+EF Core offre **deux façons** de créer la base — pour des finalités différentes.
+
+| | `EnsureCreated()` | **Migrations** (`migrations add` + `database update`) |
+|---|---|---|
+| Crée la base | oui, d'un coup | oui, étape par étape |
+| Fait évoluer un schéma existant | ❌ non (il faut tout supprimer) | ✅ oui (ajout de colonne, table…) |
+| Historique versionné | ❌ aucun | ✅ un fichier par changement (dans Git) |
+| Travail en équipe | risqué (schémas divergents) | ✅ tout le monde applique les mêmes migrations |
+| Idéal pour | un prototype jetable, un test | un vrai projet qui évolue |
+
+### ⏱️ Le coût caché
+
+`EnsureCreated` paraît plus rapide *au début* (une ligne), mais dès qu'on modifie une entité il faut **supprimer puis recréer** la base → **perte des données**. Une migration coûte une commande de plus, mais fait évoluer la base **sans rien perdre**.
+
+### 🧭 Choisir selon l'usage
+
+```mermaid
+flowchart TD
+    Q{"La base va-t-elle évoluer<br/>ou être partagée ?"}
+    Q -->|"non (démo, test jetable)"| E["EnsureCreated()<br/>rapide et simple"]
+    Q -->|"oui (projet réel, équipe)"| M["✅ Migrations<br/>traçable, évolutif, sans perte"]
+```
+
+| Situation | Préférez |
+|---|---|
+| Test unitaire (souvent base InMemory) | `EnsureCreated` |
+| Démo jetable, schéma figé | `EnsureCreated` |
+| Projet de TP / vrai projet, schéma qui évolue | **Migrations** |
+| Plusieurs développeurs sur la même base | **Migrations** |
+
+> 🧠 Dans ce cours on utilise les **migrations** : c'est la pratique professionnelle, et ça évite le piège « j'ai changé une classe, ma base ne correspond plus ».
+
+### ✅ Mini auto-évaluation
+
+**Q1.** Vous ajoutez une propriété `Label` à `Chanson` sur un projet déjà en base. `EnsureCreated` ou migration ?
+<details><summary>▸ Voir la réponse</summary>
+
+Une **migration** (`dotnet ef migrations add AjoutLabel` puis `database update`). `EnsureCreated` ne modifie pas une base existante : il faudrait la supprimer et perdre les données.
+</details>
+
+**Q2.** Pourquoi les migrations sont-elles meilleures en équipe ?
+<details><summary>▸ Voir la réponse</summary>
+
+Chaque migration est un fichier **versionné dans Git** : tous les développeurs appliquent la même suite et obtiennent **exactement le même schéma**, de façon reproductible.
+</details>
+
+**Q3.** Quand `EnsureCreated` est-il acceptable ?
+<details><summary>▸ Voir la réponse</summary>
+
+Pour une **base jetable** : prototype rapide, démo, ou tests (souvent en InMemory) où l'historique et l'évolution du schéma n'ont pas d'importance.
+</details>
+
+---
+
 ## 11. Dépannage
 
 | Problème | Solution |

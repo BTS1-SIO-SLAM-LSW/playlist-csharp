@@ -300,6 +300,62 @@ dotnet test ../PlaylistAppAPI.Tests/
 
 ---
 
+## 🆚 SOA vs EOA : comparatif et choix
+
+Vous venez de construire une API en couches (**SOA**). Au TP4, vous y ajouterez les **événements** (**EOA**). Voici comment les situer.
+
+| | SOA (ce TP) | EOA (TP4) |
+|---|---|---|
+| Principe | « fais ceci et réponds-moi » | « ceci est arrivé, réagissez » |
+| Appel | direct (Controller → Repository) | indirect (via un bus) |
+| Couplage | l'appelant connaît l'appelé | émetteur et abonnés s'ignorent |
+| Moment | synchrone (on attend la réponse) | asynchrone (après-coup) |
+| Temps de réponse perçu | le client attend la fin de tout | le client est répondu vite, les effets suivent |
+
+### ⏱️ L'angle « temps de réponse »
+
+En **SOA pur**, si créer une chanson devait aussi envoyer un e-mail + recalculer des stats *avant* de répondre, le client attendrait **tout**. En **EOA**, on enregistre, on **publie un événement**, on répond aussitôt ; l'e-mail et les stats se font **après**, sans faire patienter l'utilisateur.
+
+### 🧭 Choisir selon l'usage
+
+```mermaid
+flowchart TD
+    Q{"L'appelant a-t-il besoin<br/>du résultat tout de suite ?"}
+    Q -->|"oui (lire, créer et renvoyer)"| Soa["✅ SOA<br/>appel direct, synchrone"]
+    Q -->|"non (effets de bord : audit, mail, stats)"| Eoa["✅ EOA<br/>publier un événement, réagir après"]
+```
+
+| Besoin | Architecture |
+|---|---|
+| Lire/écrire une donnée et renvoyer la réponse | **SOA** |
+| Déclencher des effets de bord (audit, notif, cache) | **EOA** |
+| Ajouter un comportement sans toucher l'émetteur | **EOA** |
+| Contrat clair entre deux couches | **SOA** |
+
+> 🧠 Ce ne sont **pas** des rivales : une appli moderne fait du **SOA** pour le cœur (enregistrer) **et** de l'**EOA** pour les à-côtés (réagir). Vous le verrez au TP4.
+
+### ✅ Mini auto-évaluation
+
+**Q1.** `GET /api/chansons` doit renvoyer la liste immédiatement. SOA ou EOA ?
+<details><summary>▸ Voir la réponse</summary>
+
+**SOA** : l'appelant attend un résultat précis tout de suite (appel direct, synchrone).
+</details>
+
+**Q2.** À la création d'une chanson, on veut journaliser ET mettre à jour des stats sans alourdir le Controller. Quelle approche ?
+<details><summary>▸ Voir la réponse</summary>
+
+**EOA** : on publie un événement « chanson ajoutée » ; l'audit et les stats sont des **abonnés** qui réagissent, sans que le Controller les connaisse.
+</details>
+
+**Q3.** Vrai ou faux : il faut choisir SOA *ou* EOA pour toute l'application.
+<details><summary>▸ Voir la réponse</summary>
+
+**Faux.** Elles sont **complémentaires** : SOA pour l'action principale (synchrone), EOA pour les effets de bord (découplés, après-coup).
+</details>
+
+---
+
 ## 10. Dépannage
 | Problème | Solution |
 |---|---|

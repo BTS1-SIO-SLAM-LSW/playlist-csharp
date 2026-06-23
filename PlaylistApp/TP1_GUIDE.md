@@ -318,6 +318,80 @@ Cochez dans votre README au fur et à mesure :
 
 ---
 
+## 🆚 SQL vs LINQ : comparatif, performance et choix
+
+Même question — « les 3 chansons de rock les mieux notées » — exprimée de deux façons :
+
+| | SQL (langage de la base) | LINQ (intégré à C#) |
+|---|---|---|
+| Écriture | `SELECT Titre FROM Chansons WHERE Genre='Rock' ORDER BY Note DESC LIMIT 3;` | `chansons.Where(c => c.Genre=="Rock").OrderByDescending(c => c.Note).Take(3)` |
+| S'exécute | dans le moteur de base de données | dans votre programme C# |
+| Vérifié | à l'exécution (chaîne de texte) | à la **compilation** (typé) |
+| Sur quoi | des tables | des objets en mémoire (`List`, tableau…) |
+
+### ⏱️ Mesurer le temps d'affichage
+
+Encadrez la requête avec un `Stopwatch` pour voir le temps réel :
+
+```csharp
+var sw = System.Diagnostics.Stopwatch.StartNew();
+var top = chansons.Where(c => c.Genre == "Rock")
+                  .OrderByDescending(c => c.Note)
+                  .Take(3)
+                  .ToList();
+sw.Stop();
+Console.WriteLine($"⏱️ LINQ : {sw.Elapsed.TotalMilliseconds:F3} ms ({top.Count} résultats)");
+```
+
+> 📏 **Ordre de grandeur** (à confirmer sur votre machine, ça dépend du volume) :
+>
+> | Volume | LINQ en mémoire | SQL (base indexée) |
+> |---|---|---|
+> | ~100 chansons | < 1 ms | quelques ms (réseau + moteur) |
+> | ~1 000 000 chansons | dizaines de ms (tout chargé en RAM) | quelques ms (l'index trie) |
+>
+> 👉 Sur **petit volume déjà en mémoire**, LINQ gagne (aucun aller-retour base). Sur **gros volume stocké**, laisser la **base** filtrer/trier ne rapatrie que 3 lignes au lieu d'un million : bien plus rapide.
+
+### 🧭 Choisir selon l'usage
+
+```mermaid
+flowchart TD
+    Q{"Où sont les données ?"}
+    Q -->|"déjà en mémoire (List, tableau)"| L["✅ LINQ<br/>simple, typé, rapide"]
+    Q -->|"dans une base de données"| B{"Gros volume ?"}
+    B -->|"non"| L2["LINQ-to-EF (confort C#)"]
+    B -->|"oui"| Sg["✅ Laisser la BASE filtrer<br/>(SQL ou LINQ-to-EF bien écrit)"]
+```
+
+| Situation | Préférez | Pourquoi |
+|---|---|---|
+| Collection déjà chargée en C# | **LINQ** | pas d'aller-retour base, typé, lisible |
+| Données en base, petit volume | **LINQ-to-EF** | confort C#, EF traduit en SQL |
+| Données en base, gros volume indexé | **SQL** (ou LINQ-to-EF soigné) | le moteur filtre/trie, on ne rapatrie que l'utile |
+| Requête partagée avec d'autres outils | **SQL** | indépendant du langage |
+
+### ✅ Mini auto-évaluation
+
+**Q1.** Vous avez une `List<Chanson>` déjà en mémoire. SQL ou LINQ ?
+<details><summary>▸ Voir la réponse</summary>
+
+**LINQ** : les données sont déjà en RAM, inutile de passer par une base — plus simple et typé.
+</details>
+
+**Q2.** Une table de 5 millions de lignes ; vous voulez les 10 meilleures. Pourquoi ne pas tout charger en mémoire pour trier en LINQ ?
+<details><summary>▸ Voir la réponse</summary>
+
+Charger 5 M de lignes coûte énormément (RAM + temps). On laisse la **base** trier via son **index** et ne renvoyer que 10 lignes (`ORDER BY … LIMIT 10`). LINQ-to-EF génère ce SQL pour vous.
+</details>
+
+**Q3.** Un avantage de LINQ qu'une requête SQL en chaîne de texte n'a pas ?
+<details><summary>▸ Voir la réponse</summary>
+
+LINQ est **vérifié à la compilation** (types, noms de propriétés) : une faute est détectée avant l'exécution, contrairement à une chaîne SQL dont l'erreur n'apparaît qu'au lancement.
+</details>
+
+---
+
 ## 10. Dépannage
 
 | Problème | Solution |
