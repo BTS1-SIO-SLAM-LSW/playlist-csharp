@@ -8,6 +8,8 @@
 
 ---
 
+> 🏛️ **Enjeu d'architecture** — **Étendre sans casser** : remplacer des appels directs par des **événements (EOA)** pour découpler l'émetteur des réactions. Arbitrage : découplage/extensibilité vs lisibilité d'un appel direct.
+
 ## 1. Objectifs pédagogiques
 
 À la fin de ce TP, vous serez capable de :

@@ -8,6 +8,8 @@
 
 ---
 
+> 🏛️ **Enjeu d'architecture** — Décider **comment persister** les données : un **ORM** (productivité) plutôt que du SQL à la main, et faire évoluer le schéma par **migrations** (traçable, sans perte). Arbitrage : confort/portabilité vs contrôle fin du SQL.
+
 ## 1. Objectifs pédagogiques
 
 À la fin de ce TP, vous serez capable de :

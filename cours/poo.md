@@ -80,6 +80,18 @@ flowchart LR
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** décider comment **structurer** le code pour qu'il reste compréhensible et modifiable quand l'application grandit — et **quoi exposer ou cacher** (encapsulation).
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Données + comportements regroupés : code lisible et réutilisable | Sur-conception possible (trop de classes/abstractions) |
+| L'encapsulation protège les règles métier (invariants) | Plus verbeux qu'un simple script procédural |
+| Base saine pour faire évoluer l'app | Courbe d'apprentissage (héritage, polymorphisme…) |
+
+**Le choix :** la POO s'impose dès qu'il y a des **règles métier** et une durée de vie. Pour un mini-script jetable, le procédural suffit — ne pas « tout objet-ifier » par réflexe.
+
 ## 5. Auto-évaluation
 
 > Essayez de répondre **avant** de déplier.

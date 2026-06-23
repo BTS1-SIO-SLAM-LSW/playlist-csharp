@@ -53,6 +53,17 @@ parId.ContainsKey(5);         // la clé existe-t-elle ?
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** la structure de données retenue **conditionne la performance et la lisibilité** de l'accès aux données — un mauvais choix se paie en lenteur ou en bugs.
+
+| Option | ✅ Forte | ⚠️ Faible |
+|---|---|---|
+| `List<T>` | conserve l'ordre, autorise les doublons | recherche par valeur lente (parcours O(n)) |
+| `Dictionary<K,V>` | accès par clé quasi-instantané (O(1)) | pas d'ordre garanti, clé unique obligatoire |
+
+**Le choix :** ordre/doublons → `List` ; recherche fréquente par identifiant → `Dictionary`. Très souvent : une `List` pour parcourir, un `Dictionary` pour retrouver vite.
+
 ## 6. Auto-évaluation
 
 **Q1.** Quelle collection garde l'ordre d'insertion ?

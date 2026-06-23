@@ -64,6 +64,18 @@ sequenceDiagram
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** arbitrer entre **productivité** (manipuler des objets) et **contrôle/performance** (maîtriser le SQL).
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Productivité : on pense objets, pas SQL | « Magie » qui masque le SQL (risque de requêtes N+1) |
+| Portabilité entre bases, moins d'erreurs de syntaxe | Performance parfois en retrait sur requêtes complexes |
+| Suivi des changements, migrations intégrées | Fuites d'abstraction : il faut quand même comprendre le SQL |
+
+**Le choix :** l'ORM pour le **CRUD courant** ; pour les requêtes critiques en perf, descendre au **SQL** (vues, requêtes brutes, micro-ORM).
+
 ## 5. Auto-évaluation
 
 **Q1.** Que signifie ORM et à quoi ça sert ?

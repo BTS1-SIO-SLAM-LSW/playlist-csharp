@@ -67,6 +67,18 @@ Les données circulent en **JSON** (`Content-Type: application/json`). ASP.NET C
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** exposer un service **interopérable** et **sans état**, compréhensible par n'importe quel client.
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Standard universel, outillé (Swagger), cacheable | Verbeux ; sur-/sous-récupération de données |
+| Sans état → facile à mettre à l'échelle | Peu adapté au temps réel / aux flux |
+| Découplé du langage client | Plusieurs allers-retours pour des données liées |
+
+**Le choix :** REST pour des **API de ressources (CRUD)** ; sinon **gRPC** (perf interne), **GraphQL** (requêtes flexibles) ou **WebSocket** (temps réel) selon le besoin.
+
 ## 5. Auto-évaluation
 
 **Q1.** Quel verbe pour créer une ressource, et quel code en cas de succès ?

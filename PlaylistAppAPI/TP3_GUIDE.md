@@ -8,6 +8,8 @@
 
 ---
 
+> 🏛️ **Enjeu d'architecture** — **Exposer** l'application comme un service : style **REST** (interopérable, sans état) et **découpage en couches (SOA)** pour isoler web / métier / données. Arbitrage : séparation des responsabilités vs simplicité.
+
 ## 1. Objectifs pédagogiques
 
 À la fin de ce TP, vous serez capable de :

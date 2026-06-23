@@ -49,6 +49,18 @@ Une playlist contient plusieurs chansons **et** une chanson peut être dans plus
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** modéliser fidèlement le métier tout en garantissant l'**intégrité** des données et des requêtes efficaces.
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Intégrité référentielle (clés étrangères) | Modèle plus complexe à concevoir |
+| Pas de duplication de données | Les jointures ont un coût |
+| Requêtes riches (regrouper, filtrer, joindre) | Le chargement (`Include`) doit être maîtrisé |
+
+**Le choix :** **normaliser** (relations) par défaut ; **dénormaliser** ponctuellement (copier une donnée) seulement pour accélérer des lectures critiques.
+
 ## 5. Auto-évaluation
 
 **Q1.** Donnez un exemple de relation 1-N dans le projet.

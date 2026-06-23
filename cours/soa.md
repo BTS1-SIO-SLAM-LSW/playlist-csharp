@@ -50,6 +50,18 @@ public class ChansonsController(PlaylistContext ctx) : ControllerBase
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** séparer les responsabilités pour **tester, faire évoluer et remplacer** des morceaux indépendamment.
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Couplage faible : changer la base n'impacte que le Repository | Plus de code et d'indirection |
+| Testable couche par couche | Sur-découpage possible (couches inutiles) |
+| Responsabilités claires | Appels en série → latence cumulée |
+
+**Le choix :** le découpage en couches pour des applis **qui durent** ; éviter l'over-engineering sur un prototype.
+
 ## 5. Auto-évaluation
 
 **Q1.** Quelle est la responsabilité du Controller ? du Repository ?

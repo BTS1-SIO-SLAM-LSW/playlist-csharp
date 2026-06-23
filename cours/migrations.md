@@ -38,6 +38,18 @@ Mettre `DateTime.UtcNow` comme valeur par défaut dans le *seed* crée des **mig
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** faire évoluer un schéma **en production** et **en équipe**, sans casser ni perdre de données.
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Évolution traçable et versionnée (Git) | Demande de la discipline et de la rigueur |
+| Schéma reproductible pour toute l'équipe | Conflits de migrations possibles à plusieurs |
+| Évolution sans perte de données | Les migrations de **données** restent délicates |
+
+**Le choix :** migrations dès qu'un schéma **vit, évolue ou est partagé** ; `EnsureCreated` réservé au jetable (proto, tests).
+
 ## 5. Auto-évaluation
 
 **Q1.** Qu'est-ce qu'une migration ?

@@ -51,6 +51,18 @@ chansons.Any(c => c.Note == 5);
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** gagner en **lisibilité** des requêtes sans perdre le **contrôle du coût** (mémoire, SQL généré).
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Lisible, typé (vérifié à la compilation), composable | L'exécution paresseuse peut surprendre (requête rejouée) |
+| Marche sur la mémoire **et** sur la base (LINQ-to-EF) | Mal écrit sur gros volume → tout chargé en RAM |
+| Moins de boucles, code plus court | L'abstraction masque parfois le coût réel |
+
+**Le choix :** LINQ par défaut pour la clarté ; sur de gros volumes en base, **surveiller le SQL généré** et la matérialisation (`ToList`).
+
 ## 4. Auto-évaluation
 
 **Q1.** Que fait `chansons.Where(c => c.Annee >= 2000)` ?

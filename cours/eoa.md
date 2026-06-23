@@ -60,6 +60,18 @@ flowchart LR
 
 ---
 
+## 🏛️ Le point de vue de l'architecte
+
+**Enjeu :** **découpler** l'émetteur des réactions pour **étendre sans modifier**, et garder des temps de réponse stables.
+
+| ✅ Avantages | ⚠️ Inconvénients / limites |
+|---|---|
+| Découplage fort : on ajoute des abonnés sans toucher l'émetteur | Le flux est moins lisible (« qui réagit à quoi ? ») |
+| Réponses rapides (effets traités après-coup) | Débogage plus difficile |
+| Passe à l'échelle (Kafka, RabbitMQ) | Livraison/ordre/erreurs des messages à gérer |
+
+**Le choix :** EOA quand les effets sont **multiples, évolutifs ou découplés** ; un appel direct (SOA) reste préférable pour un effet **unique et immédiat**.
+
 ## 5. Auto-évaluation
 
 **Q1.** Quel problème l'EOA résout-elle ?

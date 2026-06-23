@@ -8,6 +8,8 @@
 
 ---
 
+> 🏛️ **Enjeu d'architecture** — Ce TP pose les **fondations objet** (encapsulation, choix des structures de données). Bien les poser conditionne la lisibilité et l'évolutivité de toute la suite. Arbitrage récurrent : **structurer proprement** vs **aller au plus vite**.
+
 ## 1. Objectifs pédagogiques
 
 À la fin de ce TP, vous serez capable de :
