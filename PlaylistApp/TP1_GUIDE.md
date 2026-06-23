@@ -344,6 +344,7 @@ Cochez dans votre README au fur et à mesure :
 
 ---
 
+⬅️ **TP précédent :** [TP0 — Mise en place](../TP0_GUIDE.md)
 ➡️ **TP suivant :** [TP2 — Entity Framework Core & base de données](../PlaylistAppEF/TP2_GUIDE.md)
 
 🧭 **[Retour au parcours](../PARCOURS_TP.md)**

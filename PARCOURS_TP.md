@@ -52,6 +52,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
+    TP0["🚀 TP0<br/>Mise en place<br/>(ça démarre)"] --> TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"]
     TP1["📘 TP1<br/>Console & POO<br/>(ça marche)"] --> TP2["📗 TP2<br/>+ base de données<br/>(ça se souvient)"]
     TP2 --> TP3["📕 TP3<br/>+ API REST / SOA<br/>(c'est exposé)"]
     TP3 --> TP4["🎏 TP4<br/>+ événements / EOA<br/>(ça évolue)"]
@@ -59,6 +60,7 @@ flowchart LR
 
 | TP | Titre | Durée | Compétence | Fiche |
 |---|---|---|---|---|
+| **TP0** | Mise en place de l'environnement | ~30 min | — | [🚀 Ouvrir TP0](TP0_GUIDE.md) |
 | **TP1** | Application console & POO | 4h | SLAM1 | [📘 Ouvrir TP1](PlaylistApp/TP1_GUIDE.md) |
 | **TP2** | Persistance avec Entity Framework Core | 6h | SLAM3, SLAM2 | [📗 Ouvrir TP2](PlaylistAppEF/TP2_GUIDE.md) |
 | **TP3** | API REST & architecture SOA | 4h | SLAM4 | [📕 Ouvrir TP3](PlaylistAppAPI/TP3_GUIDE.md) |
@@ -103,6 +105,8 @@ Chaque TP s'appuie sur des **fiches concept** ([dossier `cours/`](cours/README.m
 > 🧮 Un **quiz interactif** couvrant tous ces concepts est aussi dans le [tableau de bord](https://ggaillard.github.io/playlist-csharp) (onglet « Quiz ») et compte dans votre progression.
 
 ## 🚦 Avant de commencer
+
+> 🚀 **Étape 0 — faites le [TP0 : mettre en place l'environnement](TP0_GUIDE.md)** : l'application doit tourner (Codespaces ou VS Code local) **avant** de démarrer les TP.
 
 1. **Mise en route** (créer le dépôt, ouvrir Codespaces) : suivez le **[Guide étudiant](GUIDE_ETUDIANT.md)** — c'est la procédure de référence.
 2. Suivez ensuite les fiches **dans l'ordre** : TP1 → TP2 → TP3 → TP4.

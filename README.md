@@ -33,7 +33,7 @@ flowchart LR
 
 ## 🚦 Mise en route
 
-La procédure de référence — créer votre dépôt, ouvrir GitHub Codespaces, lancer chaque TP — est détaillée dans le **[Guide étudiant](GUIDE_ETUDIANT.md)** (également accessible via le [Parcours](PARCOURS_TP.md)).
+Commencez par le **[🚀 TP0 — Mettre en place l'environnement](TP0_GUIDE.md)** : faire tourner l'application en **Codespaces** ou en **local (VS Code)**. Procédure détaillée aussi dans le [Guide étudiant](GUIDE_ETUDIANT.md), parcours complet dans le [Parcours](PARCOURS_TP.md).
 
 ---
 

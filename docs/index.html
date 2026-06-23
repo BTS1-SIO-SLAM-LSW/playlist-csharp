@@ -100,7 +100,7 @@
 
 <header>
   <h1>🎯 Mon parcours PlaylistApp</h1>
-  <p>Suivez votre progression dans les 4 TP · C# · .NET 10</p>
+  <p>Suivez votre progression : TP0 (mise en place) + 4 TP · C# · .NET 10</p>
 </header>
 
 <div class="tabs">
@@ -154,12 +154,19 @@
 <script>
 const PARCOURS = [
   {
+    id:'tp0', icon:'🚀', titre:'TP0 — Mise en place', sous:'Environnement : Codespaces ou VS Code local',
+    color:'#56b6c2', guide:'TP0_GUIDE.md',
+    missions:[
+      {id:'tp0-1', t:"🚀 Préparer l'environnement (Codespaces ou Dev Container local)", tag:'setup'},
+      {id:'tp0-2', t:"📂 Comprendre le rôle du dossier .devcontainer", tag:'concept'},
+      {id:'tp0-3', t:"▶️ Lancer l'application : cd PlaylistApp && dotnet run", tag:'setup'},
+    ]
+  },
+  {
     id:'tp1', icon:'📘', titre:'TP1 — Console & POO', sous:'Collections, LINQ, encapsulation',
     color:'var(--blue)', guide:'PlaylistApp/TP1_GUIDE.md',
     missions:[
       {id:'tp1-c0', t:"🎓 Concepts associés : POO · Collections · LINQ (lire + auto-évaluation)", tag:'concept'},
-      {id:'tp1-s1', t:"Créer mon dépôt depuis le template", tag:'setup'},
-      {id:'tp1-s2', t:"Ouvrir le Codespace et lancer l'application", tag:'setup'},
       {id:'tp1-m1', t:"Ajouter une note (1-5) aux chansons", tag:'g'},
       {id:'tp1-m2', t:"Trier une playlist par durée", tag:'y'},
       {id:'tp1-m3', t:"Recherche par genre musical", tag:'r'},
@@ -439,14 +446,4 @@ function answerQuiz(bi,qi,oi){
 function switchTab(name){
   document.getElementById('tab-missions').classList.toggle('active', name==='missions');
   document.getElementById('tab-quiz').classList.toggle('active', name==='quiz');
-  document.getElementById('panel-missions').classList.toggle('active', name==='missions');
-  document.getElementById('panel-quiz').classList.toggle('active', name==='quiz');
-  if(name==='quiz') renderQuiz();
-}
-
-renderQuiz();
-
-render();
-</script>
-</body>
-</html>
+  document.getEleme
