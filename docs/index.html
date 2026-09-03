@@ -227,7 +227,8 @@ const KEY='playlistapp-progression';
 let memStore={};
 function load(){ try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return memStore} }
 function save(s){ try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){memStore=s} }
-let state=load();
+// `var` (et non `let`) : rend l'état accessible à la surcouche de suivi (assets/suivi.js).
+var state=load();
 
 const allMissions = PARCOURS.flatMap(tp=>tp.missions.map(m=>m.id));
 
@@ -465,5 +466,10 @@ function switchTab(name){
 render();
 renderQuiz();
 </script>
+
+<!-- Suivi centralisé (BTS SIO 2 SLAM). L'ordre compte : librairie, config, surcouche. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/suivi.js"></script>
 </body>
 </html>
