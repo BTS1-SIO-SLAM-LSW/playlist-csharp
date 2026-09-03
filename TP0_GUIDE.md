@@ -146,6 +146,10 @@ dotnet run
 | Docker ne démarre pas (local) | Lancez **Docker Desktop** avant d'ouvrir le conteneur |
 | 1re construction longue | Normal : l'image se télécharge une fois, puis elle est mise en cache |
 | Le menu ne s'affiche pas | Êtes-vous bien dans le dossier `PlaylistApp` (`cd PlaylistApp`) ? |
+| Le Codespace échoue à se créer | Votre dépôt date d'avant le correctif `.devcontainer` → [🚑 Dépannage §1](DEPANNAGE.md#1-️-codespaces) |
+| `http://localhost:5000` ne s'ouvre pas en Codespace | Normal. Onglet **PORTS** → port 5000 → 🌐 → [🚑 Dépannage §5](DEPANNAGE.md#5--api-et-ports) |
+
+➡️ **Toutes les erreurs courantes, classées par message : [🚑 DEPANNAGE.md](DEPANNAGE.md)**
 
 ---
 

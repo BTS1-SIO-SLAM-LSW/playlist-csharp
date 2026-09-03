@@ -4,7 +4,7 @@
 
 [![Ouvrir dans GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ggaillard/playlist-csharp?quickstart=1)
 
-**[📊 Tableau de bord](https://ggaillard.github.io/playlist-csharp)** · **[📘 Parcours](PARCOURS_TP.md)** · **[❓ Poser une question](../../issues/new?template=question.yml)**
+**[📊 Tableau de bord](https://ggaillard.github.io/playlist-csharp)** · **[📘 Parcours](PARCOURS_TP.md)** · **[🚑 Dépannage](DEPANNAGE.md)** · **[❓ Poser une question](../../issues/new?template=question.yml)**
 
 </div>
 
@@ -127,7 +127,10 @@ Le tableau de bord sauvegarde votre avancement dans le navigateur. Quand vous vo
 
 ## ❓ Besoin d'aide ?
 
-Ouvrez une [issue avec le template "Question"](../../issues/new?template=question.yml) en précisant :
+👉 **Commencez par la page [🚑 Dépannage](DEPANNAGE.md)** : elle est classée par message
+d'erreur et couvre Codespaces, le conteneur local, `dotnet`, EF Core, les ports et Docker.
+
+Si votre cas n'y figure pas, ouvrez une [issue avec le template "Question"](../../issues/new?template=question.yml) en précisant :
 - Le TP concerné (TP1 / TP2 / TP3 / TP4)
 - Le message d'erreur complet
 - La commande que vous avez tapée
