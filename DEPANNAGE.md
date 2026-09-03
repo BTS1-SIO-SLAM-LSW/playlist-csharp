@@ -16,8 +16,8 @@ Repérez votre message d'erreur, appliquez la solution, reprenez votre TP.
 |---|---|
 | Le Codespace ne démarre pas | [1. Codespaces](#1-️-codespaces) |
 | Le conteneur local ne démarre pas | [2. Dev Container local](#2--dev-container-local) |
-| Une commande `dotnet` échoue | [3. Commandes dotnet](#3--commandes-dotnet) |
-| Les migrations / la base de données | [4. EF Core et SQLite](#4--ef-core-et-sqlite) |
+| Une commande `dotnet` échoue | [3. Commandes dotnet](#3-️-commandes-dotnet) |
+| Les migrations / la base de données | [4. EF Core et SQLite](#4-️-ef-core-et-sqlite) |
 | Swagger, l'API, les ports | [5. API et ports](#5--api-et-ports) |
 | Docker et docker compose | [6. Docker](#6--docker) |
 | Git, commits, push | [7. Git](#7--git) |
@@ -82,7 +82,7 @@ wsl --update
 
 Ancienne version du `.devcontainer`, qui exigeait un dossier `data/` inexistant.
 
-**Solution :** appliquez le correctif de la [section 1](#-codespace-creation-failed--le-conteneur-ne-finit-jamais-de-construire), ou créez simplement le dossier manquant avant d'ouvrir le conteneur :
+**Solution :** appliquez le correctif de la [section 1](#--codespace-creation-failed---le-conteneur-ne-finit-jamais-de-construire), ou créez simplement le dossier manquant avant d'ouvrir le conteneur :
 
 ```bash
 mkdir -p data
@@ -225,7 +225,7 @@ dotnet run --urls http://+:5050
 
 ### ❌ Swagger affiche « Failed to load API definition »
 
-L'API a démarré mais une erreur est survenue au chargement. **Lisez le terminal** où tourne `dotnet run` : l'exception réelle y est affichée. Le plus souvent, la base n'est pas à jour (voir [section 4](#4--ef-core-et-sqlite)).
+L'API a démarré mais une erreur est survenue au chargement. **Lisez le terminal** où tourne `dotnet run` : l'exception réelle y est affichée. Le plus souvent, la base n'est pas à jour (voir [section 4](#4-️-ef-core-et-sqlite)).
 
 ### ❌ Le port se ferme dès que je ferme l'onglet
 
