@@ -23,6 +23,10 @@
   }
 
   var CLE_NUM = "playlistapp-numero";
+
+  // Portail commun. Même origine que ce site : la session y est partagée,
+  // l'étudiant ne saisit donc son numéro qu'une fois par poste.
+  var PORTAIL = "/portail-bts/";
   var sb = window.supabase.createClient(CFG.url, CFG.cle, {
     auth: { persistSession: true, autoRefreshToken: true }
   });
@@ -49,14 +53,9 @@
     barre.innerHTML =
       '<div class="suivi-in">' +
         '<span class="suivi-pastille" id="suivi-pastille"></span>' +
-        '<span class="suivi-txt" id="suivi-txt">Progression enregistrée sur ce poste uniquement.</span>' +
-        '<form class="suivi-form" id="suivi-form">' +
-          '<label class="suivi-lbl" for="suivi-num">Votre numéro</label>' +
-          '<input class="suivi-inp" id="suivi-num" inputmode="numeric" ' +
-                 'autocomplete="off" placeholder="00" maxlength="3">' +
-          '<button class="suivi-btn" type="submit">Me connecter</button>' +
-        '</form>' +
-        '<button class="suivi-btn suivi-btn-sec" id="suivi-out" hidden>Changer</button>' +
+        '<span class="suivi-txt" id="suivi-txt">Vérification de votre identité…</span>' +
+        '<a class="suivi-btn" id="suivi-lien" hidden>Ouvrir le portail</a>' +
+        '<a class="suivi-btn suivi-btn-sec" id="suivi-out" hidden>Ce n\'est pas moi</a>' +
       '</div>';
 
     var style = document.createElement("style");
@@ -75,7 +74,8 @@
         'font:inherit;font-size:.9rem;text-align:center}' +
       '.suivi-inp:focus{outline:2px solid var(--blue);outline-offset:1px}' +
       '.suivi-btn{background:var(--blue);color:#0d1117;border:0;border-radius:7px;' +
-        'padding:.36rem .7rem;font:inherit;font-size:.84rem;font-weight:600;cursor:pointer}' +
+        'padding:.36rem .7rem;font:inherit;font-size:.84rem;font-weight:600;cursor:pointer;' +
+        'text-decoration:none;display:inline-block;white-space:nowrap}' +
       '.suivi-btn:hover{filter:brightness(1.1)}' +
       '.suivi-btn:focus-visible{outline:2px solid var(--text);outline-offset:2px}' +
       '.suivi-btn-sec{background:var(--track);color:var(--muted)}';
@@ -84,41 +84,35 @@
     var hote = document.querySelector(".wrap");
     hote.insertBefore(barre, hote.firstChild);
 
-    document.getElementById("suivi-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var n = document.getElementById("suivi-num").value.trim();
-      if (n) rejoindre(n);
-    });
-    document.getElementById("suivi-out").addEventListener("click", function () {
-      localStorage.removeItem(CLE_NUM);
-      location.reload();
-    });
+    document.getElementById("suivi-lien").href = PORTAIL;
+    document.getElementById("suivi-out").href = PORTAIL;
   }
 
   function etat(couleur, texte, connecte) {
     document.getElementById("suivi-pastille").className = "suivi-pastille " + couleur;
     document.getElementById("suivi-txt").textContent = texte;
-    document.getElementById("suivi-form").hidden = !!connecte;
+    document.getElementById("suivi-lien").hidden = !!connecte;
     document.getElementById("suivi-out").hidden = !connecte;
   }
 
-  // ── Identification ──────────────────────────────────────────────────────
-  function rejoindre(numero) {
-    etat("", "Connexion…", false);
-    sb.rpc("rejoindre", { p_classe_code: CFG.classeCode, p_numero: numero })
-      .then(function (r) {
-        if (r.error) {
-          etat("ko", "Numéro refusé : " + r.error.message, false);
-          return;
-        }
-        eleveNumero = numero;
-        localStorage.setItem(CLE_NUM, numero);
-        etat("ok", "Connecté — numéro " + numero + ". Progression enregistrée pour votre enseignant.", true);
-        recuperer();
-      })
-      .catch(function (e) {
-        etat("ko", "Connexion impossible : " + e.message, false);
-      });
+  // ── Identité reprise du portail ─────────────────────────────────────────
+  function reprendreIdentite() {
+    return sb.rpc("qui_suis_je").then(function (r) {
+      if (r.error || !r.data) {
+        etat("", "Progression enregistrée sur ce poste uniquement. " +
+                 "Identifiez-vous sur le portail pour qu'elle remonte à votre enseignant.", false);
+        return false;
+      }
+      if (r.data.classe_code !== CFG.classeCode) {
+        etat("ko", "Vous êtes connecté en " + r.data.classe_nom +
+                   ", qui ne suit pas ce projet.", true);
+        return false;
+      }
+      eleveNumero = r.data.numero;
+      localStorage.setItem(CLE_NUM, eleveNumero);
+      etat("ok", "Connecté, numéro " + eleveNumero + ".", true);
+      return true;
+    });
   }
 
   // ── Récupération de l'état depuis le serveur ────────────────────────────
@@ -195,19 +189,20 @@
       envoiDifferé();
     };
 
-    sb.auth.signInAnonymously().then(function (r) {
-      if (r.error) {
-        etat("ko", "Suivi indisponible — progression conservée sur ce poste.", false);
-        return;
-      }
+    sb.auth.getSession().then(function (s) {
+      // Pas de session : on en ouvre une anonyme, sans identifier personne.
+      if (s.data && s.data.session) return null;
+      return sb.auth.signInAnonymously();
+    }).then(function () {
       return sb.from("seances")
         .select("numero,id,classe_id,classes!inner(code)")
         .eq("classes.code", CFG.classeCode)
         .then(function (res) {
           (res.data || []).forEach(function (s) { seanceParNumero[s.numero] = s.id; });
-          var memorise = localStorage.getItem(CLE_NUM);
-          if (memorise) rejoindre(memorise);
+          return reprendreIdentite();
         });
+    }).then(function (identifie) {
+      if (identifie) recuperer();
     }).catch(function () {
       etat("ko", "Suivi indisponible — progression conservée sur ce poste.", false);
     });
